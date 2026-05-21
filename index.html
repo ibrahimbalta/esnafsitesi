@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Esnaf Sitesi | Yapay Zeka Çağında Esnaf Dijitalleşme Hareketi</title>
+  <meta name="description" content="1000 firmaya profesyonel web sitesi sadece 1000 TL. Esnafın yanındayız! Domain ve hosting sizden, tasarım bizden." />
+  <meta name="keywords" content="web sitesi, esnaf, ucuz web sitesi, 1000 TL, dijital dönüşüm, küçük işletme, yapay zeka web tasarım" />
+  <link rel="icon" type="image/png" href="/logo.png" />
+  
+  <!-- Premium Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  
+  <!-- Style Sheet -->
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+
+  <!-- NAVIGATION BAR (GLASSMORPHISM) -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="#" class="nav-logo">
+        <span class="logo-icon">
+          <img src="/logo.png" alt="Esnaf Sitesi Logo" width="48" height="48" style="object-fit: contain; filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.4));" />
+        </span>
+        <span class="logo-text">Esnaf<span class="logo-accent">Sitesi</span></span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#hero">Ana Sayfa</a></li>
+        <li><a href="#nasil">Nasıl Çalışır?</a></li>
+        <li><a href="#referanslar">Referanslar</a></li>
+        <li><a href="/ekibimiz.html">Ekibimiz</a></li>
+        <li><a href="#neden">Neden Biz?</a></li>
+        <li><a href="#faq">SSS</a></li>
+        <li><a href="#iletisim" class="nav-cta">Hemen Başvur</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Menü">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION (NEON AI AGE DESIGN) -->
+  <section class="hero" id="hero">
+    <div class="hero-particles" id="heroParticles"></div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge animate-in">
+          <span class="badge-pulse"></span>
+          <span>🚀 Türkiye'nin En Büyük Esnaf Dijitalleşme Hareketi</span>
+        </div>
+        <h1 class="hero-title animate-in" style="animation-delay: 0.1s;">
+          <span class="title-line">1000 Seçkin Firma.</span>
+          <span class="title-line gradient-text">Sadece 1000 TL.</span>
+          <span class="title-line">Sınırsız Dijital Başarı.</span>
+        </h1>
+        <p class="hero-subtitle animate-in" style="animation-delay: 0.2s;">
+          Yapay zeka çağında profesyonel web sitenizi bugün kurun, Google'da en ön sırada yerinizi alın. 
+          <strong>İnternet sitesi olmayan tek bir esnaf kalmayana dek buradayız!</strong>
+        </p>
+        
+        <!-- Live Counter Metrics -->
+        <div class="hero-stats animate-in" style="animation-delay: 0.3s;">
+          <div class="stat-item">
+            <span class="stat-number" id="statFilled">47</span>
+            <span class="stat-label">Dijitalleşen Firma</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-number" id="statRemaining">953</span>
+            <span class="stat-label">Kalan Kontenjan</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-number">48<small>saat</small></span>
+            <span class="stat-label">Ultra Hızlı Teslim</span>
+          </div>
+        </div>
+        
+        <!-- Action Buttons -->
+        <div class="hero-actions animate-in" style="animation-delay: 0.4s;">
+          <a href="#iletisim" class="btn btn-primary btn-glow">
+            <span>Hemen Yerini Ayırt</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#nasil" class="btn btn-ghost">
+            <span>Nasıl Çalışır?</span>
+          </a>
+        </div>
+        
+        <!-- Urgency Gauge -->
+        <div class="hero-urgency animate-in" style="animation-delay: 0.5s;">
+          <div class="urgency-bar">
+            <div class="urgency-fill" id="urgencyFill"></div>
+          </div>
+          <span class="urgency-text">Kontenjan hızla tükeniyor! <strong>%95.3</strong> Doluluk Oranı</span>
+        </div>
+        
+        <!-- Trust Seals -->
+        <div class="trust-badges animate-in" style="animation-delay: 0.6s;">
+          <div class="trust-badge">
+            <span class="badge-icon">🛡️</span>
+            <span>48 Saat Teslim Garantisi</span>
+          </div>
+          <div class="trust-badge">
+            <span class="badge-icon">💎</span>
+            <span>%100 Müşteri Memnuniyeti</span>
+          </div>
+          <div class="trust-badge">
+            <span class="badge-icon">💳</span>
+            <span>Güvenli Ödeme Altyapısı</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 3D-Like Floating Mockups -->
+    <div class="hero-visual">
+      <div class="floating-card card-1">
+        <div class="mini-site">
+          <div class="mini-header"></div>
+          <div class="mini-hero-img"></div>
+          <div class="mini-lines"><span></span><span></span><span></span></div>
+        </div>
+        <span class="card-label">Kafe & Bistro ✓</span>
+      </div>
+      <div class="floating-card card-2">
+        <div class="mini-site">
+          <div class="mini-header style2"></div>
+          <div class="mini-hero-img style2"></div>
+          <div class="mini-lines"><span></span><span></span></div>
+        </div>
+        <span class="card-label">Premium Hair & Beauty ✓</span>
+      </div>
+      <div class="floating-card card-3">
+        <div class="mini-site">
+          <div class="mini-header style3"></div>
+          <div class="mini-hero-img style3"></div>
+          <div class="mini-lines"><span></span><span></span><span></span></div>
+        </div>
+        <span class="card-label">Gurme Şarküteri ✓</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE INFINITE TICKER -->
+  <div class="marquee-section">
+    <div class="marquee-track">
+      <div class="marquee-content">
+        <span>✦ SİTESİZ FİRMA KALMASIN</span>
+        <span>✦ YENİ NESİL DİJİTAL DÖNÜŞÜM</span>
+        <span>✦ SADECE 1000 TL</span>
+        <span>✦ 48 SAATTE TESLİM</span>
+        <span>✦ PROFESYONEL WEB TASARIM</span>
+        <span>✦ MOBİL UYUMLU VE RESPONSIVE</span>
+        <span>✦ SEO OPTİMİZASYONLU</span>
+        <span>✦ SİTESİZ FİRMA KALMASIN</span>
+        <span>✦ YENİ NESİL DİJİTAL DÖNÜŞÜM</span>
+        <span>✦ SADECE 1000 TL</span>
+        <span>✦ 48 SAATTE TESLİM</span>
+        <span>✦ PROFESYONEL WEB TASARIM</span>
+        <span>✦ MOBİL UYUMLU VE RESPONSIVE</span>
+        <span>✦ SEO OPTİMİZASYONLU</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS SECTION -->
+  <section class="section nasil-section" id="nasil">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Süreç</span>
+        <h2 class="section-title">Hızlı ve Kusursuz <span class="gradient-text">3 Adım</span></h2>
+        <p class="section-desc">Dijital dünyadaki prestijli yerinize kavuşmak hiç bu kadar kolay olmamıştı.</p>
+      </div>
+      
+      <div class="steps-grid">
+        <!-- Step 1 -->
+        <div class="step-card" data-step="1">
+          <div class="step-number">01</div>
+          <div class="step-icon">🌐</div>
+          <h3>Domain & Hosting Alın</h3>
+          <p>İstediğiniz firmadan web sitenizin ismi (domain) ve barındırma (hosting) hizmetinizi alın. Tüm süreçte size rehberlik ediyoruz!</p>
+        </div>
+        
+        <!-- Step 2 -->
+        <div class="step-card" data-step="2">
+          <div class="step-number">02</div>
+          <div class="step-icon">📋</div>
+          <h3>Bilgilerinizi Gönderin</h3>
+          <p>Firma logosu, adres, fotoğraflar ve iletişim detaylarınızı bize güvenli portalımız aracılığıyla iletin.</p>
+        </div>
+        
+        <!-- Step 3 -->
+        <div class="step-card" data-step="3">
+          <div class="step-number">03</div>
+          <div class="step-icon">🚀</div>
+          <h3>Siteniz Canlıda!</h3>
+          <p>Sadece 48 saat içinde, tüm mobil cihazlarla tam uyumlu ve Google SEO uyumlu profesyonel web siteniz yayında.</p>
+        </div>
+      </div>
+
+      <!-- Realtime Timeline Progress Indicator -->
+      <div class="timeline-wrapper">
+        <div class="timeline-item">
+          <div class="time">1. Saat</div>
+          <div class="desc">Başvurunuz anında incelenir ve müşteri danışmanınız sizinle iletişime geçer.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="time">12. Saat</div>
+          <div class="desc">Sektörünüze en uygun modern, mobil uyumlu premium arayüz şablonunuz oluşturulur.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="time">24. Saat</div>
+          <div class="desc">İletmiş olduğunuz görseller ve kurumsal metinler profesyonelce yerleştirilir.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="time">48. Saat</div>
+          <div class="desc">Performans ve SEO testleri başarıyla tamamlanarak web siteniz tüm dünyaya sunulur!</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED PROJECTS PORTFOLIO -->
+  <section class="section featured-projects" id="portfolyo">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Portfolyo</span>
+        <h2 class="section-title">Canlı <span class="gradient-text">Örneklerimiz</span></h2>
+        <p class="section-desc">Sadece 1000 TL'ye sunduğumuz premium kalitenin en son örnekleri.</p>
+      </div>
+      
+      <div class="projects-grid" id="featuredProjectsGrid">
+        <!-- JS generated -->
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT'S INCLUDED SECTION -->
+  <section class="section included-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Paket İçeriği</span>
+        <h2 class="section-title">Tek Fiyat, <span class="gradient-text">Eksiksiz Hizmet</span></h2>
+        <p class="section-desc">Profesyonel bir kurumsal web sitesinde olması gereken tüm özellikler pakete dahildir.</p>
+      </div>
+      
+      <div class="features-grid">
+        <!-- Feature 1 -->
+        <div class="feature-card">
+          <div class="feature-icon">🎨</div>
+          <h3>Ultra Modern Tasarım</h3>
+          <p>Yapay zeka trendlerine ve sektörünüze özel, şık ve göz alıcı arayüz tasarımı.</p>
+        </div>
+        
+        <!-- Feature 2 -->
+        <div class="feature-card">
+          <div class="feature-icon">📱</div>
+          <h3>%100 Mobil Uyumlu</h3>
+          <p>Telefon, tablet ve bilgisayarlarda kusursuz görünen responsive yapı.</p>
+        </div>
+        
+        <!-- Feature 3 -->
+        <div class="feature-card">
+          <div class="feature-icon">🔍</div>
+          <h3>SEO Optimizasyonu</h3>
+          <p>Google aramalarında üst sıralarda çıkmanızı sağlayan temel SEO ayarları.</p>
+        </div>
+        
+        <!-- Feature 4 -->
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>Yıldırım Hızında</h3>
+          <p>En son web teknolojileriyle optimize edilmiş, hızlı açılan altyapı.</p>
+        </div>
+        
+        <!-- Feature 5 -->
+        <div class="feature-card">
+          <div class="feature-icon">🛠️</div>
+          <h3>Kullanıcı Paneli</h3>
+          <p>Sitenizdeki tüm içerikleri ve bilgileri kolayca değiştirebileceğiniz özel panel.</p>
+        </div>
+        
+        <!-- Feature 6 -->
+        <div class="feature-card">
+          <div class="feature-icon">📞</div>
+          <h3>WhatsApp Butonu</h3>
+          <p>Ziyaretçilerinizin size tek tıkla ulaşmasını sağlayan interaktif buton.</p>
+        </div>
+        
+        <!-- Feature 7 -->
+        <div class="feature-card">
+          <div class="feature-icon">📍</div>
+          <h3>Google Haritalar</h3>
+          <p>Müşterilerinizin adresinizi kolayca bulabilmesi için konum entegrasyonu.</p>
+        </div>
+        
+        <!-- Feature 8 -->
+        <div class="feature-card">
+          <div class="feature-icon">📸</div>
+          <h3>Gelişmiş Galeri</h3>
+          <p>Ürün, hizmet veya portfolyonuzu sergileyeceğiniz profesyonel galeri.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1000 FIRMS GRID PANELS -->
+  <section class="section referanslar-section" id="referanslar">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Referanslar</span>
+        <h2 class="section-title">1000 Seçkin <span class="gradient-text">Firma Panosu</span></h2>
+        <p class="section-desc">Esnaf dijitalleşme hareketimize katılarak gücümüze güç katan değerli markalarımız.</p>
+      </div>
+      
+      <!-- Interactive Grid Filters & Live Counters -->
+      <div class="grid-controls animate-in">
+        <div class="grid-filter">
+          <button class="filter-btn active" data-filter="all">Tümü</button>
+          <button class="filter-btn" data-filter="filled">Onaylı Üyeler</button>
+          <button class="filter-btn" data-filter="empty">Kalan Boş Slotlar</button>
+        </div>
+        <div class="grid-counter">
+          <span class="counter-filled"><span id="counterFilled">47</span> / 1000</span> firma yerini aldı!
+        </div>
+      </div>
+      
+      <!-- Generated dynamic board -->
+      <div class="firms-grid" id="firmsGrid">
+        <!-- Cards will be dynamically populated by main.js -->
+      </div>
+      
+      <!-- Pagination -->
+      <div class="grid-pagination animate-in" id="gridPagination"></div>
+    </div>
+  </section>
+
+  <!-- TRUST & WHY US SECTION -->
+  <section class="section neden-section" id="neden">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Güven</span>
+        <h2 class="section-title">Neden <span class="gradient-text">Esnaf Sitesi?</span></h2>
+        <p class="section-desc">Kafanızdaki tüm soru işaretlerini ortadan kaldıran şeffaf iş modelimiz.</p>
+      </div>
+      
+      <div class="trust-grid">
+        <!-- Trust Card 1 -->
+        <div class="trust-card">
+          <div class="trust-icon-box">💰</div>
+          <div class="trust-content">
+            <h3>Neden Sadece 1000 TL?</h3>
+            <p>Bizim için en büyük yatırım, geleceğin dijital esnaflarının güvenini kazanmaktır. 1000 TL gibi sembolik bir ücretle profesyonel bir başlangıç yapmanızı sağlıyoruz. İşletmeniz büyüdükçe ihtiyaç duyacağınız ek hizmetlerde de en büyük çözüm ortağınız olmaya devam ediyoruz.</p>
+          </div>
+        </div>
+        
+        <!-- Trust Card 2 -->
+        <div class="trust-card">
+          <div class="trust-icon-box">🏠</div>
+          <div class="trust-content">
+            <h3>Site Sahipliği Kimin Olacak?</h3>
+            <p>Domain (web adresi) ve hosting (barındırma) tamamen sizin adınıza tescil edilir. Web sitesi tüm kodlarıyla birlikte ömür boyu sizindir. İstediğiniz zaman başka bir yazılımcıyla veya sunucuyla çalışma özgürlüğüne sahipsiniz.</p>
+          </div>
+        </div>
+        
+        <!-- Trust Card 3 -->
+        <div class="trust-card">
+          <div class="trust-icon-box">🔄</div>
+          <div class="trust-content">
+            <h3>Güncelleme & Destek Var mı?</h3>
+            <p>Siteniz yayına alındıktan sonraki ilk yıl boyunca 2 adet ücretsiz içerik güncelleme hakkınız mevcuttur. Sonraki dönemlerde ise son derece uygun fiyatlarla teknik destek hizmeti vermeye devam ediyoruz.</p>
+          </div>
+        </div>
+        
+        <!-- Trust Card 4 -->
+        <div class="trust-card">
+          <div class="trust-icon-box">⏰</div>
+          <div class="trust-content">
+            <h3>Tasarım Süreci Ne Kadar Sürer?</h3>
+            <p>İhtiyacımız olan logo, iletişim bilgileri ve görseller tarafımıza ulaştığı andan itibaren 48 saatlik teslimat süremiz başlar. Hızlı, planlı ve zamanında teslim garantisi sunuyoruz.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS SECTION -->
+  <section class="section testimonials-section" id="yorumlar">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Esnaf Görüşleri</span>
+        <h2 class="section-title">Dijitalleşen Esnaflarımız <span class="gradient-text">Ne Diyor?</span></h2>
+        <p class="section-desc">Platformumuz üzerinden sitelerini kurduğumuz mutlu üyelerimizin gerçek deneyimleri.</p>
+      </div>
+
+      <!-- Approved testimonials list (Dynamic) -->
+      <div class="testimonials-grid animate-in" id="approvedReviewsGrid">
+        <!-- Populated dynamically by main.js -->
+      </div>
+
+      <!-- Testimonial Form Form Block -->
+      <div class="review-form-wrapper animate-in" id="reviewFormWrapper">
+        <div class="review-form-header">
+          <div class="review-form-icon">💬</div>
+          <h3>Deneyiminizi Paylaşın</h3>
+          <p>Hizmetimiz hakkındaki objektif görüşlerinizi yazın. Yorumunuz moderatör onayından geçtikten sonra panomuzda yayınlanacaktır.</p>
+        </div>
+        
+        <form class="review-form" id="reviewForm">
+          <div class="review-form-row">
+            <div class="review-form-group">
+              <label for="reviewName">Adınız Soyadınız *</label>
+              <input type="text" id="reviewName" placeholder="Örn: Ahmet Yılmaz" required />
+            </div>
+            <div class="review-form-group">
+              <label for="reviewCompany">Firma Adınız *</label>
+              <input type="text" id="reviewCompany" placeholder="Örn: Yıldız Kuaför" required />
+            </div>
+          </div>
+          
+          <div class="review-form-row">
+            <div class="review-form-group">
+              <label for="reviewSector">Sektörünüz *</label>
+              <input type="text" id="reviewSector" placeholder="Örn: Kuaför, Restoran, Market..." required />
+            </div>
+            <div class="review-form-group">
+              <label for="reviewCity">Şehriniz *</label>
+              <input type="text" id="reviewCity" placeholder="Örn: İstanbul" required />
+            </div>
+          </div>
+          
+          <div class="review-form-group">
+            <label>Değerlendirme Puanınız *</label>
+            <div class="star-rating" id="starRating">
+              <button type="button" class="star-btn" data-value="1">★</button>
+              <button type="button" class="star-btn" data-value="2">★</button>
+              <button type="button" class="star-btn" data-value="3">★</button>
+              <button type="button" class="star-btn" data-value="4">★</button>
+              <button type="button" class="star-btn" data-value="5">★</button>
+            </div>
+            <input type="hidden" id="reviewRating" value="0" />
+          </div>
+          
+          <div class="review-form-group">
+            <label for="reviewText">Yorumunuz *</label>
+            <textarea id="reviewText" rows="4" placeholder="Bizden aldığınız dijital hizmet hakkındaki samimi düşünceleriniz..." required></textarea>
+          </div>
+          
+          <button type="submit" class="btn btn-primary btn-glow review-submit-btn" id="reviewSubmitBtn">
+            <span>✍️ Görüşümü Gönder</span>
+          </button>
+          <p class="review-form-note">* Gönderilen yorumlar admin onayından sonra yayına alınmaktadır.</p>
+        </form>
+      </div>
+
+      <!-- Testimonial Submission Success Block -->
+      <div class="review-success-msg animate-in" id="reviewSuccessMsg" style="display: none;">
+        <div class="success-icon">✅</div>
+        <h3>Geri Bildiriminiz Alındı!</h3>
+        <p>Değerli vaktinizi ayırıp görüşlerinizi paylaştığınız için teşekkür ederiz. Yorumunuz en kısa sürede onaylanacaktır.</p>
+        <button class="btn btn-ghost" id="writeAnotherBtn">Başka Bir Yorum Yaz</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- BIOGRAPHY / ABOUT SECTION -->
+  <section class="section about-section" id="bizkimiz">
+    <div class="container">
+      <div class="about-card">
+        <div class="about-content">
+          <span class="section-tag">Biz Kimiz?</span>
+          <h2 class="section-title">Esnafımızın Güçlü <span class="gradient-text">Dijital Ortağı</span></h2>
+          <p>Esnaf Sitesi, yüksek bütçeli reklam ajansı maliyetleri altında ezilen yerel esnafımıza en kaliteli ve modern dijital çözümleri sunmak amacıyla kurulmuş yenilikçi bir <strong>dijital dönüşüm merkezidir</strong>.</p>
+          <p>Amacımız, Türkiye genelinde dijitalleşmeyen tek bir küçük işletme dahi bırakmamaktır. Hızlı, şeffaf ve ekonomik ilkelerimizle 48 saatte anahtar teslim siteler kuruyoruz.</p>
+          <div class="about-stats">
+            <div class="a-stat"><strong>500+</strong><span>Mutlu Esnaf</span></div>
+            <div class="a-stat"><strong>48 saat</strong><span>Ortalama Teslim</span></div>
+            <div class="a-stat"><strong>7/24</strong><span>Hızlı Destek</span></div>
+          </div>
+        </div>
+        <div class="about-visual">
+          <img src="https://images.unsplash.com/photo-1556742044-3c52d6e88c62?auto=format&fit=crop&q=80&w=800" alt="Esnaf Sitesi Esnaf Destek Ekibi" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ SECTION -->
+  <section class="section faq-section" id="faq">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">SSS</span>
+        <h2 class="section-title">Sıkça Sorulan <span class="gradient-text">Sorular</span></h2>
+      </div>
+      
+      <div class="faq-list">
+        <!-- FAQ 1 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Domain ve Hosting nedir, nasıl temin edebilirim?</span>
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Domain, web sitenizin internetteki ismidir (örn: firmaadi.com). Hosting ise sitenizin tüm dosyalarını barındıran güçlü sunuculardır. Turhost, GoDaddy, Natro gibi köklü firmalardan yıllık 500-800 TL aralığında kolayca alabilirsiniz. Satın alım aşamasında size adım adım rehberlik ediyoruz!</p>
+          </div>
+        </div>
+        
+        <!-- FAQ 2 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Herhangi bir gizli veya ek maliyet var mı?</span>
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Kesinlikle hayır! 1000 TL bizim tek seferlik profesyonel tasarım ve kurulum ücretimizdir. Domain ve hosting yenilemeleri doğrudan satın aldığınız firmaya yıllık olarak ödenir (ortalama 500-800 TL/yıl).</p>
+          </div>
+        </div>
+        
+        <!-- FAQ 3 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Hangi sektörlere ve meslek gruplarına hizmet veriyorsunuz?</span>
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Sektör fark etmeksizin tüm meslek kollarına hizmet veriyoruz! Kuaför, güzellik salonu, restoran, kafe, oto yıkama, eczane, terzi, hukuk bürosu, klinik, emlak ofisi ve yerel dükkanların tamamı bu projeden yararlanabilir.</p>
+          </div>
+        </div>
+        
+        <!-- FAQ 4 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Hazırlanan sitenin tasarımını beğenmezsem ne oluyor?</span>
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Tasarım sürecinin her aşamasında onayınızı alarak ilerliyoruz. Teslimat öncesinde 1 adet kapsamlı revizyon hakkınız bulunmaktadır. Önceliğimiz tamamen sizin memnuniyetinizdir!</p>
+          </div>
+        </div>
+        
+        <!-- FAQ 5 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>E-ticaret veya online ödeme entegrasyonlu siteler yapıyor musunuz?</span>
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Bu özel proje kapsamında kurumsal tanıtım siteleri hazırlanmaktadır. Tam kapsamlı, sepetli e-ticaret siteleri ve ödeme sistemleri entegrasyonu için ayrı özel fiyatlandırmalarımız mevcuttur. İletişime geçerek detaylı bilgi alabilirsiniz.</p>
+          </div>
+        </div>
+        
+        <!-- FAQ 6 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Sitem 1 yıl sonra kapanır mı?</span>
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Hayır, yıllık domain ve hosting yenileme ücretlerinizi (doğrudan aldığınız servis sağlayıcıya) ödediğiniz sürece web siteniz ömür boyu yayında kalmaya devam eder. Biz sizden bir kez tasarım ücreti alırız ve başka bir şey talep etmeyiz.</p>
+          </div>
+        </div>
+        
+        <!-- FAQ 7 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Web sitemin tüm sahiplik hakları bana mı ait olacak?</span>
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Kesinlikle! Tüm FTP, panel ve tescil şifreleri tamamen sizin kontrolünüzdedir. Web sitenizin yasal ve teknik tek sahibi siz olursunuz.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA CONTACT APPLICATION FORM SECTION -->
+  <section class="section cta-section" id="iletisim">
+    <div class="container">
+      <div class="cta-content">
+        <h2 class="cta-title">Dijital Çağda Güçlü Markanızı<br/><span class="gradient-neon-text">Bugün Oluşturun!</span></h2>
+        <p class="cta-desc">1000 firma kontenjanı hızla doluyor. Hemen ücretsiz ön başvurunuzu iletin, yerinizi ayırtalım!</p>
+        
+        <div class="cta-form-wrapper">
+          <form class="cta-form" id="ctaForm">
+            <div class="form-row">
+              <input type="text" placeholder="Firma Adınız" required id="firmaAdi" />
+              <input type="text" placeholder="Adınız Soyadınız" required id="adSoyad" />
+            </div>
+            <div class="form-row">
+              <input type="tel" placeholder="Telefon Numaranız" required id="telefon" />
+              <input type="text" placeholder="Sektörünüz (Örn: Kafe, Kuaför vb.)" required id="sektor" />
+            </div>
+            <textarea placeholder="Varsa eklemek istediğiniz özel notlar..." rows="3" id="notlar"></textarea>
+            
+            <button type="submit" class="btn btn-primary btn-glow btn-full">
+              <span>🚀 Hemen Başvur - Yerimi Ayırt!</span>
+            </button>
+          </form>
+          <p class="form-note">* Başvurunuz tamamen ücretsizdir. Kurulum ve ödeme site onayından sonra gerçekleşir.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PREMIUM FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Brand Segment -->
+        <div class="footer-brand">
+          <a href="#" class="nav-logo" style="margin-bottom: 16px; padding: 0;">
+            <span class="logo-icon">
+              <img src="/logo.png" alt="Esnaf Sitesi Logo" width="48" height="48" style="object-fit: contain; filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.4));" />
+            </span>
+            <span class="logo-text">Esnaf<span class="logo-accent">Sitesi</span></span>
+          </a>
+          <p>Yapay zeka çağında esnafımızın yanında olan Türkiye'nin en büyük dijitalleşme hareketi.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Instagram">📷</a>
+            <a href="#" aria-label="Twitter">🐦</a>
+            <a href="#" aria-label="YouTube">🎬</a>
+          </div>
+        </div>
+        
+        <!-- Links Segment -->
+        <div class="footer-links">
+          <h4>Hızlı Navigasyon</h4>
+          <a href="#hero">Ana Sayfa</a>
+          <a href="#nasil">Nasıl Çalışır?</a>
+          <a href="#referanslar">Referanslar</a>
+          <a href="#faq">Sıkça Sorulan Sorular</a>
+        </div>
+        
+        <!-- Contact Segment -->
+        <div class="footer-links">
+          <h4>Bize Ulaşın</h4>
+          <a href="mailto:info@esnafsitesi.com">info@esnafsitesi.com</a>
+          <a href="tel:+905551234567">0555 123 45 67</a>
+          <a href="#">WhatsApp Canlı Destek</a>
+        </div>
+      </div>
+      
+      <!-- Footer Bottom -->
+      <div class="footer-bottom">
+        <p>&copy; 2026 Esnaf Sitesi. Tüm Hakları Saklıdır.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- DYNAMIC PROMOTIONAL POPUP MODAL -->
+  <div id="promoModal" class="promo-modal-overlay" style="display: none;">
+    <div class="promo-modal-container">
+      <button id="promoModalClose" class="promo-modal-close-btn" aria-label="Kapat">&times;</button>
+      <div class="promo-modal-content">
+        <div class="promo-modal-header">
+          <div class="promo-badge-container">
+            <span class="badge-pulse"></span>
+            <span class="promo-badge">🎉 GÜNÜN YILDIZI</span>
+          </div>
+          <h3 class="promo-tagline">Bugün Başvurusu Alınıp Sitesi Yayına Giren Firmamız:</h3>
+        </div>
+        <div class="promo-body">
+          <div class="promo-img-wrapper">
+            <img id="promoModalImg" src="" alt="Firma Logosu / Görseli" />
+          </div>
+          <div class="promo-text-details">
+            <h2 id="promoModalFirmName" class="gradient-text">Firma Adı</h2>
+            <p id="promoModalDescription">Firma Açıklaması</p>
+          </div>
+        </div>
+        <div class="promo-footer">
+          <button id="promoModalDismiss" class="btn btn-ghost">Kapat</button>
+          <a id="promoModalCta" href="#" target="_blank" class="btn btn-primary btn-glow">
+            <span>Siteyi Ziyaret Et</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLOATING WHATSAPP BUTTON -->
+  <a href="https://wa.me/905551234567?text=Merhaba,%20Esnaf%20Sitesi%20projesi%20hakkında%20bilgi%20almak%20istiyorum." class="whatsapp-float" target="_blank" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24" width="30" height="30" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <!-- JavaScript Modules -->
+  <script type="module" src="/main.js"></script>
+</body>
+</html>

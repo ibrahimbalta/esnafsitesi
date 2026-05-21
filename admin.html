@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yönetim Paneli | Esnaf Sitesi</title>
+  <link rel="icon" type="image/png" href="/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/admin.css" />
+  <script>
+    if (sessionStorage.getItem('isAdmin') !== 'true') {
+      window.location.href = '/login.html';
+    }
+  </script>
+</head>
+<body>
+  <div class="admin-layout">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <a href="/" class="admin-brand-link">
+          <img src="/logo.png" alt="Esnaf Admin Logo" width="38" height="38" style="object-fit: contain; margin-right: 8px;" />
+          <span class="logo-text">Esnaf<span class="logo-accent">Admin</span></span>
+        </a>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="#" class="nav-item active" data-view="dashboard">
+          <span class="icon">📊</span> Dashboard
+        </a>
+        <a href="#" class="nav-item" data-view="applications">
+          <span class="icon">📝</span> Başvurular
+          <span class="badge" id="appBadge">0</span>
+        </a>
+        <a href="#" class="nav-item" data-view="customers">
+          <span class="icon">👥</span> Müşteri Takibi
+          <span class="badge badge-warn" id="expiryBadge" style="display:none;">!</span>
+        </a>
+        <a href="#" class="nav-item" data-view="reviews">
+          <span class="icon">💬</span> Yorum Yönetimi
+          <span class="badge badge-review" id="reviewBadge">0</span>
+        </a>
+        <a href="#" class="nav-item" data-view="portfolio">
+          <span class="icon">✨</span> Referans Yönetimi
+        </a>
+        <a href="#" class="nav-item" data-view="grid">
+          <span class="icon">🏁</span> 1000 Panosu
+        </a>
+        <a href="#" class="nav-item" data-view="agenda">
+          <span class="icon">📅</span> Ajanda
+        </a>
+        <a href="#" class="nav-item" data-view="promo">
+          <span class="icon">📢</span> Günün Tanıtımı
+        </a>
+        <a href="#" class="nav-item" data-view="settings">
+          <span class="icon">⚙️</span> Ayarlar
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <a href="/" class="nav-item">
+          <span class="icon">🏠</span> Siteye Dön
+        </a>
+        <a href="#" class="nav-item logout-btn" id="logoutBtn" style="color: #ef4444;">
+          <span class="icon">🚪</span> Çıkış Yap
+        </a>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+      <header class="main-header">
+        <h2 id="viewTitle">Dashboard</h2>
+        <div class="user-profile">
+          <span>Yönetici 👋</span>
+          <div class="avatar">👑</div>
+        </div>
+      </header>
+
+      <!-- VIEW: DASHBOARD -->
+      <div id="view-dashboard" class="view active">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-info">
+              <span class="stat-label">Toplam Başvuru</span>
+              <span class="stat-value" id="totalApps">0</span>
+            </div>
+            <div class="stat-icon">📝</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-info">
+              <span class="stat-label">Dolu Slotlar</span>
+              <span class="stat-value" id="filledSlots">47</span>
+            </div>
+            <div class="stat-icon">✅</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-info">
+              <span class="stat-label">Kalan Kontenjan</span>
+              <span class="stat-value" id="emptySlots">953</span>
+            </div>
+            <div class="stat-icon">⌛</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-info">
+              <span class="stat-label">Potansiyel Kazanç</span>
+              <span class="stat-value" id="potentialRev">0 TL</span>
+            </div>
+            <div class="stat-icon">💰</div>
+          </div>
+        </div>
+
+        <div class="dashboard-grid">
+          <div class="panel">
+            <div class="panel-header">
+              <h3>Son Başvurular</h3>
+              <a href="#" onclick="document.querySelector('[data-view=applications]').click()">Tümünü Gör</a>
+            </div>
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Firma</th>
+                    <th>Sektör</th>
+                    <th>Tarih</th>
+                    <th>Durum</th>
+                  </tr>
+                </thead>
+                <tbody id="recentAppsBody">
+                  <!-- JS generated -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <h3>Hızlı Slot İşlemi</h3>
+            </div>
+            <form id="quickSlotForm" class="admin-form">
+              <div class="form-group">
+                <label>Slot No (#0001 - #1000)</label>
+                <input type="number" id="slotNo" min="1" max="1000" placeholder="Örn: 48" required />
+              </div>
+              <div class="form-group">
+                <label>Firma Adı</label>
+                <input type="text" id="slotFirmName" placeholder="Örn: Yeni Esnaf" required />
+              </div>
+              <div class="form-group">
+                <label>Site URL (Opsiyonel)</label>
+                <input type="url" id="slotUrl" placeholder="https://..." />
+              </div>
+              <div class="form-group">
+                <label>Firma Logosu (Opsiyonel)</label>
+                <input type="file" id="slotLogo" accept="image/*" class="admin-file-input" />
+                <small style="color: #94a3b8; font-size: 11px; margin-top: 4px; display: block;">Önerilen: Kare logo, max 1MB</small>
+              </div>
+              <button type="submit" class="btn-admin">Slotu Güncelle</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW: APPLICATIONS -->
+      <div id="view-applications" class="view">
+        <div class="panel">
+          <div class="panel-header">
+            <h3>Tüm Başvurular</h3>
+            <button class="btn-outline" id="clearApps">Tümünü Temizle</button>
+          </div>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Tarih</th>
+                  <th>Firma Adı</th>
+                  <th>Yetkili</th>
+                  <th>Telefon</th>
+                  <th>Sektör</th>
+                  <th>Durum</th>
+                  <th>İşlem</th>
+                </tr>
+              </thead>
+              <tbody id="allAppsBody">
+                <!-- JS generated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW: CUSTOMERS -->
+      <div id="view-customers" class="view">
+        <div class="customer-layout">
+          <div class="panel customer-list-panel">
+            <div class="panel-header">
+              <h3>Müşteri Listesi</h3>
+              <button class="btn-outline" id="addCustomerBtn">+ Yeni Müşteri</button>
+            </div>
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Firma</th>
+                    <th>Domain Durumu</th>
+                    <th>Ödeme</th>
+                    <th>İşlem</th>
+                  </tr>
+                </thead>
+                <tbody id="customerTableBody">
+                  <!-- JS generated -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="panel customer-detail-panel" id="customerDetailPanel" style="display:none;">
+            <div class="panel-header">
+              <h3 id="detailTitle">Müşteri Detayları</h3>
+              <button class="btn-outline" onclick="document.getElementById('customerDetailPanel').style.display='none'">Kapat</button>
+            </div>
+            <form id="customerDetailForm" class="admin-form">
+              <input type="hidden" id="custId" />
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Firma Adı</label>
+                  <input type="text" id="custName" required />
+                </div>
+                <div class="form-group">
+                  <label>Domain Adresi</label>
+                  <input type="text" id="custDomain" placeholder="example.com" />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Domain Başlangıç</label>
+                  <input type="date" id="custDomainStart" />
+                </div>
+                <div class="form-group">
+                  <label>Domain Bitiş</label>
+                  <input type="date" id="custDomainEnd" />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Hosting Sağlayıcı</label>
+                  <input type="text" id="custHosting" placeholder="Natro, Turhost vb." />
+                </div>
+                <div class="form-group">
+                  <label>Hosting Bitiş</label>
+                  <input type="date" id="custHostingEnd" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Teknik Notlar & Hosting Bilgileri</label>
+                <textarea id="custNotes" rows="4" placeholder="FTP, Panel bilgileri, özel notlar..."></textarea>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Ödeme Durumu</label>
+                  <select id="custPaymentStatus" class="admin-select">
+                    <option value="paid">Ödendi</option>
+                    <option value="pending">Bekliyor</option>
+                    <option value="unpaid">Ödenmedi</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Destek Paketi</label>
+                  <select id="custSupportStatus" class="admin-select">
+                    <option value="active">Aktif</option>
+                    <option value="expired">Süresi Doldu</option>
+                    <option value="none">Yok</option>
+                  </select>
+                </div>
+              </div>
+              <button type="submit" class="btn-admin">Bilgileri Kaydet</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW: REVIEWS -->
+      <div id="view-reviews" class="view">
+        <div class="review-stats-bar">
+          <div class="review-stat-item">
+            <span class="review-stat-icon">⏳</span>
+            <div>
+              <span class="review-stat-value" id="pendingReviewCount">0</span>
+              <span class="review-stat-label">Bekleyen</span>
+            </div>
+          </div>
+          <div class="review-stat-item">
+            <span class="review-stat-icon">✅</span>
+            <div>
+              <span class="review-stat-value" id="approvedReviewCount">0</span>
+              <span class="review-stat-label">Onaylı</span>
+            </div>
+          </div>
+          <div class="review-stat-item">
+            <span class="review-stat-icon">❌</span>
+            <div>
+              <span class="review-stat-value" id="rejectedReviewCount">0</span>
+              <span class="review-stat-label">Reddedilen</span>
+            </div>
+          </div>
+          <div class="review-stat-item">
+            <span class="review-stat-icon">📊</span>
+            <div>
+              <span class="review-stat-value" id="totalReviewCount">0</span>
+              <span class="review-stat-label">Toplam</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-tabs">
+          <button class="review-tab active" data-tab="pending" id="tabPending">⏳ Onay Bekleyenler</button>
+          <button class="review-tab" data-tab="approved" id="tabApproved">✅ Onaylananlar</button>
+          <button class="review-tab" data-tab="rejected" id="tabRejected">❌ Reddedilenler</button>
+          <button class="review-tab" data-tab="all" id="tabAll">📋 Tümü</button>
+        </div>
+
+        <div class="review-cards-container" id="adminReviewsList">
+          <!-- JS generated -->
+        </div>
+      </div>
+
+      <!-- VIEW: GRID -->
+      <div id="view-grid" class="view">
+        <div class="panel">
+          <div class="panel-header">
+            <h3>1000 Firma Panosu (Sıralı Görünüm)</h3>
+            <div class="grid-stats">
+              <span class="badge badge-approved" id="gridFilledCount">0 Dolu</span>
+            </div>
+          </div>
+          <div class="admin-firms-grid" id="adminFirmsGrid">
+            <!-- JS generated -->
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW: AGENDA -->
+      <div id="view-agenda" class="view">
+        <div class="agenda-layout">
+          <div class="panel">
+            <div class="panel-header">
+              <h3>Yapılacak İşler & Planlama</h3>
+              <form id="agendaForm" class="agenda-quick-add">
+                <input type="text" id="agendaInput" placeholder="Yeni görev ekle..." required />
+                <input type="date" id="agendaDate" required />
+                <button type="submit" class="btn-admin">Ekle</button>
+              </form>
+            </div>
+            <div class="agenda-list" id="agendaList">
+              <!-- JS generated -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW: PROMO -->
+      <div id="view-promo" class="view">
+        <div class="panel">
+          <div class="panel-header">
+            <h3>Günün Tanıtım Reklamı (Açılır Pencere)</h3>
+          </div>
+          <form id="promoForm" class="admin-form">
+            <div class="form-group" style="display: flex; align-items: center; gap: 10px; margin-bottom: 24px;">
+              <input type="checkbox" id="promoActive" style="width: auto; height: 20px; width: 20px; cursor: pointer;" />
+              <label for="promoActive" style="margin-bottom: 0; cursor: pointer; font-weight: 700;">Anasayfada tanıtım penceresini aktif et</label>
+            </div>
+            
+            <div class="customer-layout" style="margin-bottom: 20px;">
+              <div class="form-group">
+                <label for="promoFirmName">Firma Adı</label>
+                <input type="text" id="promoFirmName" placeholder="Örn: Lezzet Durağı Restoran" required />
+              </div>
+              <div class="form-group">
+                <label for="promoUrl">Web Sitesi Adresi (Yönlendirme URL'si)</label>
+                <input type="url" id="promoUrl" placeholder="https://..." required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="promoText">Tanıtım Yazısı / Slogan</label>
+              <textarea id="promoText" rows="4" class="admin-select" style="width: 100%; border: 1px solid var(--border); border-radius: 12px; padding: 12px; font-family: inherit; height: auto;" placeholder="Örn: Harika lezzetleri ve yepyeni web tasarımı ile bugün yayına girdi! Hemen inceleyin." required></textarea>
+            </div>
+
+            <div class="form-group">
+              <label>Tanıtım Görseli / Logo</label>
+              <input type="file" id="promoImageFile" accept="image/*" class="admin-file-input" style="margin-bottom: 8px;" />
+              <input type="text" id="promoImage" placeholder="veya görsel linki girin (https://...)" />
+              <small style="color: #94a3b8; font-size: 11px; margin-top: 4px; display: block;">Boş bırakılırsa varsayılan görsel kullanılacaktır.</small>
+            </div>
+
+            <div class="panel" style="background: #f8fafc; border: 1px dashed var(--border); margin: 24px 0; padding: 20px; box-shadow: none;">
+              <h4 style="margin-bottom: 12px; font-size: 15px; color: var(--gray); font-weight: 700;">Admin Önizleme</h4>
+              <div id="adminPromoPreview" class="admin-promo-preview" style="display: none; padding: 20px; border-radius: 16px; background: #030014; color: white; border: 1px solid rgba(255, 255, 255, 0.1);">
+                <div style="display: flex; gap: 15px; align-items: center;">
+                  <img id="adminPromoPreviewImg" src="" alt="Logo" style="width: 60px; height: 60px; object-fit: cover; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1);" />
+                  <div>
+                    <h4 id="adminPromoPreviewTitle" style="margin: 0 0 4px 0; color: white; font-size: 16px;">Firma Adı</h4>
+                    <span style="font-size: 12px; color: #06b6d4; font-weight: bold; text-transform: uppercase;">🚀 GÜNÜN FİRMASI</span>
+                  </div>
+                </div>
+                <p id="adminPromoPreviewText" style="margin: 15px 0; font-size: 14px; color: #94a3b8; line-height: 1.5;">Tanıtım Yazısı</p>
+                <div style="display: flex; justify-content: flex-end;">
+                  <span style="background: linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%); color: white; padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: bold;">İncele ➔</span>
+                </div>
+              </div>
+              <p id="adminPromoPreviewEmpty" style="font-size: 13px; color: var(--gray); margin: 0; text-align: center;">Aktif bir tanıtım kaydı bulunmuyor veya bilgiler girilmemiş.</p>
+            </div>
+
+            <button type="submit" class="btn-admin">Tanıtım Bilgilerini Kaydet</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- VIEW: SETTINGS -->
+      <div id="view-settings" class="view">
+        <div class="panel">
+          <div class="panel-header">
+            <h3>Sistem Ayarları</h3>
+          </div>
+          <div class="settings-container">
+            <form id="settingsForm" class="admin-form">
+              <div class="form-group">
+                <label>İletişim E-posta</label>
+                <input type="email" id="setEmail" placeholder="info@..." />
+              </div>
+              <div class="form-group">
+                <label>İletişim Telefon</label>
+                <input type="text" id="setPhone" placeholder="05XX XXX XX XX" />
+              </div>
+              <div class="form-group">
+                <label>WhatsApp Numarası (Ülke kodu ile, örn: 90555...)</label>
+                <input type="text" id="setWhatsapp" placeholder="90555..." />
+              </div>
+              <button type="submit" class="btn-admin">Ayarları Kaydet</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW: PORTFOLIO -->
+      <div id="view-portfolio" class="view">
+        <div class="customer-layout">
+          <div class="panel">
+            <div class="panel-header">
+              <h3>Referans Yönetimi (Canlı Örneklerimiz)</h3>
+              <button class="btn-outline" id="addPortfolioBtn">+ Yeni Referans Ekle</button>
+            </div>
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Görsel</th>
+                    <th>Firma Adı</th>
+                    <th>Sektör / Açıklama</th>
+                    <th>Site Linki</th>
+                    <th>İşlem</th>
+                  </tr>
+                </thead>
+                <tbody id="portfolioTableBody">
+                  <!-- JS generated -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="panel" id="portfolioDetailPanel" style="display:none;">
+            <div class="panel-header">
+              <h3 id="portfolioDetailTitle">Yeni Referans Ekle</h3>
+              <button class="btn-outline" onclick="document.getElementById('portfolioDetailPanel').style.display='none'">Kapat</button>
+            </div>
+            <form id="portfolioDetailForm" class="admin-form">
+              <input type="hidden" id="portId" />
+              <div class="form-group">
+                <label>Firma Adı</label>
+                <input type="text" id="portName" required />
+              </div>
+              <div class="form-group">
+                <label>Sektör / Açıklama</label>
+                <input type="text" id="portSubtitle" required />
+              </div>
+              <div class="form-group">
+                <label>Görsel Seçin veya URL Girin</label>
+                <input type="file" id="portImageFile" accept="image/*" class="admin-file-input" style="margin-bottom: 8px;" />
+                <input type="text" id="portImage" placeholder="veya görsel linki girin (https://...)" />
+              </div>
+              <div class="form-group">
+                <label>Site URL (Siteyi İncele butonu için)</label>
+                <input type="text" id="portUrl" placeholder="https://..." required />
+              </div>
+              <button type="submit" class="btn-admin">Referansı Kaydet</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="/admin.js" type="module"></script>
+</body>
+</html>

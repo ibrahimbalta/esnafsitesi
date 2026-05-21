@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Giriş Yap | Esnaf Sitesi Admin</title>
+  <link rel="icon" type="image/png" href="/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --dark: #0f172a;
+      --white: #ffffff;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: #020617;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      overflow: hidden;
+    }
+    .login-container {
+      width: 100%;
+      max-width: 400px;
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 32px;
+      text-align: center;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+    .logo {
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 30px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--white);
+    }
+    .logo > span span { color: var(--primary); }
+    .logo-svg {
+      flex-shrink: 0;
+      filter: drop-shadow(0 0 5px rgba(79, 70, 229, 0.4));
+    }
+    h1 { font-size: 24px; margin-bottom: 10px; }
+    p { color: #94a3b8; font-size: 14px; margin-bottom: 30px; }
+    .form-group { margin-bottom: 20px; text-align: left; }
+    label { display: block; font-size: 14px; margin-bottom: 8px; color: #94a3b8; }
+    input {
+      width: 100%;
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      color: white;
+      font-family: inherit;
+    }
+    input:focus { outline: none; border-color: var(--primary); background: rgba(255, 255, 255, 0.08); }
+    .btn-login {
+      width: 100%;
+      padding: 14px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-top: 10px;
+    }
+    .btn-login:hover { transform: translateY(-2px); box-shadow: 0 10px 20px -5px rgba(79, 70, 229, 0.4); }
+    .error-msg { color: #ef4444; font-size: 13px; margin-top: 15px; display: none; }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <a href="/" class="logo">
+      <img src="/logo.png" alt="Esnaf Admin Logo" width="48" height="48" style="object-fit: contain; margin-right: 8px;" />
+      <span>Esnaf<span>Admin</span></span>
+    </a>
+    <h1>Yönetici Girişi</h1>
+    <p>Projeyi yönetmek için giriş yapın.</p>
+    <form id="loginForm">
+      <div class="form-group">
+        <label>Kullanıcı Adı</label>
+        <input type="text" id="username" value="esnafsitesi" required />
+      </div>
+      <div class="form-group">
+        <label>Şifre</label>
+        <input type="password" id="password" value="6032.,Elif." required />
+      </div>
+      <button type="submit" class="btn-login">Giriş Yap</button>
+      <div id="error" class="error-msg">Hatalı kullanıcı adı veya şifre!</div>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const u = document.getElementById('username').value;
+      const p = document.getElementById('password').value;
+      
+      if (u === 'esnafsitesi' && p === '6032.,Elif.') {
+        sessionStorage.setItem('isAdmin', 'true');
+        window.location.href = '/admin.html';
+      } else {
+        document.getElementById('error').style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,564 @@
+// DOM Elements
+const navbar = document.querySelector('#navbar');
+const firmsGrid = document.querySelector('#firmsGrid');
+const counterFilled = document.querySelector('#counterFilled');
+const statFilled = document.querySelector('#statFilled');
+const statRemaining = document.querySelector('#statRemaining');
+const urgencyFill = document.querySelector('#urgencyFill');
+const faqItems = document.querySelectorAll('.faq-item');
+const navToggle = document.querySelector('#navToggle');
+const navLinks = document.querySelector('#navLinks');
+const filterBtns = document.querySelectorAll('.filter-btn');
+
+// Constants
+const TOTAL_SLOTS = 1000;
+const INITIAL_FILLED = 47;
+
+// Initialize Grid
+function initGrid(filter = 'all') {
+  if (!firmsGrid) return;
+  
+  // Clear grid
+  firmsGrid.innerHTML = '';
+  
+  // Get data from localStorage or use defaults
+  const savedFirms = JSON.parse(localStorage.getItem('firmsGrid')) || {};
+  const currentFilledCount = Object.keys(savedFirms).length;
+
+  for (let i = 1; i <= TOTAL_SLOTS; i++) {
+    const savedFirm = savedFirms[i];
+    const isFilled = !!savedFirm || (currentFilledCount === 0 && i <= INITIAL_FILLED);
+    
+    // Filter logic
+    if (filter === 'filled' && !isFilled) continue;
+    if (filter === 'empty' && isFilled) continue;
+
+    const card = document.createElement('div');
+    card.classList.add('firm-card');
+    
+    const slotNumber = document.createElement('span');
+    slotNumber.classList.add('slot-number');
+    slotNumber.textContent = `#${i.toString().padStart(4, '0')}`;
+    card.appendChild(slotNumber);
+
+    if (isFilled) {
+      card.classList.add('filled');
+      const statusIcon = document.createElement('span');
+      statusIcon.classList.add('firm-status');
+      
+      if (savedFirm && savedFirm.logo) {
+        const logoImg = document.createElement('img');
+        logoImg.src = savedFirm.logo;
+        logoImg.alt = savedFirm.name;
+        logoImg.classList.add('firm-logo-img');
+        statusIcon.appendChild(logoImg);
+      } else {
+        statusIcon.textContent = savedFirm ? (savedFirm.icon || '✅') : '✅';
+      }
+      
+      card.appendChild(statusIcon);
+      
+      const firmName = document.createElement('span');
+      firmName.classList.add('firm-name');
+      firmName.textContent = savedFirm ? savedFirm.name : `Firma #${i}`;
+      card.appendChild(firmName);
+      
+      if (savedFirm && savedFirm.url) {
+        card.addEventListener('click', () => window.open(savedFirm.url, '_blank'));
+      }
+    } else {
+      card.classList.add('empty');
+      const statusIcon = document.createElement('span');
+      statusIcon.classList.add('firm-status');
+      statusIcon.textContent = '➕';
+      card.appendChild(statusIcon);
+      
+      const firmName = document.createElement('span');
+      firmName.classList.add('firm-name');
+      firmName.textContent = 'Yer Ayırt';
+      card.appendChild(firmName);
+
+      // Scroll to contact form on click
+      card.addEventListener('click', () => {
+        const contactSection = document.querySelector('#iletisim');
+        if (contactSection) {
+          contactSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    }
+
+    firmsGrid.appendChild(card);
+  }
+}
+
+// Update Stats
+function updateStats() {
+  const savedFirms = JSON.parse(localStorage.getItem('firmsGrid')) || {};
+  const currentFilledCount = Object.keys(savedFirms).length;
+  const displayFilled = currentFilledCount > 0 ? currentFilledCount : INITIAL_FILLED;
+  
+  const percentage = (displayFilled / TOTAL_SLOTS) * 100;
+  if (urgencyFill) urgencyFill.style.width = `${percentage}%`;
+  if (counterFilled) counterFilled.textContent = displayFilled;
+  if (statFilled) statFilled.textContent = displayFilled;
+  if (statRemaining) statRemaining.textContent = TOTAL_SLOTS - displayFilled;
+}
+
+// Filter Buttons
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    // Update UI
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    
+    // Filter grid
+    const filter = btn.getAttribute('data-filter');
+    initGrid(filter);
+  });
+});
+
+// Navbar Scroll Effect
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 50) {
+    navbar.classList.add('scrolled');
+  } else {
+    navbar.classList.remove('scrolled');
+  }
+});
+
+// FAQ Accordion
+faqItems.forEach(item => {
+  const question = item.querySelector('.faq-question');
+  question.addEventListener('click', () => {
+    const isActive = item.classList.contains('active');
+    
+    // Close all others
+    faqItems.forEach(i => i.classList.remove('active'));
+    
+    // Toggle current
+    if (!isActive) item.classList.add('active');
+  });
+});
+
+// Mobile Menu Toggle
+if (navToggle) {
+  navToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    navToggle.classList.toggle('active');
+  });
+
+  // Close menu on link click
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('active');
+      navToggle.classList.remove('active');
+    });
+  });
+}
+
+// Form Submission
+const ctaForm = document.querySelector('#ctaForm');
+if (ctaForm) {
+  ctaForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const btn = ctaForm.querySelector('button');
+    const originalText = btn.innerHTML;
+    
+    const appData = {
+      id: Date.now(),
+      firmaAdi: document.querySelector('#firmaAdi').value,
+      adSoyad: document.querySelector('#adSoyad').value,
+      telefon: document.querySelector('#telefon').value,
+      sektor: document.querySelector('#sektor').value,
+      notlar: document.querySelector('#notlar').value,
+      date: new Date().toISOString(),
+      status: 'pending'
+    };
+
+    // Save application to localStorage
+    const applications = JSON.parse(localStorage.getItem('applications')) || [];
+    applications.push(appData);
+    localStorage.setItem('applications', JSON.stringify(applications));
+    
+    btn.disabled = true;
+    btn.innerHTML = '<span>⏳ Gönderiliyor...</span>';
+    
+    setTimeout(() => {
+      alert('Başvurunuz alındı! Yönetim panelinden başvurunuzu takip edebilirsiniz.');
+      btn.disabled = false;
+      btn.innerHTML = originalText;
+      ctaForm.reset();
+    }, 1000);
+  });
+}
+
+// Load Site Settings
+function loadSettings() {
+  const settings = JSON.parse(localStorage.getItem('siteSettings'));
+  if (!settings) return;
+
+  // Update Footer Email
+  const footerEmail = document.querySelector('a[href^="mailto:"]');
+  if (footerEmail) {
+    footerEmail.href = `mailto:${settings.email}`;
+    footerEmail.textContent = settings.email;
+  }
+
+  // Update Footer Phone
+  const footerPhone = document.querySelector('a[href^="tel:"]');
+  if (footerPhone) {
+    footerPhone.href = `tel:${settings.phone.replace(/\s/g, '')}`;
+    footerPhone.textContent = settings.phone;
+  }
+
+  // Update WhatsApp Buttons
+  const waButtons = document.querySelectorAll('a[href*="wa.me"]');
+  waButtons.forEach(btn => {
+    const originalUrl = new URL(btn.href);
+    const text = originalUrl.searchParams.get('text');
+    btn.href = `https://wa.me/${settings.whatsapp}?text=${text || ''}`;
+  });
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+  initGrid();
+  updateStats();
+  loadSettings();
+  initReviewSystem();
+  initPortfolioSystem();
+  initPromoModal();
+  
+  // Basic Animation on Scroll (Intersection Observer)
+  const observerOptions = {
+    threshold: 0.1
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate-in');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.section, .step-card, .feature-card, .trust-card').forEach(el => {
+    observer.observe(el);
+  });
+});
+
+// ===== REVIEW SYSTEM =====
+function initReviewSystem() {
+  seedDefaultReviews();
+  renderApprovedReviews();
+  initStarRating();
+  initReviewForm();
+}
+
+// Seed default reviews if none exist
+function seedDefaultReviews() {
+  const reviews = JSON.parse(localStorage.getItem('reviews'));
+  if (reviews && reviews.length > 0) return;
+
+  const defaultReviews = [
+    {
+      id: 1,
+      name: 'Ahmet K.',
+      company: 'Yıldız Bakkal',
+      sector: 'Bakkal',
+      city: 'İstanbul',
+      rating: 5,
+      text: 'Yıllardır web sitesi yaptırmayı düşünüyordum ama fiyatlar çok yüksekti. 1000 TL\'ye bu kalitede bir site beklemiyordum!',
+      status: 'approved',
+      date: '2026-04-15T10:00:00.000Z'
+    },
+    {
+      id: 2,
+      name: 'Fatma D.',
+      company: 'Işıltı Kuaför',
+      sector: 'Kuaför',
+      city: 'Ankara',
+      rating: 5,
+      text: '48 saatte sitem hazırdı. Müşterilerim artık Google\'dan beni buluyor. Satışlarım %30 arttı!',
+      status: 'approved',
+      date: '2026-04-20T14:30:00.000Z'
+    },
+    {
+      id: 3,
+      name: 'Mehmet Y.',
+      company: 'Lezzet Durağı',
+      sector: 'Restoran',
+      city: 'Bursa',
+      rating: 5,
+      text: 'Çok profesyonel ve ilgili bir ekip. Esnafın dijitalleşmesi için harika bir hizmet!',
+      status: 'approved',
+      date: '2026-05-01T09:15:00.000Z'
+    }
+  ];
+
+  localStorage.setItem('reviews', JSON.stringify(defaultReviews));
+}
+
+// Render approved reviews
+function renderApprovedReviews() {
+  const grid = document.querySelector('#approvedReviewsGrid');
+  if (!grid) return;
+
+  const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+  const approved = reviews.filter(r => r.status === 'approved');
+
+  if (approved.length === 0) {
+    grid.innerHTML = `
+      <div class="testimonials-empty" style="grid-column: 1 / -1;">
+        <div class="empty-icon">💬</div>
+        <h4>Henüz Yorum Yok</h4>
+        <p>İlk yorumu siz yazın! Aşağıdaki formu kullanarak deneyiminizi paylaşabilirsiniz.</p>
+      </div>
+    `;
+    return;
+  }
+
+  grid.innerHTML = approved.map(review => {
+    const initials = review.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+    const stars = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
+    const formattedDate = new Date(review.date).toLocaleDateString('tr-TR', { 
+      year: 'numeric', month: 'long', day: 'numeric' 
+    });
+
+    return `
+      <div class="testimonial-card">
+        <div class="t-header">
+          <div class="t-stars">${stars}</div>
+          <div class="t-quote">"</div>
+        </div>
+        <p>"${review.text}"</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">${initials}</div>
+          <div class="author-info">
+            <strong>${review.name}</strong>
+            <span>${review.sector} - ${review.city}</span>
+            <span class="verified-badge">✓ Onaylı Firma</span>
+          </div>
+        </div>
+        <div class="review-date">📅 ${formattedDate}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+// Star Rating Interaction
+function initStarRating() {
+  const starRating = document.querySelector('#starRating');
+  const ratingInput = document.querySelector('#reviewRating');
+  if (!starRating || !ratingInput) return;
+
+  const starBtns = starRating.querySelectorAll('.star-btn');
+
+  starBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const value = parseInt(btn.getAttribute('data-value'));
+      ratingInput.value = value;
+
+      starBtns.forEach(s => {
+        const sVal = parseInt(s.getAttribute('data-value'));
+        s.classList.toggle('active', sVal <= value);
+      });
+    });
+
+    btn.addEventListener('mouseenter', () => {
+      const value = parseInt(btn.getAttribute('data-value'));
+      starBtns.forEach(s => {
+        const sVal = parseInt(s.getAttribute('data-value'));
+        s.classList.toggle('hover-active', sVal <= value);
+      });
+    });
+
+    btn.addEventListener('mouseleave', () => {
+      starBtns.forEach(s => s.classList.remove('hover-active'));
+    });
+  });
+}
+
+// Review Form Submission
+function initReviewForm() {
+  const reviewForm = document.querySelector('#reviewForm');
+  const reviewFormWrapper = document.querySelector('#reviewFormWrapper');
+  const successMsg = document.querySelector('#reviewSuccessMsg');
+  const writeAnotherBtn = document.querySelector('#writeAnotherBtn');
+
+  if (!reviewForm) return;
+
+  reviewForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const rating = parseInt(document.querySelector('#reviewRating').value);
+    if (rating === 0) {
+      alert('Lütfen bir puan seçiniz!');
+      return;
+    }
+
+    const reviewData = {
+      id: Date.now(),
+      name: document.querySelector('#reviewName').value.trim(),
+      company: document.querySelector('#reviewCompany').value.trim(),
+      sector: document.querySelector('#reviewSector').value.trim(),
+      city: document.querySelector('#reviewCity').value.trim(),
+      rating: rating,
+      text: document.querySelector('#reviewText').value.trim(),
+      status: 'pending',
+      date: new Date().toISOString()
+    };
+
+    // Save to localStorage
+    const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+    reviews.push(reviewData);
+    localStorage.setItem('reviews', JSON.stringify(reviews));
+
+    // Show success, hide form
+    reviewFormWrapper.style.display = 'none';
+    successMsg.style.display = 'block';
+
+    // Reset form
+    reviewForm.reset();
+    document.querySelectorAll('.star-btn').forEach(s => s.classList.remove('active'));
+    document.querySelector('#reviewRating').value = '0';
+  });
+
+  // "Write Another" button
+  if (writeAnotherBtn) {
+    writeAnotherBtn.addEventListener('click', () => {
+      successMsg.style.display = 'none';
+      reviewFormWrapper.style.display = 'block';
+    });
+  }
+}
+
+// ===== PORTFOLIO SYSTEM =====
+function initPortfolioSystem() {
+  seedDefaultPortfolio();
+  renderPortfolio();
+}
+
+function seedDefaultPortfolio() {
+  const portfolio = JSON.parse(localStorage.getItem('sitePortfolio'));
+  if (portfolio && portfolio.length > 0) return;
+
+  const defaultPortfolio = [
+    {
+      id: 1,
+      name: 'Ziyafet Restoran',
+      subtitle: 'Gurme & Restoran Web Tasarımı',
+      image: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80&w=600',
+      url: '#'
+    },
+    {
+      id: 2,
+      name: 'Işıltı Kuaför',
+      subtitle: 'Premium Güzellik & Bakım Portalı',
+      image: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&q=80&w=600',
+      url: '#'
+    },
+    {
+      id: 3,
+      name: 'Moda Butik',
+      subtitle: 'Şık & Minimalist Butik Web Sitesi',
+      image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=600',
+      url: '#'
+    }
+  ];
+
+  localStorage.setItem('sitePortfolio', JSON.stringify(defaultPortfolio));
+}
+
+// Global reference render helper
+function renderPortfolio() {
+  const container = document.querySelector('#featuredProjectsGrid');
+  if (!container) return;
+
+  const portfolio = JSON.parse(localStorage.getItem('sitePortfolio')) || [];
+  
+  if (portfolio.length === 0) {
+    container.innerHTML = `
+      <div class="projects-empty" style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #94a3b8;">
+        <h4>Henüz Referans Bulunmuyor</h4>
+        <p>Yönetici panelinden referansları ekleyebilirsiniz.</p>
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = portfolio.map(project => `
+    <div class="project-card">
+      <div class="project-img">
+        <img src="${project.image || 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=600'}" alt="${project.name} Web Sitesi" />
+      </div>
+      <div class="project-info">
+        <h4>${project.name}</h4>
+        <span>${project.subtitle}</span>
+        <a href="${project.url || '#'}" target="${project.url && project.url !== '#' ? '_blank' : '_self'}" class="btn-text">Siteyi İncele →</a>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ===== PROMO MODAL SYSTEM =====
+function initPromoModal() {
+  const promoModal = document.querySelector('#promoModal');
+  if (!promoModal) return;
+
+  const promo = JSON.parse(localStorage.getItem('dailyPromo'));
+  if (!promo || !promo.active || sessionStorage.getItem('promoClosed') === 'true') {
+    return;
+  }
+
+  // Populate data
+  const promoModalImg = document.querySelector('#promoModalImg');
+  const promoModalFirmName = document.querySelector('#promoModalFirmName');
+  const promoModalDescription = document.querySelector('#promoModalDescription');
+  const promoModalCta = document.querySelector('#promoModalCta');
+
+  if (promoModalImg) {
+    promoModalImg.src = promo.image || 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=600';
+  }
+  if (promoModalFirmName) {
+    promoModalFirmName.textContent = promo.firmName;
+  }
+  if (promoModalDescription) {
+    promoModalDescription.textContent = promo.text;
+  }
+  if (promoModalCta) {
+    promoModalCta.href = promo.url || '#';
+  }
+
+  // Show modal with a slight delay for premium feel
+  setTimeout(() => {
+    promoModal.style.display = 'flex';
+  }, 1000);
+
+  // Close handlers
+  const closeModal = () => {
+    promoModal.style.animation = 'promoFadeIn 0.3s ease reverse forwards';
+    const container = promoModal.querySelector('.promo-modal-container');
+    if (container) {
+      container.style.animation = 'promoScaleIn 0.3s ease reverse forwards';
+    }
+    setTimeout(() => {
+      promoModal.style.display = 'none';
+      sessionStorage.setItem('promoClosed', 'true');
+    }, 300);
+  };
+
+  const closeBtn = document.querySelector('#promoModalClose');
+  const dismissBtn = document.querySelector('#promoModalDismiss');
+
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+  if (dismissBtn) dismissBtn.addEventListener('click', closeModal);
+
+  // Close on click outside container
+  promoModal.addEventListener('click', (e) => {
+    if (e.target === promoModal) {
+      closeModal();
+    }
+  });
+}

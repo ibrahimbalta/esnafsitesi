@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ekibimiz | Esnaf Sitesi</title>
+  <meta name="description" content="Esnaf Sitesi ekibini tanıyın. Türkiye'nin esnaf dijitalleşme hareketinin arkasındaki profesyonel kadro." />
+  <link rel="icon" type="image/png" href="/logo.png" />
+  
+  <!-- Premium Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  
+  <!-- Style Sheet -->
+  <link rel="stylesheet" href="/style.css" />
+  
+  <style>
+    /* ===== PREMIUM TEAM PAGE CUSTOM STYLES ===== */
+    .team-hero {
+      background: #020617;
+      color: white;
+      padding: 200px 0 100px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .team-hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 30% 50%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 50%, rgba(6, 182, 212, 0.08) 0%, transparent 50%);
+      animation: heroGlow 15s ease-in-out infinite alternate;
+      z-index: -1;
+    }
+
+    @keyframes heroGlow {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-3%, -3%); }
+    }
+
+    .team-hero .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .team-hero h1 {
+      font-size: clamp(38px, 6vw, 64px);
+      font-weight: 900;
+      margin-bottom: 24px;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+
+    .team-hero p {
+      color: var(--text-secondary);
+      font-size: clamp(16px, 2vw, 20px);
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* TEAM MEMBER SECTION */
+    .team-section {
+      padding: 120px 0;
+      background: #030014;
+      position: relative;
+    }
+
+    .team-member-card {
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      gap: 64px;
+      background: rgba(255, 255, 255, 0.01);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      max-width: 1140px;
+      margin: 0 auto;
+      transition: var(--transition);
+    }
+
+    .team-member-card:hover {
+      border-color: rgba(139, 92, 246, 0.25);
+      box-shadow: 0 30px 70px rgba(139, 92, 246, 0.15);
+      transform: translateY(-4px);
+    }
+
+    .team-member-photo {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .team-member-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      min-height: 600px;
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .team-member-card:hover .team-member-photo img {
+      transform: scale(1.05);
+    }
+
+    .photo-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 40px 32px;
+      background: linear-gradient(to top, rgba(3, 0, 20, 0.95), transparent);
+    }
+
+    .photo-overlay h3 {
+      font-size: 28px;
+      font-weight: 900;
+      color: white;
+      margin-bottom: 6px;
+    }
+
+    .photo-overlay span {
+      color: var(--secondary);
+      font-size: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .team-member-info {
+      padding: 60px 60px 60px 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .member-role-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(139, 92, 246, 0.08);
+      color: var(--primary);
+      padding: 8px 20px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 28px;
+      width: fit-content;
+      border: 1px solid rgba(139, 92, 246, 0.15);
+    }
+
+    .member-name {
+      font-size: 38px;
+      font-weight: 900;
+      color: white;
+      margin-bottom: 6px;
+      letter-spacing: -0.02em;
+    }
+
+    .member-title {
+      font-size: 17px;
+      color: var(--secondary);
+      font-weight: 700;
+      margin-bottom: 28px;
+    }
+
+    .member-bio {
+      color: var(--text-secondary);
+      font-size: 16px;
+      line-height: 1.8;
+      margin-bottom: 36px;
+    }
+
+    .member-bio p {
+      margin-bottom: 18px;
+    }
+
+    /* Skills Tags */
+    .member-skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 36px;
+    }
+
+    .skill-tag {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      color: var(--text-primary);
+      padding: 10px 20px;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 700;
+      transition: var(--transition);
+    }
+
+    .skill-tag:hover {
+      background: var(--gradient-main);
+      color: white;
+      border-color: transparent;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px var(--primary-glow);
+    }
+
+    /* Custom Stats Badge */
+    .member-stats {
+      display: flex;
+      gap: 36px;
+      padding: 30px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      margin-bottom: 36px;
+    }
+
+    .member-stat {
+      text-align: center;
+    }
+
+    .member-stat strong {
+      display: block;
+      font-size: 28px;
+      font-weight: 900;
+      color: #fff;
+      background: var(--gradient-main);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .member-stat span {
+      font-size: 12px;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+      margin-top: 4px;
+      display: block;
+    }
+
+    /* Social Links Buttons */
+    .member-socials {
+      display: flex;
+      gap: 16px;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 28px;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      font-size: 15px;
+      transition: var(--transition);
+      text-decoration: none;
+    }
+
+    .social-link.linkedin {
+      background: #0077B5;
+      color: white;
+      box-shadow: 0 4px 15px rgba(0, 119, 181, 0.2);
+    }
+
+    .social-link.linkedin:hover {
+      background: #006396;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(0, 119, 181, 0.4);
+    }
+
+    .social-link.email {
+      background: rgba(255, 255, 255, 0.03);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .social-link.email:hover {
+      background: var(--gradient-main);
+      border-color: transparent;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px var(--primary-glow);
+    }
+
+    /* VALUES CARD GRIDS */
+    .values-section {
+      padding: 120px 0;
+      background: #02000c;
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 36px;
+      margin-top: 80px;
+    }
+
+    .value-card {
+      text-align: center;
+      padding: 48px 36px;
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.01);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      transition: var(--transition);
+    }
+
+    .value-card:hover {
+      border-color: rgba(6, 182, 212, 0.3);
+      background: rgba(255, 255, 255, 0.03);
+      transform: translateY(-10px);
+      box-shadow: 0 25px 50px rgba(6, 182, 212, 0.1);
+    }
+
+    .value-icon {
+      font-size: 54px;
+      margin-bottom: 24px;
+      filter: drop-shadow(0 0 12px var(--secondary-glow));
+    }
+
+    .value-card h3 {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 14px;
+      color: white;
+    }
+
+    .value-card p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* TEAM CTA SEGMENT */
+    .team-cta {
+      background: #010006;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 100px 0;
+      text-align: center;
+    }
+
+    .team-cta h2 {
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 900;
+      margin-bottom: 20px;
+      color: white;
+    }
+
+    .team-cta p {
+      color: var(--text-secondary);
+      font-size: 18px;
+      margin-bottom: 48px;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* RESPONSIVE LAYOUT */
+    @media (max-width: 1100px) {
+      .team-member-card {
+        grid-template-columns: 1fr;
+        max-width: 600px;
+      }
+
+      .team-member-photo img {
+        min-height: 400px;
+      }
+
+      .team-member-info {
+        padding: 48px;
+      }
+
+      .values-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .values-grid {
+        grid-template-columns: 1fr;
+      }
+      .member-stats {
+        flex-wrap: wrap;
+        gap: 24px;
+      }
+      .member-socials {
+        flex-direction: column;
+      }
+      .member-name {
+        font-size: 30px;
+      }
+      .team-member-info {
+        padding: 32px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION BAR (GLASSMORPHISM) -->
+  <nav class="navbar scrolled" id="navbar">
+    <div class="container nav-container">
+      <a href="/" class="nav-logo">
+        <span class="logo-icon">
+          <img src="/logo.png" alt="Esnaf Sitesi Logo" width="48" height="48" style="object-fit: contain; filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.4));" />
+        </span>
+        <span class="logo-text">Esnaf<span class="logo-accent">Sitesi</span></span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="/">Ana Sayfa</a></li>
+        <li><a href="/#nasil">Nasıl Çalışır?</a></li>
+        <li><a href="/#referanslar">Referanslar</a></li>
+        <li><a href="/ekibimiz.html" style="color: var(--text-primary); font-weight: 700;">Ekibimiz</a></li>
+        <li><a href="/#faq">SSS</a></li>
+        <li><a href="/#iletisim" class="nav-cta">Hemen Başvur</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Menü">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="team-hero">
+    <div class="container">
+      <span class="section-tag animate-in">Ekibimiz</span>
+      <h1 class="animate-in" style="animation-delay: 0.1s;">Dijitalleşme Hareketinin<br /><span class="gradient-text">Arkasındaki Güç</span></h1>
+      <p class="animate-in" style="animation-delay: 0.2s;">Deneyim, güven ve yüksek teknoloji tutkusu ile Türkiye genelindeki esnafımızı geleceğe hazırlıyoruz.</p>
+    </div>
+  </section>
+
+  <!-- TEAM MEMBERS -->
+  <section class="team-section">
+    <div class="container">
+      <!-- Member 1 -->
+      <div class="team-member-card animate-in">
+        <div class="team-member-photo">
+          <img src="/ibrahim-balta.jpg" alt="İbrahim Balta - Kurucu & Proje Yöneticisi" />
+          <div class="photo-overlay">
+            <h3>İbrahim Balta</h3>
+            <span>Kurucu & Proje Yöneticisi</span>
+          </div>
+        </div>
+        <div class="team-member-info">
+          <div class="member-role-badge">
+            <span>👑</span> Kurucu & Proje Yöneticisi
+          </div>
+          <h2 class="member-name">İbrahim Balta</h2>
+          <p class="member-title">Esnaf Sitesi Kurucusu & Proje Yöneticisi</p>
+
+          <div class="member-bio">
+            <p>Dijital dönüşüm ve modern web teknolojileri alanında geniş tecrübeye sahip olan İbrahim Balta, kariyeri boyunca küçük işletmelerin ve yerel esnafın dijital rekabette öne geçmesi için yenilikçi stratejiler geliştirmiştir.</p>
+            <p>Proje yönetimi, kullanıcı deneyimi (UX) tasarımı ve dijital strateji alanlarındaki üst düzey tecrübesini, doğrudan yerel işletmelerin büyüme hedefleri doğrultusunda konumlandırarak "Esnaf Sitesi" projesini hayata geçirmiştir. Kendisinin benimsediği *"En büyük yatırım insana ve güvene yapılan yatırımdır"* ilkesi doğrultusunda şeffaf ve sürdürülebilir bir iş birliği modelini yürütmektedir.</p>
+            <p>Sadece estetik açıdan göz alıcı değil, aynı zamanda yüksek performanslı ve kalıcı dijital çözümler üreterek Türkiye'nin dört bir yanındaki yüzlerce esnafımızın dijitalleşme sürecine güçlü bir vizyoner liderlik yapmaktadır.</p>
+          </div>
+
+          <div class="member-skills">
+            <span class="skill-tag">Proje Yönetimi</span>
+            <span class="skill-tag">Dijital Strateji</span>
+            <span class="skill-tag">Web Teknolojileri</span>
+            <span class="skill-tag">UX/UI Tasarım</span>
+            <span class="skill-tag">Müşteri İlişkileri</span>
+            <span class="skill-tag">Esnaf Dijitalleşme</span>
+          </div>
+
+          <div class="member-stats">
+            <div class="member-stat">
+              <strong>500+</strong>
+              <span>Başarılı Proje</span>
+            </div>
+            <div class="member-stat">
+              <strong>%100</strong>
+              <span>Müşteri Memnuniyeti</span>
+            </div>
+            <div class="member-stat">
+              <strong>48saat</strong>
+              <span>Teslimat</span>
+            </div>
+            <div class="member-stat">
+              <strong>7/24</strong>
+              <span>Destek</span>
+            </div>
+          </div>
+
+          <div class="member-socials">
+            <a href="https://www.linkedin.com/in/ibrahimbalta/" target="_blank" rel="noopener noreferrer" class="social-link linkedin">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              LinkedIn Profili
+            </a>
+            <a href="/#iletisim" class="social-link email">
+              <span>📧</span> İletişime Geç
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES SECTION -->
+  <section class="values-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Değerlerimiz</span>
+        <h2 class="section-title">Bizi Yöneten <span class="gradient-text">Temel Değerler</span></h2>
+        <p class="section-desc">Her işletmeye dokunurken kalbimizde taşıdığımız en değerli ilkelerimiz.</p>
+      </div>
+      
+      <div class="values-grid">
+        <!-- Value 1 -->
+        <div class="value-card">
+          <div class="value-icon">🤝</div>
+          <h3>Güven Odaklı</h3>
+          <p>Her müşterimizle ömür boyu sürecek güvene dayalı ilişkiler kuruyoruz. Şeffaflık bizim en büyük taahhüdümüzdür.</p>
+        </div>
+        
+        <!-- Value 2 -->
+        <div class="value-card">
+          <div class="value-icon">💡</div>
+          <h3>Çözüm Odaklı</h3>
+          <p>Her esnafın hikayesi ve hedef kitlesi benzersizdir. Şabloncu değil, size en uygun sektörel dinamikleri uyguluyoruz.</p>
+        </div>
+        
+        <!-- Value 3 -->
+        <div class="value-card">
+          <div class="value-icon">🚀</div>
+          <h3>Mükemmel Hız</h3>
+          <p>48 saatte anahtar teslimi yaparken, performanstan, SEO standartlarından ve kod kalitesinden asla ödün vermiyoruz.</p>
+        </div>
+        
+        <!-- Value 4 -->
+        <div class="value-card">
+          <div class="value-icon">❤️</div>
+          <h3>İnsana Saygı</h3>
+          <p>Dijital dünyanın soğuk kodlarının arkasında sıcak bir dostluk kuruyor; her esnafımızı iş ortağımız kabul ediyoruz.</p>
+        </div>
+        
+        <!-- Value 5 -->
+        <div class="value-card">
+          <div class="value-icon">🎯</div>
+          <h3>Mutlak Şeffaflık</h3>
+          <p>Gizli veya sürpriz ödemelere izin vermeden, en başından itibaren ne alacağınızı ve ne ödeyeceğinizi net şekilde biliyorsunuz.</p>
+        </div>
+        
+        <!-- Value 6 -->
+        <div class="value-card">
+          <div class="value-icon">🌱</div>
+          <h3>Sürekli İnovasyon</h3>
+          <p>En yeni yapay zeka entegrasyonlarını ve modern web trendlerini takip ederek web sitenizi her zaman güncel tutuyoruz.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="team-cta">
+    <div class="container">
+      <h2>Ekibimizle Bir Kahve Eşliğinde<br /><span class="gradient-neon-text">Tanışmak İster misiniz?</span></h2>
+      <p>Aklınızdaki projeleri hayata geçirmek için hemen bizimle iletişime geçin.</p>
+      <a href="/#iletisim" class="btn btn-primary btn-glow">
+        <span>📞 Hemen İletişime Geç</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Brand -->
+        <div class="footer-brand">
+          <a href="/" class="nav-logo" style="margin-bottom: 16px; padding: 0;">
+            <span class="logo-icon">
+              <img src="/logo.png" alt="Esnaf Sitesi Logo" width="48" height="48" style="object-fit: contain; filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.4));" />
+            </span>
+            <span class="logo-text">Esnaf<span class="logo-accent">Sitesi</span></span>
+          </a>
+          <p>Yapay zeka çağında esnafımızın yanında olan Türkiye'nin en büyük dijitalleşme hareketi.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Instagram">📷</a>
+            <a href="#" aria-label="Twitter">🐦</a>
+            <a href="#" aria-label="YouTube">🎬</a>
+          </div>
+        </div>
+        
+        <!-- Links -->
+        <div class="footer-links">
+          <h4>Hızlı Navigasyon</h4>
+          <a href="/">Ana Sayfa</a>
+          <a href="/#nasil">Nasıl Çalışır?</a>
+          <a href="/#referanslar">Referanslar</a>
+          <a href="/ekibimiz.html">Ekibimiz</a>
+          <a href="/#faq">SSS</a>
+        </div>
+        
+        <!-- Contact -->
+        <div class="footer-links">
+          <h4>Bize Ulaşın</h4>
+          <a href="mailto:info@esnafsitesi.com">info@esnafsitesi.com</a>
+          <a href="tel:+905551234567">0555 123 45 67</a>
+          <a href="#">WhatsApp Canlı Destek</a>
+        </div>
+      </div>
+      
+      <!-- Bottom -->
+      <div class="footer-bottom">
+        <p>&copy; 2026 Esnaf Sitesi. Tüm Hakları Saklıdır.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FLOATING WHATSAPP BUTTON -->
+  <a href="https://wa.me/905551234567?text=Merhaba,%20Esnaf%20Sitesi%20projesi%20hakkında%20bilgi%20almak%20istiyorum." class="whatsapp-float" target="_blank" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24" width="30" height="30" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <!-- Mobile Toggle Action Script -->
+  <script>
+    const navToggle = document.querySelector('#navToggle');
+    const navLinks = document.querySelector('#navLinks');
+    if (navToggle) {
+      navToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        navToggle.classList.toggle('active');
+      });
+      navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          navLinks.classList.remove('active');
+          navToggle.classList.remove('active');
+        });
+      });
+    }
+  </script>
+</body>
+</html>
