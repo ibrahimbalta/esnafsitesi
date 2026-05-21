@@ -277,6 +277,20 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.04em;
 }
 
+.nav-logo-img {
+  height: 42px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  transition: var(--transition);
+  filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.3));
+}
+
+.nav-logo:hover .nav-logo-img {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 15px rgba(139, 92, 246, 0.6));
+}
+
 .logo-icon {
   display: flex;
   align-items: center;
@@ -1814,6 +1828,10 @@ h1, h2, h3, h4, h5, h6 {
 @media (max-width: 768px) {
   .section { padding: 80px 0; }
   .section-title { font-size: 32px; }
+  
+  .nav-logo-img {
+    height: 34px;
+  }
   
   .nav-links { 
     display: none; 
