@@ -171,7 +171,7 @@ function initAdmin() {
   if (settingsForm) {
     // Load current settings
     const settings = JSON.parse(localStorage.getItem('siteSettings')) || {
-      email: 'info@esnafsitesi.com',
+      email: 'info@kolaywebci.com',
       phone: '0555 123 45 67',
       whatsapp: '905551234567'
     };

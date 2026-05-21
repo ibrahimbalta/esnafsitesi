@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Giriş Yap | Esnaf Sitesi Admin</title>
+  <title>Giriş Yap | KolayWebci Admin</title>
   <link rel="icon" type="image/png" href="/logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -85,15 +85,15 @@
 <body>
   <div class="login-container">
     <a href="/" class="logo">
-      <img src="/logo.png" alt="Esnaf Admin Logo" width="48" height="48" style="object-fit: contain; margin-right: 8px;" />
-      <span>Esnaf<span>Admin</span></span>
+      <img src="/logo.png" alt="KolayWebci Admin Logo" width="48" height="48" style="object-fit: contain; margin-right: 8px;" />
+      <span>Kolay<span>WebciAdmin</span></span>
     </a>
     <h1>Yönetici Girişi</h1>
     <p>Projeyi yönetmek için giriş yapın.</p>
     <form id="loginForm">
       <div class="form-group">
         <label>Kullanıcı Adı</label>
-        <input type="text" id="username" value="esnafsitesi" required />
+        <input type="text" id="username" value="kolaywebci" required />
       </div>
       <div class="form-group">
         <label>Şifre</label>
@@ -110,7 +110,7 @@
       const u = document.getElementById('username').value;
       const p = document.getElementById('password').value;
       
-      if (u === 'esnafsitesi' && p === '6032.,Elif.') {
+      if (u === 'kolaywebci' && p === '6032.,Elif.') {
         sessionStorage.setItem('isAdmin', 'true');
         window.location.href = '/admin.html';
       } else {
