@@ -3,13 +3,55 @@ const TOTAL_SLOTS = 1000;
 const INITIAL_FILLED_COUNT = 47;
 const PRICE_PER_SITE = 1000;
 
+// --- API & Cloud Storage Helpers ---
+const API_URL = '/.netlify/functions/api';
+
+async function fetchFromStore(key, defaultValue) {
+  try {
+    const res = await fetch(`${API_URL}?key=${key}`);
+    if (res.ok) {
+      const data = await res.json();
+      return data !== null ? data : defaultValue;
+    }
+  } catch (err) {
+    console.warn(`Failed to fetch ${key} from Netlify Blobs, falling back to localStorage:`, err);
+  }
+  
+  // Fallback to localStorage
+  const localData = localStorage.getItem(key);
+  return localData ? JSON.parse(localData) : defaultValue;
+}
+
+async function saveToStore(key, value) {
+  // Save to localStorage immediately as a local copy/backup
+  localStorage.setItem(key, JSON.stringify(value));
+  
+  try {
+    const res = await fetch(API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Admin-Password': '6032.,Elif.' // Existing admin password for lightweight verification
+      },
+      body: JSON.stringify({ key, value })
+    });
+    if (res.ok) {
+      console.log(`Saved ${key} to Netlify Blobs successfully.`);
+      return true;
+    }
+  } catch (err) {
+    console.error(`Failed to save ${key} to Netlify Blobs:`, err);
+  }
+  return false;
+}
+
 // --- State & Initialization ---
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   console.log('Admin JS Initializing...');
-  initAdmin();
+  await initAdmin();
 });
 
-function initAdmin() {
+async function initAdmin() {
   // Selectors inside init to ensure DOM is ready
   const navItems = document.querySelectorAll('.nav-item[data-view]');
   const views = document.querySelectorAll('.view');
@@ -17,7 +59,7 @@ function initAdmin() {
   
   // Navigation Handler
   navItems.forEach(item => {
-    item.addEventListener('click', (e) => {
+    item.addEventListener('click', async (e) => {
       e.preventDefault();
       const targetView = item.getAttribute('data-view');
       console.log('Switching to view:', targetView);
@@ -35,7 +77,7 @@ function initAdmin() {
       if (viewTitle) viewTitle.textContent = item.textContent.trim().replace('!', '');
 
       // Refresh Data
-      updateDashboardData();
+      await updateDashboardData();
     });
   });
 
@@ -65,7 +107,7 @@ function initAdmin() {
         }
       }
 
-      const grid = JSON.parse(localStorage.getItem('firmsGrid')) || {};
+      const grid = await fetchFromStore('firmsGrid', {});
       
       // Keep existing logo if no new logo is uploaded
       const existingLogo = grid[no] ? grid[no].logo : null;
@@ -77,10 +119,10 @@ function initAdmin() {
         icon: '✅' 
       };
       
-      localStorage.setItem('firmsGrid', JSON.stringify(grid));
-      console.log('Slot updated in localStorage:', no);
+      await saveToStore('firmsGrid', grid);
+      console.log('Slot updated in Netlify Blobs:', no);
       
-      updateDashboardData();
+      await updateDashboardData();
       window.alert(`Slot #${no} başarıyla güncellendi!`);
       quickSlotForm.reset();
     });
@@ -101,10 +143,10 @@ function initAdmin() {
   }
 
   if (customerDetailForm) {
-    customerDetailForm.addEventListener('submit', (e) => {
+    customerDetailForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const id = document.querySelector('#custId').value;
-      const customers = JSON.parse(localStorage.getItem('customers')) || [];
+      const customers = await fetchFromStore('customers', []);
       
       const customerData = {
         id: id ? parseInt(id) : Date.now(),
@@ -126,8 +168,8 @@ function initAdmin() {
         customers.push(customerData);
       }
 
-      localStorage.setItem('customers', JSON.stringify(customers));
-      updateDashboardData();
+      await saveToStore('customers', customers);
+      await updateDashboardData();
       if (customerDetailPanel) customerDetailPanel.style.display = 'none';
       alert('Müşteri bilgileri kaydedildi.');
     });
@@ -136,10 +178,10 @@ function initAdmin() {
   // Clear Applications
   const clearAppsBtn = document.querySelector('#clearApps');
   if (clearAppsBtn) {
-    clearAppsBtn.addEventListener('click', () => {
+    clearAppsBtn.addEventListener('click', async () => {
       if (confirm('Tüm başvuruları silmek istediğinize emin misiniz?')) {
-        localStorage.removeItem('applications');
-        updateDashboardData();
+        await saveToStore('applications', []);
+        await updateDashboardData();
       }
     });
   }
@@ -147,12 +189,12 @@ function initAdmin() {
   // Agenda Handler
   const agendaForm = document.querySelector('#agendaForm');
   if (agendaForm) {
-    agendaForm.addEventListener('submit', (e) => {
+    agendaForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const text = document.querySelector('#agendaInput').value;
       const date = document.querySelector('#agendaDate').value;
       
-      const agenda = JSON.parse(localStorage.getItem('agenda')) || [];
+      const agenda = await fetchFromStore('agenda', []);
       agenda.push({
         id: Date.now(),
         text,
@@ -160,9 +202,9 @@ function initAdmin() {
         completed: false
       });
       
-      localStorage.setItem('agenda', JSON.stringify(agenda));
+      await saveToStore('agenda', agenda);
       agendaForm.reset();
-      updateDashboardData();
+      await updateDashboardData();
     });
   }
 
@@ -170,17 +212,17 @@ function initAdmin() {
   const settingsForm = document.querySelector('#settingsForm');
   if (settingsForm) {
     // Load current settings
-    const settings = JSON.parse(localStorage.getItem('siteSettings')) || {
+    const settings = await fetchFromStore('siteSettings', {
       email: 'info@kolaywebci.com',
       phone: '0555 123 45 67',
       whatsapp: '905551234567'
-    };
+    });
     
     document.querySelector('#setEmail').value = settings.email;
     document.querySelector('#setPhone').value = settings.phone;
     document.querySelector('#setWhatsapp').value = settings.whatsapp;
 
-    settingsForm.addEventListener('submit', (e) => {
+    settingsForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const newSettings = {
         email: document.querySelector('#setEmail').value,
@@ -188,7 +230,7 @@ function initAdmin() {
         whatsapp: document.querySelector('#setWhatsapp').value
       };
       
-      localStorage.setItem('siteSettings', JSON.stringify(newSettings));
+      await saveToStore('siteSettings', newSettings);
       alert('Ayarlar kaydedildi. Değişiklikler anasayfada görünecektir.');
     });
   }
@@ -228,7 +270,7 @@ function initAdmin() {
         }
       }
 
-      const portfolio = JSON.parse(localStorage.getItem('sitePortfolio')) || [];
+      const portfolio = await fetchFromStore('sitePortfolio', []);
       
       const projectData = {
         id: id ? parseInt(id) : Date.now(),
@@ -245,8 +287,8 @@ function initAdmin() {
         portfolio.push(projectData);
       }
 
-      localStorage.setItem('sitePortfolio', JSON.stringify(portfolio));
-      updateDashboardData();
+      await saveToStore('sitePortfolio', portfolio);
+      await updateDashboardData();
       if (portfolioDetailPanel) portfolioDetailPanel.style.display = 'none';
       alert('Referans bilgileri kaydedildi.');
     });
@@ -256,13 +298,13 @@ function initAdmin() {
   const promoForm = document.querySelector('#promoForm');
   if (promoForm) {
     // Load current promo settings
-    const promo = JSON.parse(localStorage.getItem('dailyPromo')) || {
+    const promo = await fetchFromStore('dailyPromo', {
       active: false,
       firmName: '',
       url: '',
       text: '',
       image: ''
-    };
+    });
 
     document.querySelector('#promoActive').checked = promo.active;
     document.querySelector('#promoFirmName').value = promo.firmName || '';
@@ -336,7 +378,7 @@ function initAdmin() {
         image
       };
 
-      localStorage.setItem('dailyPromo', JSON.stringify(newPromo));
+      await saveToStore('dailyPromo', newPromo);
       alert('Günün tanıtım reklamı ayarları başarıyla kaydedildi.');
       updateAdminPromoPreview();
     });
@@ -354,20 +396,20 @@ function convertToBase64(file) {
 }
 
 // --- Data Refresh Logic ---
-function updateDashboardData() {
+async function updateDashboardData() {
   console.log('Refreshing Dashboard Data...');
   
-  const apps = JSON.parse(localStorage.getItem('applications')) || [];
-  const customers = JSON.parse(localStorage.getItem('customers')) || [];
+  const apps = await fetchFromStore('applications', []);
+  const customers = await fetchFromStore('customers', []);
   
   // Grid Data & Stat Logic
-  let grid = JSON.parse(localStorage.getItem('firmsGrid'));
+  let grid = await fetchFromStore('firmsGrid', null);
   if (!grid) {
     grid = {};
     for (let i = 1; i <= INITIAL_FILLED_COUNT; i++) {
       grid[i] = { name: `Firma #${i}`, icon: '✅', url: '' };
     }
-    localStorage.setItem('firmsGrid', JSON.stringify(grid));
+    await saveToStore('firmsGrid', grid);
   }
   
   const gridCount = Object.keys(grid).length;
@@ -391,17 +433,17 @@ function updateDashboardData() {
   // 2. Update Tables
   renderApplicationsTable(apps);
   renderCustomerTable(customers);
-  renderGridManager(grid);
-  renderAgenda();
-  renderReviews();
-  renderPortfolioTable();
+  await renderGridManager(grid);
+  await renderAgenda();
+  await renderReviews();
+  await renderPortfolioTable();
 }
 
-function renderAgenda() {
+async function renderAgenda() {
   const container = document.querySelector('#agendaList');
   if (!container || !document.querySelector('#view-agenda').classList.contains('active')) return;
 
-  const agenda = JSON.parse(localStorage.getItem('agenda')) || [];
+  const agenda = await fetchFromStore('agenda', []);
   
   if (agenda.length === 0) {
     container.innerHTML = '<div class="agenda-empty">Henüz bir planlama yapılmamış.</div>';
@@ -484,7 +526,7 @@ function renderCustomerTable(customers) {
   }
 }
 
-function renderGridManager(grid) {
+async function renderGridManager(grid) {
   const container = document.querySelector('#adminFirmsGrid');
   if (!container || !document.querySelector('#view-grid').classList.contains('active')) return;
 
@@ -493,13 +535,13 @@ function renderGridManager(grid) {
     const slot = document.createElement('div');
     slot.className = `admin-slot ${grid[i] ? 'filled' : ''}`;
     slot.textContent = i;
-    slot.onclick = () => {
+    slot.onclick = async () => {
       if (grid[i]) {
         const confirmClear = confirm(`Slot #${i} dolu (${grid[i].name}).\n\nBu slotu BOŞALTMAK (iptal etmek) istiyorsanız [Tamam] butonuna basın.\nDÜZENLEMEK istiyorsanız [İptal] butonuna basın.`);
         if (confirmClear) {
           delete grid[i];
-          localStorage.setItem('firmsGrid', JSON.stringify(grid));
-          updateDashboardData();
+          await saveToStore('firmsGrid', grid);
+          await updateDashboardData();
           alert(`Slot #${i} başarıyla boşaltıldı!`);
           return;
         }
@@ -528,25 +570,25 @@ function renderGridManager(grid) {
 }
 
 // --- Global Handlers (for onclick attributes) ---
-window.handleAppAction = (id, action) => {
-  let apps = JSON.parse(localStorage.getItem('applications')) || [];
+window.handleAppAction = async (id, action) => {
+  let apps = await fetchFromStore('applications', []);
   if (action === 'approve') {
     const idx = apps.findIndex(a => a.id === id);
     if (idx !== -1) apps[idx].status = 'approved';
   } else if (action === 'delete') {
     if (confirm('Silmek istediğinize emin misiniz?')) apps = apps.filter(a => a.id !== id);
   }
-  localStorage.setItem('applications', JSON.stringify(apps));
-  updateDashboardData();
+  await saveToStore('applications', apps);
+  await updateDashboardData();
 };
 
-window.handleCustAction = (id, action) => {
-  let customers = JSON.parse(localStorage.getItem('customers')) || [];
+window.handleCustAction = async (id, action) => {
+  let customers = await fetchFromStore('customers', []);
   if (action === 'delete') {
     if (confirm('Silmek istediğinize emin misiniz?')) {
       customers = customers.filter(c => c.id !== id);
-      localStorage.setItem('customers', JSON.stringify(customers));
-      updateDashboardData();
+      await saveToStore('customers', customers);
+      await updateDashboardData();
     }
   } else if (action === 'edit') {
     const cust = customers.find(c => c.id === id);
@@ -569,16 +611,16 @@ window.handleCustAction = (id, action) => {
   }
 };
 
-window.handleAgendaAction = (id, action) => {
-  let agenda = JSON.parse(localStorage.getItem('agenda')) || [];
+window.handleAgendaAction = async (id, action) => {
+  let agenda = await fetchFromStore('agenda', []);
   if (action === 'toggle') {
     const idx = agenda.findIndex(a => a.id === id);
     if (idx !== -1) agenda[idx].completed = !agenda[idx].completed;
   } else if (action === 'delete') {
     agenda = agenda.filter(a => a.id !== id);
   }
-  localStorage.setItem('agenda', JSON.stringify(agenda));
-  renderAgenda();
+  await saveToStore('agenda', agenda);
+  await renderAgenda();
 };
 
 // Logout Handler
@@ -594,11 +636,11 @@ document.addEventListener('click', (e) => {
 // ===== REVIEW MANAGEMENT =====
 let currentReviewFilter = 'pending';
 
-function renderReviews() {
+async function renderReviews() {
   const container = document.querySelector('#adminReviewsList');
   if (!container) return;
 
-  const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+  const reviews = await fetchFromStore('reviews', []);
   
   // Update stats
   const pending = reviews.filter(r => r.status === 'pending');
@@ -701,8 +743,8 @@ function renderReviews() {
 }
 
 // Review Action Handler
-window.handleReviewAction = (id, action) => {
-  let reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+window.handleReviewAction = async (id, action) => {
+  let reviews = await fetchFromStore('reviews', []);
   
   if (action === 'approve') {
     const idx = reviews.findIndex(r => r.id === id);
@@ -715,29 +757,29 @@ window.handleReviewAction = (id, action) => {
     reviews = reviews.filter(r => r.id !== id);
   }
 
-  localStorage.setItem('reviews', JSON.stringify(reviews));
-  renderReviews();
+  await saveToStore('reviews', reviews);
+  await renderReviews();
 };
 
 // Review Tab Click Handlers
 document.addEventListener('DOMContentLoaded', () => {
   const tabs = document.querySelectorAll('.review-tab');
   tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
+    tab.addEventListener('click', async () => {
       tabs.forEach(t => t.classList.remove('active'));
       tab.classList.add('active');
       currentReviewFilter = tab.getAttribute('data-tab');
-      renderReviews();
+      await renderReviews();
     });
   });
 });
 
 // ===== PORTFOLIO MANAGEMENT =====
-function renderPortfolioTable() {
+async function renderPortfolioTable() {
   const body = document.querySelector('#portfolioTableBody');
   if (!body) return;
 
-  const portfolio = JSON.parse(localStorage.getItem('sitePortfolio')) || [];
+  const portfolio = await fetchFromStore('sitePortfolio', []);
   
   if (portfolio.length === 0) {
     body.innerHTML = `
@@ -768,14 +810,14 @@ function renderPortfolioTable() {
   `).join('');
 }
 
-window.handlePortfolioAction = (id, action) => {
-  let portfolio = JSON.parse(localStorage.getItem('sitePortfolio')) || [];
+window.handlePortfolioAction = async (id, action) => {
+  let portfolio = await fetchFromStore('sitePortfolio', []);
   
   if (action === 'delete') {
     if (confirm('Bu referansı silmek istediğinize emin misiniz?')) {
       portfolio = portfolio.filter(p => p.id !== id);
-      localStorage.setItem('sitePortfolio', JSON.stringify(portfolio));
-      updateDashboardData();
+      await saveToStore('sitePortfolio', portfolio);
+      await updateDashboardData();
     }
   } else if (action === 'edit') {
     const project = portfolio.find(p => p.id === id);

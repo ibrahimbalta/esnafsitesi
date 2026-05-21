@@ -14,15 +14,56 @@ const filterBtns = document.querySelectorAll('.filter-btn');
 const TOTAL_SLOTS = 1000;
 const INITIAL_FILLED = 47;
 
+// --- API & Cloud Storage Helpers ---
+const API_URL = '/.netlify/functions/api';
+
+async function fetchFromStore(key, defaultValue) {
+  try {
+    const res = await fetch(`${API_URL}?key=${key}`);
+    if (res.ok) {
+      const data = await res.json();
+      return data !== null ? data : defaultValue;
+    }
+  } catch (err) {
+    console.warn(`Failed to fetch ${key} from Netlify Blobs, falling back to localStorage:`, err);
+  }
+  
+  // Fallback to localStorage
+  const localData = localStorage.getItem(key);
+  return localData ? JSON.parse(localData) : defaultValue;
+}
+
+async function saveToStore(key, value) {
+  // Save to localStorage immediately as a local copy/backup
+  localStorage.setItem(key, JSON.stringify(value));
+  
+  try {
+    const res = await fetch(API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ key, value })
+    });
+    if (res.ok) {
+      console.log(`Saved ${key} to Netlify Blobs successfully.`);
+      return true;
+    }
+  } catch (err) {
+    console.error(`Failed to save ${key} to Netlify Blobs:`, err);
+  }
+  return false;
+}
+
 // Initialize Grid
-function initGrid(filter = 'all') {
+async function initGrid(filter = 'all') {
   if (!firmsGrid) return;
   
   // Clear grid
   firmsGrid.innerHTML = '';
   
-  // Get data from localStorage or use defaults
-  const savedFirms = JSON.parse(localStorage.getItem('firmsGrid')) || {};
+  // Get data from Netlify Blobs or use defaults
+  const savedFirms = await fetchFromStore('firmsGrid', {});
   const currentFilledCount = Object.keys(savedFirms).length;
 
   for (let i = 1; i <= TOTAL_SLOTS; i++) {
@@ -92,8 +133,8 @@ function initGrid(filter = 'all') {
 }
 
 // Update Stats
-function updateStats() {
-  const savedFirms = JSON.parse(localStorage.getItem('firmsGrid')) || {};
+async function updateStats() {
+  const savedFirms = await fetchFromStore('firmsGrid', {});
   const currentFilledCount = Object.keys(savedFirms).length;
   const displayFilled = currentFilledCount > 0 ? currentFilledCount : INITIAL_FILLED;
   
@@ -106,14 +147,14 @@ function updateStats() {
 
 // Filter Buttons
 filterBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
+  btn.addEventListener('click', async () => {
     // Update UI
     filterBtns.forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     
     // Filter grid
     const filter = btn.getAttribute('data-filter');
-    initGrid(filter);
+    await initGrid(filter);
   });
 });
 
@@ -159,7 +200,7 @@ if (navToggle) {
 // Form Submission
 const ctaForm = document.querySelector('#ctaForm');
 if (ctaForm) {
-  ctaForm.addEventListener('submit', (e) => {
+  ctaForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const btn = ctaForm.querySelector('button');
     const originalText = btn.innerHTML;
@@ -175,13 +216,13 @@ if (ctaForm) {
       status: 'pending'
     };
 
-    // Save application to localStorage
-    const applications = JSON.parse(localStorage.getItem('applications')) || [];
-    applications.push(appData);
-    localStorage.setItem('applications', JSON.stringify(applications));
-    
     btn.disabled = true;
     btn.innerHTML = '<span>⏳ Gönderiliyor...</span>';
+
+    // Save application to Netlify Blobs
+    const applications = await fetchFromStore('applications', []);
+    applications.push(appData);
+    await saveToStore('applications', applications);
     
     setTimeout(() => {
       alert('Başvurunuz alındı! Yönetim panelinden başvurunuzu takip edebilirsiniz.');
@@ -193,8 +234,8 @@ if (ctaForm) {
 }
 
 // Load Site Settings
-function loadSettings() {
-  const settings = JSON.parse(localStorage.getItem('siteSettings'));
+async function loadSettings() {
+  const settings = await fetchFromStore('siteSettings', null);
   if (!settings) return;
 
   // Update Footer Email
@@ -221,13 +262,13 @@ function loadSettings() {
 }
 
 // Initialize
-document.addEventListener('DOMContentLoaded', () => {
-  initGrid();
-  updateStats();
-  loadSettings();
-  initReviewSystem();
-  initPortfolioSystem();
-  initPromoModal();
+document.addEventListener('DOMContentLoaded', async () => {
+  await initGrid();
+  await updateStats();
+  await loadSettings();
+  await initReviewSystem();
+  await initPortfolioSystem();
+  await initPromoModal();
   
   // Basic Animation on Scroll (Intersection Observer)
   const observerOptions = {
@@ -249,16 +290,16 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ===== REVIEW SYSTEM =====
-function initReviewSystem() {
-  seedDefaultReviews();
-  renderApprovedReviews();
+async function initReviewSystem() {
+  await seedDefaultReviews();
+  await renderApprovedReviews();
   initStarRating();
   initReviewForm();
 }
 
 // Seed default reviews if none exist
-function seedDefaultReviews() {
-  const reviews = JSON.parse(localStorage.getItem('reviews'));
+async function seedDefaultReviews() {
+  const reviews = await fetchFromStore('reviews', null);
   if (reviews && reviews.length > 0) return;
 
   const defaultReviews = [
@@ -297,15 +338,15 @@ function seedDefaultReviews() {
     }
   ];
 
-  localStorage.setItem('reviews', JSON.stringify(defaultReviews));
+  await saveToStore('reviews', defaultReviews);
 }
 
 // Render approved reviews
-function renderApprovedReviews() {
+async function renderApprovedReviews() {
   const grid = document.querySelector('#approvedReviewsGrid');
   if (!grid) return;
 
-  const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+  const reviews = await fetchFromStore('reviews', []);
   const approved = reviews.filter(r => r.status === 'approved');
 
   if (approved.length === 0) {
@@ -389,7 +430,7 @@ function initReviewForm() {
 
   if (!reviewForm) return;
 
-  reviewForm.addEventListener('submit', (e) => {
+  reviewForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const rating = parseInt(document.querySelector('#reviewRating').value);
@@ -410,10 +451,10 @@ function initReviewForm() {
       date: new Date().toISOString()
     };
 
-    // Save to localStorage
-    const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+    // Save to Netlify Blobs
+    const reviews = await fetchFromStore('reviews', []);
     reviews.push(reviewData);
-    localStorage.setItem('reviews', JSON.stringify(reviews));
+    await saveToStore('reviews', reviews);
 
     // Show success, hide form
     reviewFormWrapper.style.display = 'none';
@@ -435,13 +476,13 @@ function initReviewForm() {
 }
 
 // ===== PORTFOLIO SYSTEM =====
-function initPortfolioSystem() {
-  seedDefaultPortfolio();
-  renderPortfolio();
+async function initPortfolioSystem() {
+  await seedDefaultPortfolio();
+  await renderPortfolio();
 }
 
-function seedDefaultPortfolio() {
-  const portfolio = JSON.parse(localStorage.getItem('sitePortfolio'));
+async function seedDefaultPortfolio() {
+  const portfolio = await fetchFromStore('sitePortfolio', null);
   if (portfolio && portfolio.length > 0) return;
 
   const defaultPortfolio = [
@@ -468,15 +509,15 @@ function seedDefaultPortfolio() {
     }
   ];
 
-  localStorage.setItem('sitePortfolio', JSON.stringify(defaultPortfolio));
+  await saveToStore('sitePortfolio', defaultPortfolio);
 }
 
 // Global reference render helper
-function renderPortfolio() {
+async function renderPortfolio() {
   const container = document.querySelector('#featuredProjectsGrid');
   if (!container) return;
 
-  const portfolio = JSON.parse(localStorage.getItem('sitePortfolio')) || [];
+  const portfolio = await fetchFromStore('sitePortfolio', []);
   
   if (portfolio.length === 0) {
     container.innerHTML = `
@@ -503,11 +544,11 @@ function renderPortfolio() {
 }
 
 // ===== PROMO MODAL SYSTEM =====
-function initPromoModal() {
+async function initPromoModal() {
   const promoModal = document.querySelector('#promoModal');
   if (!promoModal) return;
 
-  const promo = JSON.parse(localStorage.getItem('dailyPromo'));
+  const promo = await fetchFromStore('dailyPromo', null);
   if (!promo || !promo.active || sessionStorage.getItem('promoClosed') === 'true') {
     return;
   }
