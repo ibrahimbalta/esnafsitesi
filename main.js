@@ -310,7 +310,7 @@ async function seedDefaultReviews() {
       sector: 'Bakkal',
       city: 'İstanbul',
       rating: 5,
-      text: 'Yıllardır web sitesi yaptırmayı düşünüyordum ama fiyatlar çok yüksekti. 1000 TL\'ye bu kalitede bir site beklemiyordum!',
+      text: 'Yıllardır web sitesi yaptırmayı düşünüyordum ama fiyatlar çok yüksekti. 1500 TL\'ye bu kalitede bir site beklemiyordum!',
       status: 'approved',
       date: '2026-04-15T10:00:00.000Z'
     },

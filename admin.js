@@ -1,7 +1,7 @@
 // --- Configuration ---
 const TOTAL_SLOTS = 1000;
 const INITIAL_FILLED_COUNT = 47;
-const PRICE_PER_SITE = 1000;
+const PRICE_PER_SITE = 1500;
 
 // --- API & Cloud Storage Helpers ---
 const API_URL = '/.netlify/functions/api';
