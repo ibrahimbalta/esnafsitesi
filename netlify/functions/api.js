@@ -19,7 +19,7 @@ export default async (req, context) => {
     }
 
     try {
-      const data = await store.getJSON(key);
+      const data = await store.get(key, { type: "json" });
       return new Response(JSON.stringify(data), {
         status: 200,
         headers: { 
