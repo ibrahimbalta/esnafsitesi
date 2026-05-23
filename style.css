@@ -1373,7 +1373,7 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: var(--radius-sm);
   color: #fff;
   font-family: inherit;
-  font-size: 15px;
+  font-size: 16px;
   transition: var(--transition);
 }
 
@@ -1881,6 +1881,15 @@ h1, h2, h3, h4, h5, h6 {
   .about-visual { height: 280px; }
   
   .whatsapp-float { bottom: 24px; right: 24px; width: 56px; height: 56px; }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .timeline-wrapper {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
 }
 
 /* ==========================================================================
