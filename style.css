@@ -1823,12 +1823,8 @@ h1, h2, h3, h4, h5, h6 {
   .hero-visual { display: none; }
   .trust-grid { grid-template-columns: 1fr; }
   .testimonials-grid { grid-template-columns: 1fr; }
-}
-
-@media (max-width: 768px) {
-  .section { padding: 80px 0; }
-  .section-title { font-size: 32px; }
   
+  /* Hamburger Menu Breakpoint & Positioning */
   .nav-logo-img {
     height: 44px;
   }
@@ -1846,6 +1842,7 @@ h1, h2, h3, h4, h5, h6 {
     text-align: center;
     backdrop-filter: blur(24px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    z-index: 1000;
   }
 
   .nav-links.active {
@@ -1856,7 +1853,10 @@ h1, h2, h3, h4, h5, h6 {
     background: rgba(3, 0, 20, 0.98);
   }
 
-  .nav-toggle { display: flex; }
+  .nav-toggle { 
+    display: flex; 
+    z-index: 1001;
+  }
 
   .nav-toggle.active span:nth-child(1) {
     transform: translateY(8px) rotate(45deg);
@@ -1867,6 +1867,11 @@ h1, h2, h3, h4, h5, h6 {
   .nav-toggle.active span:nth-child(3) {
     transform: translateY(-8px) rotate(-45deg);
   }
+}
+
+@media (max-width: 768px) {
+  .section { padding: 80px 0; }
+  .section-title { font-size: 32px; }
 
   .form-row { grid-template-columns: 1fr; }
   .review-form-row { grid-template-columns: 1fr; }
