@@ -364,15 +364,18 @@ h1, h2, h3, h4, h5, h6 {
   display: none;
   flex-direction: column;
   gap: 6px;
-  background: none;
+  background: transparent;
   border: none;
   cursor: pointer;
+  padding: 10px; /* Larger touch target */
 }
 
 .nav-toggle span {
-  width: 28px;
-  height: 2px;
-  background: #fff;
+  display: block; /* Guarantees rendering in all mobile browsers */
+  width: 26px;
+  height: 2.5px; /* Thicker modern lines */
+  background: #ffffff;
+  border-radius: 2px;
   transition: var(--transition);
 }
 
