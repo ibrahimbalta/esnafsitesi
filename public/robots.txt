@@ -4,4 +4,4 @@ Allow: /ekibimiz.html
 Disallow: /admin.html
 Disallow: /login.html
 
-Sitemap: https://scintillating-kitten-595e96.netlify.app/sitemap.xml
+Sitemap: https://kolaywebci.com/sitemap.xml
