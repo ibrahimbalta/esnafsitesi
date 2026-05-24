@@ -1,4 +1,10 @@
-import { kv } from '@vercel/kv';
+import { createClient } from '@supabase/supabase-js';
+
+// Initialize Supabase client using Vercel environment variables
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_KEY
+);
 
 export default async function handler(req, res) {
   // CORS Headers
@@ -23,10 +29,25 @@ export default async function handler(req, res) {
     }
 
     try {
-      const data = await kv.get(key);
-      return res.status(200).json(data);
+      const { data, error } = await supabase
+        .from('store')
+        .select('value')
+        .eq('key', key)
+        .single();
+
+      if (error && error.code === 'PGRST116') {
+        // Row not found — return null (same behavior as before)
+        return res.status(200).json(null);
+      }
+
+      if (error) {
+        console.error(`Supabase GET error for key "${key}":`, error);
+        return res.status(500).json({ error: error.message });
+      }
+
+      return res.status(200).json(data.value);
     } catch (err) {
-      console.error(`Error reading key ${key} from Vercel KV:`, err);
+      console.error(`Error reading key "${key}" from Supabase:`, err);
       return res.status(500).json({ error: err.message });
     }
   }
@@ -47,10 +68,18 @@ export default async function handler(req, res) {
     }
 
     try {
-      await kv.set(key, value);
+      const { error } = await supabase
+        .from('store')
+        .upsert({ key, value }, { onConflict: 'key' });
+
+      if (error) {
+        console.error(`Supabase POST error for key "${key}":`, error);
+        return res.status(500).json({ error: error.message });
+      }
+
       return res.status(200).json({ success: true });
     } catch (err) {
-      console.error(`Error writing key ${key} to Vercel KV:`, err);
+      console.error(`Error writing key "${key}" to Supabase:`, err);
       return res.status(500).json({ error: err.message });
     }
   }

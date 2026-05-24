@@ -465,7 +465,7 @@ async function initAdmin() {
             if (res.ok) {
               const data = await res.json();
               if (data !== null) {
-                // Save it directly using our saveToStore (which saves to Vercel KV and localStorage)
+                // Save it directly using our saveToStore (which saves to Supabase and localStorage)
                 await saveToStore(key, data);
                 successCount++;
               } else {
@@ -485,7 +485,7 @@ async function initAdmin() {
           statusDiv.style.background = '#d1fae5';
           statusDiv.style.borderLeftColor = '#10b981';
           statusDiv.style.color = '#065f46';
-          statusDiv.textContent = `🎉 Tebrikler! ${successCount} adet veri tablosu sıfır kayıpla başarıyla yeni Vercel KV sunucusuna aktarıldı. Bilgiler güncelleniyor, sayfa yenileniyor...`;
+          statusDiv.textContent = `🎉 Tebrikler! ${successCount} adet veri tablosu sıfır kayıpla başarıyla yeni Supabase sunucusuna aktarıldı. Bilgiler güncelleniyor, sayfa yenileniyor...`;
           
           setTimeout(() => {
             window.location.reload();
