@@ -739,9 +739,6 @@ async function updateDashboardData() {
   let grid = await fetchFromStore('firmsGrid', null);
   if (!grid) {
     grid = {};
-    for (let i = 1; i <= INITIAL_FILLED_COUNT; i++) {
-      grid[i] = { name: `Firma #${i}`, icon: '✅', url: '' };
-    }
     await saveToStore('firmsGrid', grid);
   }
   

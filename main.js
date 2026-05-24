@@ -297,7 +297,7 @@ async function initGrid(filter = 'all') {
 
   for (let i = 1; i <= TOTAL_SLOTS; i++) {
     const savedFirm = savedFirms[i];
-    const isFilled = !!savedFirm || (currentFilledCount === 0 && i <= INITIAL_FILLED);
+    const isFilled = !!savedFirm;
     
     // Filter logic
     if (filter === 'filled' && !isFilled) continue;
@@ -365,7 +365,7 @@ async function initGrid(filter = 'all') {
 async function updateStats() {
   const savedFirms = await fetchFromStore('firmsGrid', {});
   const currentFilledCount = Object.keys(savedFirms).length;
-  const displayFilled = currentFilledCount > 0 ? currentFilledCount : INITIAL_FILLED;
+  const displayFilled = currentFilledCount;
   
   const percentage = (displayFilled / TOTAL_SLOTS) * 100;
   if (urgencyFill) urgencyFill.style.width = `${percentage}%`;
