@@ -15,7 +15,7 @@ const TOTAL_SLOTS = 1000;
 const INITIAL_FILLED = 47;
 
 // --- API & Cloud Storage Helpers ---
-const API_URL = '/.netlify/functions/api';
+const API_URL = '/api/api';
 
 async function fetchFromStore(key, defaultValue) {
   // Check sessionStorage cache first (valid for 60 seconds to prevent burst traffic billing)

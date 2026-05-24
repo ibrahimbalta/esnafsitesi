@@ -4,7 +4,7 @@ const INITIAL_FILLED_COUNT = 47;
 const PRICE_PER_SITE = 1500;
 
 // --- API & Cloud Storage Helpers ---
-const API_URL = '/.netlify/functions/api';
+const API_URL = '/api/api';
 
 async function fetchFromStore(key, defaultValue) {
   try {
@@ -385,6 +385,91 @@ async function initAdmin() {
       await saveToStore('dailyPromo', newPromo);
       alert('Günün tanıtım reklamı ayarları başarıyla kaydedildi.');
       updateAdminPromoPreview();
+    });
+  }
+
+  // Data Migration Handler
+  const startMigrationBtn = document.querySelector('#startMigrationBtn');
+  if (startMigrationBtn) {
+    startMigrationBtn.addEventListener('click', async () => {
+      const urlInput = document.querySelector('#migrationUrl');
+      const statusDiv = document.querySelector('#migrationStatus');
+      
+      let netlifyUrl = urlInput.value.trim();
+      if (!netlifyUrl) {
+        alert('Lütfen eski Netlify web sitenizin adresini girin.');
+        return;
+      }
+      
+      // Normalize URL (strip trailing slash)
+      if (netlifyUrl.endsWith('/')) {
+        netlifyUrl = netlifyUrl.slice(0, -1);
+      }
+      
+      if (!netlifyUrl.startsWith('http://') && !netlifyUrl.startsWith('https://')) {
+        netlifyUrl = 'https://' + netlifyUrl;
+      }
+      
+      statusDiv.style.display = 'block';
+      statusDiv.style.background = '#e0e7ff';
+      statusDiv.style.borderLeftColor = '#4f46e5';
+      statusDiv.style.color = '#3730a3';
+      statusDiv.textContent = 'Eski site ile bağlantı kuruluyor...';
+      startMigrationBtn.disabled = true;
+      
+      const keysToMigrate = ['firmsGrid', 'customers', 'agenda', 'siteSettings', 'sitePortfolio', 'dailyPromo', 'applications', 'reviews'];
+      let successCount = 0;
+      let failCount = 0;
+      
+      try {
+        for (const key of keysToMigrate) {
+          statusDiv.textContent = `"${key}" tablosu aktarılıyor...`;
+          
+          try {
+            const res = await fetch(`${netlifyUrl}/.netlify/functions/api?key=${key}`);
+            if (res.ok) {
+              const data = await res.json();
+              if (data !== null) {
+                // Save it directly using our saveToStore (which saves to Vercel KV and localStorage)
+                await saveToStore(key, data);
+                successCount++;
+              } else {
+                console.warn(`Key "${key}" was null on Netlify.`);
+              }
+            } else {
+              console.warn(`Key "${key}" could not be fetched (Status: ${res.status}).`);
+              failCount++;
+            }
+          } catch (e) {
+            console.error(`Error migrating key "${key}":`, e);
+            failCount++;
+          }
+        }
+        
+        if (successCount > 0) {
+          statusDiv.style.background = '#d1fae5';
+          statusDiv.style.borderLeftColor = '#10b981';
+          statusDiv.style.color = '#065f46';
+          statusDiv.textContent = `🎉 Tebrikler! ${successCount} adet veri tablosu sıfır kayıpla başarıyla yeni Vercel KV sunucusuna aktarıldı. Bilgiler güncelleniyor, sayfa yenileniyor...`;
+          
+          setTimeout(() => {
+            window.location.reload();
+          }, 3500);
+        } else {
+          statusDiv.style.background = '#fee2e2';
+          statusDiv.style.borderLeftColor = '#ef4444';
+          statusDiv.style.color = '#991b1b';
+          statusDiv.textContent = '❌ Eski siteden aktarılacak veri bulunamadı veya eski sitenin CORS politikası/API bağlantısı başarısız oldu. Lütfen URL\'yi doğru girdiğinizden emin olun.';
+          startMigrationBtn.disabled = false;
+        }
+      } catch (err) {
+        console.error('Migration failed:', err);
+        statusDiv.style.background = '#fee2e2';
+        statusDiv.style.borderLeftColor = '#ef4444';
+        statusDiv.style.color = '#991b1b';
+        statusDiv.textContent = '❌ Aktarım sırasında beklenmedik bir hata oluştu: ' + err.message;
+        startMigrationBtn.disabled = false;
+      }
     });
   }
 }

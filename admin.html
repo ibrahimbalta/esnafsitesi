@@ -440,6 +440,33 @@
             </form>
           </div>
         </div>
+
+        <!-- DATA MIGRATION PANEL -->
+        <div class="panel" style="margin-top: 30px; border: 1px solid rgba(79, 70, 229, 0.3); background: #f8fafc; box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.05);">
+          <div class="panel-header" style="border-bottom: 1px solid rgba(79, 70, 229, 0.1); padding-bottom: 15px; margin-bottom: 20px;">
+            <h3 style="color: var(--primary); display: flex; align-items: center; gap: 8px; margin: 0;">
+              🚀 Netlify'dan Vercel'e Veri Taşıma Aracı
+            </h3>
+          </div>
+          <p style="color: var(--gray); font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
+            Eski web sitenizdeki (Netlify üzerinde çalışan) verileri bu aracı kullanarak tek tıkla yeni <strong>Vercel KV</strong> veritabanınıza güvenle taşıyabilirsiniz. Hiçbir müşteri ve firma veriniz kaybolmaz!
+          </p>
+          <div class="admin-form">
+            <div class="form-group">
+              <label style="color: var(--dark);">Eski Netlify Site Adresi (URL)</label>
+              <input type="url" id="migrationUrl" placeholder="Örn: https://esnafsitesi.netlify.app" required style="border-color: rgba(79, 70, 229, 0.4);" />
+              <small style="color: var(--gray); font-size: 11px; margin-top: 4px; display: block;">Adresin sonuna "/" koymanıza gerek yoktur.</small>
+            </div>
+            
+            <div id="migrationStatus" style="display: none; padding: 16px; border-radius: 12px; font-size: 14px; margin-bottom: 20px; line-height: 1.5; border-left: 4px solid #4f46e5; background: #e0e7ff; color: #3730a3;">
+              Aktarım durum mesajı...
+            </div>
+            
+            <button type="button" id="startMigrationBtn" class="btn-admin" style="background: linear-gradient(135deg, var(--primary) 0%, #4338ca 100%); display: flex; align-items: center; justify-content: center; gap: 8px;">
+              ⚡ Verileri Şimdi Aktar
+            </button>
+          </div>
+        </div>
       </div>
 
       <!-- VIEW: PORTFOLIO -->
