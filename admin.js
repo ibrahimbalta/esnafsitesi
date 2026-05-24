@@ -741,6 +741,19 @@ async function updateDashboardData() {
     grid = {};
     await saveToStore('firmsGrid', grid);
   }
+
+  // Auto-clean leftover mock "Firma #N" entries from old initialization
+  let needsCleanup = false;
+  for (const key of Object.keys(grid)) {
+    if (grid[key] && typeof grid[key].name === 'string' && /^Firma #\d+$/.test(grid[key].name)) {
+      delete grid[key];
+      needsCleanup = true;
+    }
+  }
+  if (needsCleanup) {
+    await saveToStore('firmsGrid', grid);
+    console.log('Auto-cleaned leftover mock firm entries from database.');
+  }
   
   const gridCount = Object.keys(grid).length;
 
