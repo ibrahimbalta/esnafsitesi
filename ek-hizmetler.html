@@ -176,16 +176,18 @@
     .service-features li {
       color: var(--text-primary);
       font-size: 14.5px;
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      line-height: 1.5;
+      line-height: 1.6;
+      position: relative;
+      padding-left: 24px;
     }
 
     .service-features li::before {
       content: '✦';
       color: var(--secondary);
       font-weight: bold;
+      position: absolute;
+      left: 0;
+      top: 0;
     }
 
     .service-footer {
