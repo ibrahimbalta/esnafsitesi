@@ -64,13 +64,22 @@
         <a href="#" class="nav-item logout-btn" id="logoutBtn" style="color: #ef4444;">
           <span class="icon">🚪</span> Çıkış Yap
         </a>
-      </div>
     </aside>
+
+    <!-- SIDEBAR OVERLAY FOR MOBILE -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     <!-- MAIN CONTENT -->
     <main class="main-content">
       <header class="main-header">
-        <h2 id="viewTitle">Dashboard</h2>
+        <div style="display: flex; align-items: center; gap: 15px;">
+          <button class="mobile-toggle-btn" id="mobileToggleBtn" aria-label="Menü">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <h2 id="viewTitle" style="margin: 0;">Dashboard</h2>
+        </div>
         <div class="user-profile">
           <span>Yönetici 👋</span>
           <div class="avatar">👑</div>

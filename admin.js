@@ -56,6 +56,38 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 async function initAdmin() {
+  // --- Mobile Navigation Toggler ---
+  const mobileToggleBtn = document.querySelector('#mobileToggleBtn');
+  const sidebar = document.querySelector('.sidebar');
+  const sidebarOverlay = document.querySelector('#sidebarOverlay');
+
+  function toggleMobileMenu() {
+    if (sidebar && mobileToggleBtn && sidebarOverlay) {
+      const isOpen = sidebar.classList.toggle('open');
+      mobileToggleBtn.classList.toggle('active');
+      sidebarOverlay.classList.toggle('active');
+    }
+  }
+
+  function closeMobileMenu() {
+    if (sidebar && mobileToggleBtn && sidebarOverlay) {
+      sidebar.classList.remove('open');
+      mobileToggleBtn.classList.remove('active');
+      sidebarOverlay.classList.remove('active');
+    }
+  }
+
+  if (mobileToggleBtn) {
+    mobileToggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleMobileMenu();
+    });
+  }
+
+  if (sidebarOverlay) {
+    sidebarOverlay.addEventListener('click', closeMobileMenu);
+  }
+
   // Selectors inside init to ensure DOM is ready
   const navItems = document.querySelectorAll('.nav-item[data-view]');
   const views = document.querySelectorAll('.view');
@@ -79,6 +111,9 @@ async function initAdmin() {
 
       // Update Header Title
       if (viewTitle) viewTitle.textContent = item.textContent.trim().replace('!', '');
+
+      // Close mobile menu on click
+      closeMobileMenu();
 
       // Refresh Data
       await updateDashboardData();
