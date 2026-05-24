@@ -214,8 +214,8 @@ async function initAdmin() {
     // Load current settings
     const settings = await fetchFromStore('siteSettings', {
       email: 'info@kolaywebci.com',
-      phone: '0555 123 45 67',
-      whatsapp: '905551234567'
+      phone: '0545 346 79 86',
+      whatsapp: '905453467986'
     });
     
     document.querySelector('#setEmail').value = settings.email;
