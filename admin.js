@@ -1,3 +1,212 @@
+// --- PREMIUM CYBER-AI MODAL ALERT SYSTEM ---
+function showAlert(message, type = 'success', title = '') {
+  if (!document.getElementById('cyber-modal-styles')) {
+    const style = document.createElement('style');
+    style.id = 'cyber-modal-styles';
+    style.textContent = `
+      .cyber-modal-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(3, 0, 20, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        z-index: 100000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        pointer-events: none;
+      }
+      .cyber-modal-backdrop.active {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .cyber-modal {
+        background: linear-gradient(145deg, rgba(20, 16, 40, 0.95), rgba(10, 8, 25, 0.98));
+        border: 1px solid rgba(139, 92, 246, 0.35);
+        border-radius: 24px;
+        width: 90%;
+        max-width: 440px;
+        padding: 40px 30px;
+        text-align: center;
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7), 0 0 30px rgba(139, 92, 246, 0.25);
+        transform: translateY(30px) scale(0.95);
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        font-family: 'Outfit', sans-serif;
+        color: #f8fafc;
+        position: relative;
+        overflow: hidden;
+      }
+      .cyber-modal::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(139, 92, 246, 0.05) 0%, transparent 70%);
+        pointer-events: none;
+      }
+      .cyber-modal-backdrop.active .cyber-modal {
+        transform: translateY(0) scale(1);
+      }
+      .cyber-modal-icon-wrapper {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        margin: 0 auto 24px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        z-index: 1;
+      }
+      .cyber-modal-icon-wrapper.success {
+        background: rgba(6, 182, 212, 0.1);
+        border: 1.5px solid rgba(6, 182, 212, 0.5);
+        box-shadow: 0 0 25px rgba(6, 182, 212, 0.3);
+        color: #06b6d4;
+      }
+      .cyber-modal-icon-wrapper.error {
+        background: rgba(236, 72, 153, 0.1);
+        border: 1.5px solid rgba(236, 72, 153, 0.5);
+        box-shadow: 0 0 25px rgba(236, 72, 153, 0.3);
+        color: #ec4899;
+      }
+      .cyber-modal-icon-wrapper.warning {
+        background: rgba(245, 158, 11, 0.1);
+        border: 1.5px solid rgba(245, 158, 11, 0.5);
+        box-shadow: 0 0 25px rgba(245, 158, 11, 0.3);
+        color: #f59e0b;
+      }
+      .cyber-modal-icon {
+        font-size: 36px;
+        font-weight: bold;
+        line-height: 1;
+      }
+      .cyber-modal-title {
+        color: #f8fafc;
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 12px;
+        letter-spacing: -0.5px;
+        z-index: 1;
+        position: relative;
+      }
+      .cyber-modal-text {
+        color: #94a3b8;
+        font-size: 15px;
+        line-height: 1.6;
+        margin-bottom: 30px;
+        z-index: 1;
+        position: relative;
+        padding: 0 10px;
+      }
+      .cyber-modal-btn {
+        background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 50%, #06b6d4 100%);
+        color: #ffffff;
+        border: none;
+        border-radius: 14px;
+        padding: 14px 35px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        width: 100%;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4);
+        position: relative;
+        z-index: 1;
+      }
+      .cyber-modal-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(139, 92, 246, 0.6);
+        filter: brightness(1.15);
+      }
+      .cyber-modal-btn:active {
+        transform: translateY(0);
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  const backdrop = document.createElement('div');
+  backdrop.className = 'cyber-modal-backdrop';
+
+  if (!title) {
+    if (type === 'success') title = 'Başarılı';
+    else if (type === 'error') title = 'Hata';
+    else if (type === 'warning') title = 'Uyarı';
+    else title = 'Bilgi';
+  }
+
+  let iconHtml = '';
+  if (type === 'success') {
+    iconHtml = `
+      <div class="cyber-modal-icon-wrapper success">
+        <span class="cyber-modal-icon">✓</span>
+      </div>
+    `;
+  } else if (type === 'error') {
+    iconHtml = `
+      <div class="cyber-modal-icon-wrapper error">
+        <span class="cyber-modal-icon">✗</span>
+      </div>
+    `;
+  } else {
+    iconHtml = `
+      <div class="cyber-modal-icon-wrapper warning">
+        <span class="cyber-modal-icon">!</span>
+      </div>
+    `;
+  }
+
+  backdrop.innerHTML = `
+    <div class="cyber-modal">
+      \${iconHtml}
+      <h3 class="cyber-modal-title">\${title}</h3>
+      <p class="cyber-modal-text">\${message}</p>
+      <button class="cyber-modal-btn">Tamam</button>
+    </div>
+  `;
+
+  document.body.appendChild(backdrop);
+  setTimeout(() => backdrop.classList.add('active'), 10);
+
+  return new Promise((resolve) => {
+    const btn = backdrop.querySelector('.cyber-modal-btn');
+    const close = () => {
+      backdrop.classList.remove('active');
+      setTimeout(() => {
+        backdrop.remove();
+        resolve();
+      }, 400);
+    };
+
+    btn.addEventListener('click', close);
+    backdrop.addEventListener('click', (e) => {
+      if (e.target === backdrop) close();
+    });
+  });
+}
+
+// Global alert override
+window.alert = function(msg) {
+  let type = 'info';
+  let title = 'Bilgi';
+  if (msg.toLowerCase().includes('hata') || msg.toLowerCase().includes('geçersiz') || msg.toLowerCase().includes('seçiniz') || msg.toLowerCase().includes('lütfen')) {
+    type = 'warning';
+    title = 'Uyarı';
+  } else if (msg.toLowerCase().includes('başarıyla') || msg.toLowerCase().includes('alındı') || msg.toLowerCase().includes('kaydedildi') || msg.toLowerCase().includes('güncellendi')) {
+    type = 'success';
+    title = 'Başarılı';
+  }
+  showAlert(msg, type, title);
+};
+
 // --- Configuration ---
 const TOTAL_SLOTS = 1000;
 const INITIAL_FILLED_COUNT = 47;
