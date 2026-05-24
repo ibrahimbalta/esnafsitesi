@@ -166,9 +166,9 @@ function showAlert(message, type = 'success', title = '') {
 
   backdrop.innerHTML = `
     <div class="cyber-modal">
-      \${iconHtml}
-      <h3 class="cyber-modal-title">\${title}</h3>
-      <p class="cyber-modal-text">\${message}</p>
+      ${iconHtml}
+      <h3 class="cyber-modal-title">${title}</h3>
+      <p class="cyber-modal-text">${message}</p>
       <button class="cyber-modal-btn">Tamam</button>
     </div>
   `;
