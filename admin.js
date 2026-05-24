@@ -23,6 +23,10 @@ async function fetchFromStore(key, defaultValue) {
 }
 
 async function saveToStore(key, value) {
+  // Clear sessionStorage cache keys immediately on write so main page sees updates
+  sessionStorage.removeItem(`cache_${key}`);
+  sessionStorage.removeItem(`cache_time_${key}`);
+
   // Save to localStorage immediately as a local copy/backup
   localStorage.setItem(key, JSON.stringify(value));
   

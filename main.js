@@ -18,11 +18,27 @@ const INITIAL_FILLED = 47;
 const API_URL = '/.netlify/functions/api';
 
 async function fetchFromStore(key, defaultValue) {
+  // Check sessionStorage cache first (valid for 60 seconds to prevent burst traffic billing)
+  const cacheKey = `cache_${key}`;
+  const cacheTimeKey = `cache_time_${key}`;
+  const cachedData = sessionStorage.getItem(cacheKey);
+  const cachedTime = sessionStorage.getItem(cacheTimeKey);
+  
+  if (cachedData && cachedTime && (Date.now() - parseInt(cachedTime) < 60 * 1000)) {
+    return JSON.parse(cachedData);
+  }
+
   try {
     const res = await fetch(`${API_URL}?key=${key}`);
     if (res.ok) {
       const data = await res.json();
-      return data !== null ? data : defaultValue;
+      const result = data !== null ? data : defaultValue;
+      
+      // Save to cache
+      sessionStorage.setItem(cacheKey, JSON.stringify(result));
+      sessionStorage.setItem(cacheTimeKey, Date.now().toString());
+      
+      return result;
     }
   } catch (err) {
     console.warn(`Failed to fetch ${key} from Netlify Blobs, falling back to localStorage:`, err);
@@ -34,6 +50,10 @@ async function fetchFromStore(key, defaultValue) {
 }
 
 async function saveToStore(key, value) {
+  // Clear cache immediately on write
+  sessionStorage.removeItem(`cache_${key}`);
+  sessionStorage.removeItem(`cache_time_${key}`);
+
   // Save to localStorage immediately as a local copy/backup
   localStorage.setItem(key, JSON.stringify(value));
   
