@@ -9,6 +9,7 @@ export default defineConfig({
         admin: resolve(__dirname, 'admin.html'),
         login: resolve(__dirname, 'login.html'),
         ekibimiz: resolve(__dirname, 'ekibimiz.html'),
+        ekhizmetler: resolve(__dirname, 'ek-hizmetler.html'),
       },
     },
   },
