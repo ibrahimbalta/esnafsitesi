@@ -237,7 +237,11 @@ async function saveToStore(key, value) {
   sessionStorage.removeItem(`cache_time_${key}`);
 
   // Save to localStorage immediately as a local copy/backup
-  localStorage.setItem(key, JSON.stringify(value));
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch (err) {
+    console.warn(`Failed to save ${key} to localStorage (quota exceeded?):`, err);
+  }
   
   try {
     const res = await fetch(API_URL, {
@@ -718,13 +722,73 @@ async function initAdmin() {
   }
 }
 
-// Helper: Convert File to Base64
+// Helper: Convert File to Base64 (with built-in image resizing & compression)
 function convertToBase64(file) {
   return new Promise((resolve, reject) => {
+    // If it's not an image, perform standard base64 read
+    if (!file.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = error => reject(error);
+      return;
+    }
+
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = error => reject(error);
+    reader.onload = (e) => {
+      const img = new Image();
+      img.src = e.target.result;
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        let width = img.width;
+        let height = img.height;
+        const maxWidth = 800;
+        const maxHeight = 800;
+
+        // Scale maintaining aspect ratio
+        if (width > height) {
+          if (width > maxWidth) {
+            height = Math.round((height * maxWidth) / width);
+            width = maxWidth;
+          }
+        } else {
+          if (height > maxHeight) {
+            width = Math.round((width * maxHeight) / height);
+            height = maxHeight;
+          }
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+
+        const ctx = canvas.getContext('2d');
+
+        // Fill background with white for non-PNG images to avoid black transparent areas
+        const isPng = file.type === 'image/png' || file.name.toLowerCase().endsWith('.png');
+        if (!isPng) {
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0, 0, width, height);
+        }
+
+        ctx.drawImage(img, 0, 0, width, height);
+
+        let dataUrl;
+        if (isPng) {
+          dataUrl = canvas.toDataURL('image/png');
+          // If PNG is still too large (> 250KB), export as compressed WebP or JPEG
+          if (dataUrl.length > 250000) {
+            dataUrl = canvas.toDataURL('image/webp', 0.7);
+          }
+        } else {
+          dataUrl = canvas.toDataURL('image/jpeg', 0.7);
+        }
+
+        resolve(dataUrl);
+      };
+      img.onerror = (err) => reject(err);
+    };
+    reader.onerror = (err) => reject(err);
   });
 }
 

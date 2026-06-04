@@ -264,7 +264,11 @@ async function saveToStore(key, value) {
   sessionStorage.removeItem(`cache_time_${key}`);
 
   // Save to localStorage immediately as a local copy/backup
-  localStorage.setItem(key, JSON.stringify(value));
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch (err) {
+    console.warn(`Failed to save ${key} to localStorage (quota exceeded?):`, err);
+  }
   
   try {
     const res = await fetch(API_URL, {
