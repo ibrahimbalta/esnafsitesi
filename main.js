@@ -479,11 +479,17 @@ async function loadSettings() {
   }
 
   // Update Footer Phone
-  const footerPhone = document.querySelector('a[href^="tel:"]');
+  const footerPhone = document.querySelector('.footer a[href^="tel:"]');
   if (footerPhone) {
     footerPhone.href = `tel:${settings.phone.replace(/\s/g, '')}`;
     footerPhone.textContent = settings.phone;
   }
+
+  // Update all phone links (including mobile contact bar)
+  const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
+  phoneLinks.forEach(link => {
+    link.href = `tel:${settings.phone.replace(/\s/g, '')}`;
+  });
 
   // Update WhatsApp Buttons
   const waButtons = document.querySelectorAll('a[href*="wa.me"]');

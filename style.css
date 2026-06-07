@@ -2117,3 +2117,63 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+/* ==========================================================================
+   MOBILE CONTACT BOTTOM BAR
+   ========================================================================== */
+.mobile-contact-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 60px;
+  display: none;
+  grid-template-columns: 1fr 1fr;
+  z-index: 9999;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.mobile-contact-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #ffffff;
+  text-decoration: none;
+  font-family: var(--font-main);
+  font-size: 15px;
+  font-weight: 700;
+  transition: opacity 0.2s ease;
+  height: 100%;
+}
+
+.mobile-contact-btn:active {
+  opacity: 0.85;
+}
+
+.mobile-contact-btn svg {
+  display: block;
+}
+
+.mobile-contact-btn.call-btn {
+  background-color: #007bff;
+}
+
+.mobile-contact-btn.whatsapp-btn {
+  background-color: #25d366;
+}
+
+@media (max-width: 768px) {
+  .mobile-contact-bar {
+    display: grid;
+  }
+  
+  .whatsapp-float {
+    display: none !important;
+  }
+
+  body {
+    padding-bottom: 60px;
+  }
+}
+
