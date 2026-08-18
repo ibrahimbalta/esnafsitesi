@@ -855,10 +855,12 @@ const SIMULATOR_DATA = {
     desc: 'Taze malzemeler, usta eller ve eşsiz mekan atmosferimiz ile sizleri ve sevdiklerinizi ağırlamaktan mutluluk duyuyoruz.',
     url: 'https://lezzetduragi.kolaywebci.com',
     navAction: 'Rezervasyon Yap',
+    heroImg: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=800',
+    overlayTag: '🔥 Popüler Mekan',
     services: [
-      { icon: '🍲', title: 'Günlük Ev Yemekleri', desc: 'Özenle hazırlanan sıcak çorbalar, zeytinyağlılar ve ana yemekler.' },
-      { icon: '🔥', title: 'Izgara & Kebap Çeşitleri', desc: 'Közde pişen leziz et çeşitleri ve özel ikramlar.' },
-      { icon: '🛵', title: 'Hızlı Paket Servis', desc: 'Bartın içi sıcak ve hijyenik paket servis imkanı.' }
+      { img: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&q=80&w=400', tag: 'Izgara Çeşitleri', title: 'Közde Izgara & Kebap', desc: 'Közde pişen leziz et çeşitleri ve özel ikramlar.' },
+      { img: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80&w=400', tag: 'Sıcak Yemek', title: 'Günlük Ev Yemekleri', desc: 'Özenle hazırlanan sıcak çorbalar ve ana yemekler.' },
+      { img: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&q=80&w=400', tag: 'Hızlı Servis', title: 'Paket Servis Hizmeti', desc: 'Bartın içi sıcak ve hijyenik paket servis imkanı.' }
     ]
   },
   kuafor: {
@@ -868,10 +870,12 @@ const SIMULATOR_DATA = {
     desc: 'Trend saç tasarımları, kişiye özel renklendirme ve profesyonel cilt bakımı ile kendinizi özel hissedin.',
     url: 'https://isiltikuafor.kolaywebci.com',
     navAction: 'Randevu Al',
+    heroImg: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&q=80&w=800',
+    overlayTag: '💅 Trend Salon',
     services: [
-      { icon: '💇‍♀️', title: 'Saç Tasarım & Boya', desc: 'Ombre, sombre, kesim ve keratin bakımları.' },
-      { icon: '💅', title: 'Manikür & Pedikür', desc: 'Kalıcı oje, protez tırnak ve el-ayak bakımı.' },
-      { icon: '✨', title: 'Gelin Saçı & Makyaj', desc: 'Özel günleriniz için kusursuz hazırlık konsepti.' }
+      { img: 'https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&q=80&w=400', tag: 'Trend Kesim', title: 'Saç Tasarım & Boya', desc: 'Ombre, sombre, kesim ve keratin bakımları.' },
+      { img: 'https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&q=80&w=400', tag: 'El & Ayak', title: 'Manikür & Pedikür', desc: 'Kalıcı oje, protez tırnak ve el-ayak bakımı.' },
+      { img: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&q=80&w=400', tag: 'Özel Gün', title: 'Gelin Saçı & Makyaj', desc: 'Özel günleriniz için kusursuz hazırlık konsepti.' }
     ]
   },
   emlak: {
@@ -881,10 +885,12 @@ const SIMULATOR_DATA = {
     desc: 'Geniş portföyümüz ve şeffaf danışmanlık anlayışımızla en doğru yatırımı yapmanıza rehberlik ediyoruz.',
     url: 'https://guvenemlak.kolaywebci.com',
     navAction: 'İlanları İncele',
+    heroImg: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=800',
+    overlayTag: '🏡 Onaylı İlanlar',
     services: [
-      { icon: '🏢', title: 'Satılık Daireler', desc: 'Merkezi konumda, sıfır ve ikinci el konut seçenekleri.' },
-      { icon: '🏡', title: 'Müstakil & Arsa', desc: 'Yatırımlık tarla, imarlı arsa ve villa seçenekleri.' },
-      { icon: '🤝', title: 'Gayrimenkul Danışmanlığı', desc: 'Ücretsiz ekspertiz ve tapu takip işlemleri.' }
+      { img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=400', tag: 'Lüks Konut', title: 'Satılık Villalar', desc: 'Doğa ve deniz manzaralı sıfır villa seçenekleri.' },
+      { img: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=400', tag: 'Merkezi Daire', title: 'Merkezi Konutlar', desc: 'Şehir merkezinde yatırımlık sıfır daireler.' },
+      { img: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=400', tag: 'Yatırımlık', title: 'İmarlı Arsalar', desc: 'Amasra ve Bartın\'da prim yapacak arsa fırsatları.' }
     ]
   },
   hukuk: {
@@ -894,10 +900,12 @@ const SIMULATOR_DATA = {
     desc: 'Uzman avukat kadromuzla ceza, aile, iş ve ticaret hukuku alanlarında kurumsal danışmanlık hizmeti sunuyoruz.',
     url: 'https://baltahukuk.kolaywebci.com',
     navAction: 'Danışmanlık Al',
+    heroImg: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=800',
+    overlayTag: '⚖️ Kurumsal Hukuk',
     services: [
-      { icon: '📜', title: 'İş & Ceza Hukuku', desc: 'Dava takibi ve hukuki sözleşme danışmanlığı.' },
-      { icon: '🏠', title: 'Gayrimenkul Hukuku', desc: 'Tapu iptal, tescil ve kira uyuşmazlığı davaları.' },
-      { icon: '💼', title: 'Kurumsal Danışmanlık', desc: 'Şirketler için sürekli hukuki koruma paketi.' }
+      { img: 'https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&q=80&w=400', tag: 'Dava Takibi', title: 'İş & Ceza Hukuku', desc: 'Dava takibi ve hukuki sözleşme danışmanlığı.' },
+      { img: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&q=80&w=400', tag: 'Gayrimenkul', title: 'Tapu & Tescil Davaları', desc: 'Tapu iptal, tescil ve kira uyuşmazlığı davaları.' },
+      { img: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=400', tag: 'Danışmanlık', title: 'Şirketler Hukuku', desc: 'Şirketler için sürekli hukuki koruma paketi.' }
     ]
   },
   usta: {
@@ -907,10 +915,12 @@ const SIMULATOR_DATA = {
     desc: 'Bartın ve tüm beldelerinde garantili tamir, montaj ve bakım hizmetini en uygun fiyatlarla kapınıza getiriyoruz.',
     url: 'https://ustateknik.kolaywebci.com',
     navAction: 'Usta Çağır',
+    heroImg: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&q=80&w=800',
+    overlayTag: '🛠️ 7/24 Teknik Servis',
     services: [
-      { icon: '🚰', title: 'Su Tesisatı & Kaçak', desc: 'Kırmadan dökmeden cihazla su kaçağı tespiti.' },
-      { icon: '⚡', title: 'Elektrik Arıza & Montaj', desc: 'Ev ve iş yeri elektrik tesisatı yenileme.' },
-      { icon: '❄️', title: 'Kombi & Klima Bakımı', desc: 'Yıllık periyodik bakım ve petek temizliği.' }
+      { img: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&q=80&w=400', tag: 'Cihazla Tespit', title: 'Su Tesisatı & Kaçak', desc: 'Kırmadan dökmeden cihazla su kaçağı tespiti.' },
+      { img: 'https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?auto=format&fit=crop&q=80&w=400', tag: 'Elektrik', title: 'Elektrik Arıza & Montaj', desc: 'Ev ve iş yeri elektrik tesisatı yenileme.' },
+      { img: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&q=80&w=400', tag: 'Periyodik', title: 'Kombi & Klima Bakımı', desc: 'Yıllık periyodik bakım ve petek temizliği.' }
     ]
   }
 };
@@ -942,6 +952,8 @@ function initDemoSimulator() {
         const descEl = document.querySelector('#simHeroDesc');
         const urlEl = document.querySelector('#simUrlText');
         const actionEl = document.querySelector('#simNavAction');
+        const heroImgEl = document.querySelector('#simHeroImg');
+        const overlayTagEl = document.querySelector('#simOverlayTag');
 
         if (brandEl) brandEl.textContent = data.brand;
         if (badgeEl) badgeEl.textContent = data.badge;
@@ -949,15 +961,20 @@ function initDemoSimulator() {
         if (descEl) descEl.textContent = data.desc;
         if (urlEl) urlEl.textContent = data.url;
         if (actionEl) actionEl.textContent = data.navAction;
+        if (heroImgEl) heroImgEl.src = data.heroImg;
+        if (overlayTagEl) overlayTagEl.textContent = data.overlayTag;
 
         data.services.forEach((s, idx) => {
           const num = idx + 1;
           const card = document.querySelector(`#simServicesGrid .sim-service-card:nth-child(${num})`);
           if (card) {
-            const iconEl = card.querySelector('.card-icon');
-            const h4El = card.querySelector('h4');
-            const pEl = card.querySelector('p');
-            if (iconEl) iconEl.textContent = s.icon;
+            const imgEl = card.querySelector('#servImg' + num);
+            const tagEl = card.querySelector('#servPrice' + num);
+            const h4El = card.querySelector('#servTitle' + num);
+            const pEl = card.querySelector('#servDesc' + num);
+
+            if (imgEl) imgEl.src = s.img;
+            if (tagEl) tagEl.textContent = s.tag;
             if (h4El) h4El.textContent = s.title;
             if (pEl) pEl.textContent = s.desc;
           }
