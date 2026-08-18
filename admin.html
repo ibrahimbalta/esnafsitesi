@@ -37,6 +37,9 @@
           <span class="icon">👥</span> Müşteri Takibi
           <span class="badge badge-warn" id="expiryBadge" style="display:none;">!</span>
         </a>
+        <a href="#" class="nav-item" data-view="kanban">
+          <span class="icon">📋</span> Kanban İş Tahtası
+        </a>
         <a href="#" class="nav-item" data-view="reviews">
           <span class="icon">💬</span> Yorum Yönetimi
           <span class="badge badge-review" id="reviewBadge">0</span>
@@ -194,6 +197,65 @@
                 <!-- JS generated -->
               </tbody>
             </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW: KANBAN BOARD -->
+      <div id="view-kanban" class="view">
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <h3>📋 İş Süreci & Kanban Takip Tahtası</h3>
+              <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Başvuruların ve aktif web tasarım süreçlerinin aşamalarını takip edin.</p>
+            </div>
+            <button class="btn-outline" id="refreshKanbanBtn">🔄 Yenile</button>
+          </div>
+
+          <div class="kanban-board" id="kanbanBoard">
+            <!-- Kanban Column 1: Yeni Başvurular -->
+            <div class="kanban-col" data-status="new">
+              <div class="kanban-col-header col-new">
+                <span>📥 Yeni Başvurular</span>
+                <span class="kanban-count" id="count-new">0</span>
+              </div>
+              <div class="kanban-cards" id="col-new">
+                <!-- JS generated -->
+              </div>
+            </div>
+
+            <!-- Kanban Column 2: Görseller Bekleniyor -->
+            <div class="kanban-col" data-status="assets">
+              <div class="kanban-col-header col-assets">
+                <span>📁 Görseller Bekleniyor</span>
+                <span class="kanban-count" id="count-assets">0</span>
+              </div>
+              <div class="kanban-cards" id="col-assets">
+                <!-- JS generated -->
+              </div>
+            </div>
+
+            <!-- Kanban Column 3: Tasarım Aşamasında -->
+            <div class="kanban-col" data-status="design">
+              <div class="kanban-col-header col-design">
+                <span>🎨 Tasarım Aşamasında</span>
+                <span class="kanban-count" id="count-design">0</span>
+              </div>
+              <div class="kanban-cards" id="col-design">
+                <!-- JS generated -->
+              </div>
+            </div>
+
+            <!-- Kanban Column 4: Canlıda / Tamamlandı -->
+            <div class="kanban-col" data-status="live">
+              <div class="kanban-col-header col-live">
+                <span>🚀 Canlıda / Tamamlandı</span>
+                <span class="kanban-count" id="count-live">0</span>
+              </div>
+              <div class="kanban-cards" id="col-live">
+                <!-- JS generated -->
+              </div>
+            </div>
           </div>
         </div>
       </div>

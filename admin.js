@@ -834,6 +834,8 @@ async function updateDashboardData() {
   if (statRev) statRev.textContent = `${gridCount * PRICE_PER_SITE} TL`;
   if (appBadge) appBadge.textContent = apps.length;
 
+  await renderKanbanBoard();
+
   const gridFilledBadge = document.querySelector('#gridFilledCount');
   if (gridFilledBadge) gridFilledBadge.textContent = `${gridCount} Dolu`;
 
@@ -1241,3 +1243,103 @@ window.handlePortfolioAction = async (id, action) => {
     }
   }
 };
+
+// --- KANBAN BOARD & WHATSAPP TEMPLATES LOGIC ---
+async function renderKanbanBoard() {
+  const applications = await fetchFromStore('applications', []);
+  
+  const colNew = document.querySelector('#col-new');
+  const colAssets = document.querySelector('#col-assets');
+  const colDesign = document.querySelector('#col-design');
+  const colLive = document.querySelector('#col-live');
+
+  if (!colNew) return;
+
+  colNew.innerHTML = '';
+  colAssets.innerHTML = '';
+  colDesign.innerHTML = '';
+  colLive.innerHTML = '';
+
+  let counts = { new: 0, assets: 0, design: 0, live: 0 };
+
+  applications.forEach((app, idx) => {
+    const status = app.status || 'new';
+    counts[status] = (counts[status] || 0) + 1;
+
+    const card = document.createElement('div');
+    card.className = 'kanban-card';
+
+    const dateStr = app.date ? new Date(app.date).toLocaleDateString('tr-TR') : 'Bugün';
+
+    card.innerHTML = `
+      <div class="kanban-card-title">${app.firmaAdi || app.name || 'İşletme'}</div>
+      <div class="kanban-card-meta">
+        👤 ${app.adSoyad || app.contact || '-'} <br/>
+        📞 ${app.telefon || app.phone || '-'} <br/>
+        🎯 ${app.sektor || app.sector || '-'} • 📅 ${dateStr}
+      </div>
+      <div class="kanban-card-actions">
+        <select class="status-select" data-index="${idx}">
+          <option value="new" ${status === 'new' ? 'selected' : ''}>📥 Yeni Başvuru</option>
+          <option value="assets" ${status === 'assets' ? 'selected' : ''}>📁 Görsel Bekleniyor</option>
+          <option value="design" ${status === 'design' ? 'selected' : ''}>🎨 Tasarım Aşamasında</option>
+          <option value="live" ${status === 'live' ? 'selected' : ''}>🚀 Canlıda / Tamamlandı</option>
+        </select>
+        <button class="btn-wa-tmpl" data-index="${idx}">
+          💬 WhatsApp Mesajı Gönder
+        </button>
+      </div>
+    `;
+
+    if (status === 'new') colNew.appendChild(card);
+    else if (status === 'assets') colAssets.appendChild(card);
+    else if (status === 'design') colDesign.appendChild(card);
+    else if (status === 'live') colLive.appendChild(card);
+  });
+
+  const cNew = document.querySelector('#count-new');
+  const cAssets = document.querySelector('#count-assets');
+  const cDesign = document.querySelector('#count-design');
+  const cLive = document.querySelector('#count-live');
+
+  if (cNew) cNew.textContent = counts.new;
+  if (cAssets) cAssets.textContent = counts.assets;
+  if (cDesign) cDesign.textContent = counts.design;
+  if (cLive) cLive.textContent = counts.live;
+
+  // Status select listener
+  document.querySelectorAll('.status-select').forEach(sel => {
+    sel.addEventListener('change', async (e) => {
+      const idx = e.target.dataset.index;
+      const newStatus = e.target.value;
+      applications[idx].status = newStatus;
+      await saveToStore('applications', applications);
+      await renderKanbanBoard();
+      showAlert('İş aşaması başarıyla güncellendi.', 'success');
+    });
+  });
+
+  // WhatsApp Template Listener
+  document.querySelectorAll('.btn-wa-tmpl').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const idx = e.target.dataset.index;
+      const app = applications[idx];
+      const phone = (app.telefon || app.phone || '').replace(/\D/g, '');
+      const firma = app.firmaAdi || app.name || 'İşletmeniz';
+      const status = app.status || 'new';
+
+      let msg = '';
+      if (status === 'new' || status === 'assets') {
+        msg = `Merhaba ${firma}! KolayWebci üzerinden yaptığınız web sitesi başvurunuz alındı. 48 saatlik kurulum sürecimizin başlayabilmesi için firmanıza ait logo, adres ve görsellerinizi buraya iletebilirsiniz.`;
+      } else if (status === 'design') {
+        msg = `Merhaba ${firma}! Web sitenizin tasarımı şu an uzman ekibimiz tarafından özenle hazırlanıyor. Kısa süre içerisinde canlı önizleme linkini sizinle paylaşacağız.`;
+      } else if (status === 'live') {
+        msg = `Tebrikler ${firma}! 5000 TL tutarındaki profesyonel kurumsal web siteniz 48 saatlik süre içerisinde başarıyla yayına alındı! İnternet sitenizi hemen inceleyebilirsiniz. Hayırlı ve bol kazançlar dileriz! 🚀`;
+      }
+
+      const encoded = encodeURIComponent(msg);
+      window.open(`https://wa.me/90${phone}?text=${encoded}`, '_blank');
+    });
+  });
+}
+

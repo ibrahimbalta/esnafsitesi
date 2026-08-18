@@ -599,6 +599,129 @@ td {
   box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
 }
 
+/* ==========================================================================
+   KANBAN BOARD & WHATSAPP TEMPLATES STYLING
+   ========================================================================== */
+.kanban-board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 20px;
+  min-height: 500px;
+}
+
+.kanban-col {
+  background: var(--bg-admin);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.kanban-col-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 700;
+  font-size: 14px;
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+  border-bottom: 2px solid var(--border);
+}
+
+.kanban-col-header.col-new { border-color: #ef4444; color: #dc2626; }
+.kanban-col-header.col-assets { border-color: #f59e0b; color: #d97706; }
+.kanban-col-header.col-design { border-color: #3b82f6; color: #2563eb; }
+.kanban-col-header.col-live { border-color: #10b981; color: #059669; }
+
+.kanban-count {
+  background: rgba(0, 0, 0, 0.06);
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+.kanban-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.kanban-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+}
+
+.kanban-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.kanban-card-title {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--dark);
+  margin-bottom: 4px;
+}
+
+.kanban-card-meta {
+  font-size: 12px;
+  color: var(--gray);
+  margin-bottom: 10px;
+}
+
+.kanban-card-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--border);
+}
+
+.status-select {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--bg-admin);
+  cursor: pointer;
+}
+
+.btn-wa-tmpl {
+  background: #25d366;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+@media (max-width: 1024px) {
+  .kanban-board {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .kanban-board {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Review Cards */
 .review-cards-container {
   display: grid;

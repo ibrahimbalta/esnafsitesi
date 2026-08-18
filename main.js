@@ -508,6 +508,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   await initReviewSystem();
   await initPortfolioSystem();
   await initPromoModal();
+  initDemoSimulator();
+  initApplicationWizard();
+  initSocialProofToast();
   
   // Basic Animation on Scroll (Intersection Observer)
   const observerOptions = {
@@ -842,3 +845,301 @@ async function initPromoModal() {
     }
   });
 }
+
+// --- INTERACTIVE DEMO SIMULATOR LOGIC ---
+const SIMULATOR_DATA = {
+  restoran: {
+    brand: 'Lezzet Durağı Restoran',
+    badge: '✨ Lezzetin & Kalitenin Adresi',
+    title: 'Bartın\'ın En Nefis Lezzetleri Masanızda!',
+    desc: 'Taze malzemeler, usta eller ve eşsiz mekan atmosferimiz ile sizleri ve sevdiklerinizi ağırlamaktan mutluluk duyuyoruz.',
+    url: 'https://lezzetduragi.kolaywebci.com',
+    navAction: 'Rezervasyon Yap',
+    services: [
+      { icon: '🍲', title: 'Günlük Ev Yemekleri', desc: 'Özenle hazırlanan sıcak çorbalar, zeytinyağlılar ve ana yemekler.' },
+      { icon: '🔥', title: 'Izgara & Kebap Çeşitleri', desc: 'Közde pişen leziz et çeşitleri ve özel ikramlar.' },
+      { icon: '🛵', title: 'Hızlı Paket Servis', desc: 'Bartın içi sıcak ve hijyenik paket servis imkanı.' }
+    ]
+  },
+  kuafor: {
+    brand: 'Işıltı Saç & Güzellik Salonu',
+    badge: '✂️ Saç ve Cilt Bakımında Uzman',
+    title: 'Güzelliğinizi Profesyonel Dokunuşlarla Taçlandırın',
+    desc: 'Trend saç tasarımları, kişiye özel renklendirme ve profesyonel cilt bakımı ile kendinizi özel hissedin.',
+    url: 'https://isiltikuafor.kolaywebci.com',
+    navAction: 'Randevu Al',
+    services: [
+      { icon: '💇‍♀️', title: 'Saç Tasarım & Boya', desc: 'Ombre, sombre, kesim ve keratin bakımları.' },
+      { icon: '💅', title: 'Manikür & Pedikür', desc: 'Kalıcı oje, protez tırnak ve el-ayak bakımı.' },
+      { icon: '✨', title: 'Gelin Saçı & Makyaj', desc: 'Özel günleriniz için kusursuz hazırlık konsepti.' }
+    ]
+  },
+  emlak: {
+    brand: 'Güven Emlak & Gayrimenkul',
+    badge: '🏠 Hayalinizdeki Evi Birlikte Bulalım',
+    title: 'Bartın ve Amasra\'da Satılık & Kiralık Fırsatlar',
+    desc: 'Geniş portföyümüz ve şeffaf danışmanlık anlayışımızla en doğru yatırımı yapmanıza rehberlik ediyoruz.',
+    url: 'https://guvenemlak.kolaywebci.com',
+    navAction: 'İlanları İncele',
+    services: [
+      { icon: '🏢', title: 'Satılık Daireler', desc: 'Merkezi konumda, sıfır ve ikinci el konut seçenekleri.' },
+      { icon: '🏡', title: 'Müstakil & Arsa', desc: 'Yatırımlık tarla, imarlı arsa ve villa seçenekleri.' },
+      { icon: '🤝', title: 'Gayrimenkul Danışmanlığı', desc: 'Ücretsiz ekspertiz ve tapu takip işlemleri.' }
+    ]
+  },
+  hukuk: {
+    brand: 'Balta Hukuk & Danışmanlık',
+    badge: '⚖️ Adalet ve Profesyonel Hukuki Destek',
+    title: 'Hukuki Sorunlarınıza Güvenilir ve Etkin Çözümler',
+    desc: 'Uzman avukat kadromuzla ceza, aile, iş ve ticaret hukuku alanlarında kurumsal danışmanlık hizmeti sunuyoruz.',
+    url: 'https://baltahukuk.kolaywebci.com',
+    navAction: 'Danışmanlık Al',
+    services: [
+      { icon: '📜', title: 'İş & Ceza Hukuku', desc: 'Dava takibi ve hukuki sözleşme danışmanlığı.' },
+      { icon: '🏠', title: 'Gayrimenkul Hukuku', desc: 'Tapu iptal, tescil ve kira uyuşmazlığı davaları.' },
+      { icon: '💼', title: 'Kurumsal Danışmanlık', desc: 'Şirketler için sürekli hukuki koruma paketi.' }
+    ]
+  },
+  usta: {
+    brand: 'Usta Teknik Servis & Tesisat',
+    badge: '🛠️ 7/24 Acil Usta & Tamir Hizmeti',
+    title: 'Elektrik, Su Tesisatı ve Kombi Bakımında 1 Numarayız',
+    desc: 'Bartın ve tüm beldelerinde garantili tamir, montaj ve bakım hizmetini en uygun fiyatlarla kapınıza getiriyoruz.',
+    url: 'https://ustateknik.kolaywebci.com',
+    navAction: 'Usta Çağır',
+    services: [
+      { icon: '🚰', title: 'Su Tesisatı & Kaçak', desc: 'Kırmadan dökmeden cihazla su kaçağı tespiti.' },
+      { icon: '⚡', title: 'Elektrik Arıza & Montaj', desc: 'Ev ve iş yeri elektrik tesisatı yenileme.' },
+      { icon: '❄️', title: 'Kombi & Klima Bakımı', desc: 'Yıllık periyodik bakım ve petek temizliği.' }
+    ]
+  }
+};
+
+function initDemoSimulator() {
+  const tabs = document.querySelectorAll('#simSectorTabs .sim-tab');
+  const themePills = document.querySelectorAll('#simThemePills .theme-pill');
+  const siteBody = document.querySelector('#simSiteBody');
+
+  if (!siteBody) return;
+
+  // Sector tab switcher
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      const sector = tab.dataset.sector;
+      const data = SIMULATOR_DATA[sector];
+      if (!data) return;
+
+      siteBody.style.opacity = '0.4';
+      siteBody.style.transform = 'scale(0.99)';
+
+      setTimeout(() => {
+        const brandEl = document.querySelector('#simBrandName');
+        const badgeEl = document.querySelector('#simHeroBadge');
+        const titleEl = document.querySelector('#simHeroTitle');
+        const descEl = document.querySelector('#simHeroDesc');
+        const urlEl = document.querySelector('#simUrlText');
+        const actionEl = document.querySelector('#simNavAction');
+
+        if (brandEl) brandEl.textContent = data.brand;
+        if (badgeEl) badgeEl.textContent = data.badge;
+        if (titleEl) titleEl.textContent = data.title;
+        if (descEl) descEl.textContent = data.desc;
+        if (urlEl) urlEl.textContent = data.url;
+        if (actionEl) actionEl.textContent = data.navAction;
+
+        data.services.forEach((s, idx) => {
+          const num = idx + 1;
+          const card = document.querySelector(`#simServicesGrid .sim-service-card:nth-child(${num})`);
+          if (card) {
+            const iconEl = card.querySelector('.card-icon');
+            const h4El = card.querySelector('h4');
+            const pEl = card.querySelector('p');
+            if (iconEl) iconEl.textContent = s.icon;
+            if (h4El) h4El.textContent = s.title;
+            if (pEl) pEl.textContent = s.desc;
+          }
+        });
+
+        siteBody.style.opacity = '1';
+        siteBody.style.transform = 'scale(1)';
+      }, 150);
+    });
+  });
+
+  // Theme pill switcher
+  themePills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      themePills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+
+      const theme = pill.dataset.theme;
+      siteBody.className = `sim-site-body theme-${theme}`;
+    });
+  });
+}
+
+// --- 3-STEP APPLICATION WIZARD & LIVE CALCULATOR LOGIC ---
+function initApplicationWizard() {
+  const wizardNavBtns = document.querySelectorAll('#wizNav .wizard-step-btn');
+  const panels = document.querySelectorAll('.wizard-step-panel');
+  
+  const next1 = document.querySelector('#wizNextStep1');
+  const next2 = document.querySelector('#wizNextStep2');
+  const prev2 = document.querySelector('#wizPrevStep2');
+  const prev3 = document.querySelector('#wizPrevStep3');
+  const addonCbs = document.querySelectorAll('.addon-cb');
+  const waOrderBtn = document.querySelector('#waOrderBtn');
+
+  if (!next1) return;
+
+  const goToStep = (stepNum) => {
+    panels.forEach(p => p.classList.remove('active'));
+    wizardNavBtns.forEach(btn => {
+      const bStep = parseInt(btn.dataset.step);
+      btn.classList.remove('active');
+      if (bStep < stepNum) btn.classList.add('completed');
+      else btn.classList.remove('completed');
+      if (bStep === stepNum) btn.classList.add('active');
+    });
+
+    const targetPanel = document.querySelector(`#wizStep${stepNum}`);
+    if (targetPanel) targetPanel.classList.add('active');
+
+    if (stepNum === 3) updateSummary();
+  };
+
+  const updateSummary = () => {
+    const BASE_PRICE = 5000;
+    let total = BASE_PRICE;
+    const summaryList = document.querySelector('#summaryList');
+    const totalPriceEl = document.querySelector('#totalPriceEl');
+
+    if (!summaryList || !totalPriceEl) return;
+
+    summaryList.innerHTML = `<li><span>Ana Kurumsal Web Sitesi Paketi (48 Saat Teslim)</span> <span>5000 TL</span></li>`;
+
+    addonCbs.forEach(cb => {
+      if (cb.checked) {
+        const name = cb.dataset.name;
+        const price = parseInt(cb.dataset.price);
+        total += price;
+        const li = document.createElement('li');
+        li.innerHTML = `<span>+ ${name}</span> <span>${price} TL</span>`;
+        summaryList.appendChild(li);
+      }
+    });
+
+    totalPriceEl.textContent = `${total} TL`;
+  };
+
+  next1.addEventListener('click', () => {
+    const firma = document.querySelector('#firmaAdi').value.trim();
+    const adSoyad = document.querySelector('#adSoyad').value.trim();
+    const tel = document.querySelector('#telefon').value.trim();
+    const sektor = document.querySelector('#sektor').value.trim();
+
+    if (!firma || !adSoyad || !tel || !sektor) {
+      alert('Lütfen Adım 1\'deki zorunlu alanları (Firma Adı, Ad Soyad, Telefon, Sektör) doldurunuz.');
+      return;
+    }
+    goToStep(2);
+  });
+
+  if (next2) next2.addEventListener('click', () => goToStep(3));
+  if (prev2) prev2.addEventListener('click', () => goToStep(1));
+  if (prev3) prev3.addEventListener('click', () => goToStep(2));
+
+  addonCbs.forEach(cb => cb.addEventListener('change', updateSummary));
+
+  // WhatsApp Direct Order Action
+  if (waOrderBtn) {
+    waOrderBtn.addEventListener('click', () => {
+      const firma = document.querySelector('#firmaAdi').value.trim() || 'Belirtilmedi';
+      const adSoyad = document.querySelector('#adSoyad').value.trim() || 'Belirtilmedi';
+      const tel = document.querySelector('#telefon').value.trim() || 'Belirtilmedi';
+      const sektor = document.querySelector('#sektor').value.trim() || 'Belirtilmedi';
+      const sehir = document.querySelector('#sehir').value.trim() || 'Belirtilmedi';
+      const notlar = document.querySelector('#notlar').value.trim() || 'Yok';
+
+      let addonsText = '';
+      addonCbs.forEach(cb => {
+        if (cb.checked) addonsText += `\n - ${cb.dataset.name} (+${cb.dataset.price} TL)`;
+      });
+
+      const total = document.querySelector('#totalPriceEl').textContent;
+
+      const text = `Merhaba KolayWebci! Siteniz üzerinden yeni bir paket siparişi oluşturmak istiyorum:
+
+🏢 *Firma Adı:* ${firma}
+👤 *Yetkili:* ${adSoyad}
+📞 *Telefon:* ${tel}
+🎯 *Sektör:* ${sektor}
+📍 *Şehir/İlçe:* ${sehir}
+
+📦 *Seçilen Paket & Ek Hizmetler:*
+- Ana Web Sitesi Paketi (5000 TL)${addonsText || '\n - Ek hizmet seçilmedi'}
+
+💰 *Toplam Tutar:* ${total}
+📝 *Notlar:* ${notlar}`;
+
+      const encoded = encodeURIComponent(text);
+      window.open(`https://wa.me/905453467986?text=${encoded}`, '_blank');
+    });
+  }
+}
+
+// --- LIVE SOCIAL PROOF TOAST WIDGET LOGIC ---
+const SOCIAL_NOTIFICATIONS = [
+  { avatar: '🐟', title: 'Yeni Başvuru Alındı!', desc: '12 dakika önce Amasra\'dan Bir Balık Restoranı katıldı.', time: 'Kalan Kontenjan: 953/1000' },
+  { avatar: '✂️', title: 'Site Yayına Alındı!', desc: '35 dakika önce Bartın Merkez\'den Bir Kuaförün sitesi kuruldu.', time: '48 Saat Teslim Garantisi' },
+  { avatar: '🛠️', title: 'Yerini Ayırttı!', desc: '1 saat önce Ulus\'tan Bir Sıhhi Tesisatçı başvuru yaptı.', time: 'Kalan Kontenjan: 952/1000' },
+  { avatar: '🏨', title: 'Canlıda!', desc: '2 saat önce Amasra\'dan Bir Butik Otel dijitalleşti.', time: 'SEO Uyumlu Kurumsal Site' },
+  { avatar: '👥', title: 'Canlı Ziyaretçi', desc: 'Şu an 14 kişi web sitemizi inceliyor ve paketleri araştırıyor.', time: 'Bartın & Çevresi Esnaf Hareketi' }
+];
+
+function initSocialProofToast() {
+  const toast = document.querySelector('#socialProofToast');
+  const closeBtn = document.querySelector('#toastCloseBtn');
+  if (!toast) return;
+
+  let currentIndex = 0;
+
+  const showToast = () => {
+    const notif = SOCIAL_NOTIFICATIONS[currentIndex];
+    const avatarEl = document.querySelector('#toastAvatar');
+    const titleEl = document.querySelector('#toastTitle');
+    const descEl = document.querySelector('#toastDesc');
+    const timeEl = document.querySelector('#toastTime');
+
+    if (avatarEl) avatarEl.textContent = notif.avatar;
+    if (titleEl) titleEl.textContent = notif.title;
+    if (descEl) descEl.textContent = notif.desc;
+    if (timeEl) timeEl.textContent = notif.time;
+
+    toast.classList.add('active');
+
+    setTimeout(() => {
+      toast.classList.remove('active');
+    }, 6000);
+
+    currentIndex = (currentIndex + 1) % SOCIAL_NOTIFICATIONS.length;
+  };
+
+  // Initial popup after 4 seconds
+  setTimeout(showToast, 4000);
+
+  // Periodic interval every 16 seconds
+  setInterval(showToast, 16000);
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      toast.classList.remove('active');
+    });
+  }
+}
+
+
+

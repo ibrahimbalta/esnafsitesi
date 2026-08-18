@@ -307,6 +307,125 @@
     </div>
   </section>
 
+  <!-- INTERACTIVE DEMO SANDBOX & SITE SIMULATOR -->
+  <section class="section demo-sandbox-section" id="demo-simulator">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag glow-tag">🎮 İnteraktif Deneyim</span>
+        <h2 class="section-title">Sitenizi <span class="gradient-text">Canlı Simüle Edin</span></h2>
+        <p class="section-desc">Sektörünüzü ve renk temanızı seçin, web sitenizin 48 saat içinde nasıl görüneceğini anında keşfedin!</p>
+      </div>
+
+      <!-- Controls: Sector Tabs & Theme Selectors -->
+      <div class="simulator-controls animate-in">
+        <div class="control-group">
+          <label class="control-label">1. Sektörünüzü Seçin:</label>
+          <div class="sector-tabs" id="simSectorTabs">
+            <button class="sim-tab active" data-sector="restoran">☕ Kafe & Restoran</button>
+            <button class="sim-tab" data-sector="kuafor">✂️ Kuaför & Güzellik</button>
+            <button class="sim-tab" data-sector="emlak">🏠 Emlak & Otomotiv</button>
+            <button class="sim-tab" data-sector="hukuk">⚖️ Hukuk & Danışmanlık</button>
+            <button class="sim-tab" data-sector="usta">🛠️ Usta & Teknik Servis</button>
+          </div>
+        </div>
+
+        <div class="control-group" style="margin-top: 16px;">
+          <label class="control-label">2. Renk Teması Seçin:</label>
+          <div class="theme-pills" id="simThemePills">
+            <button class="theme-pill active" data-theme="purple" style="--theme-color: #8b5cf6;">
+              <span class="pill-dot"></span> Cyber Purple
+            </button>
+            <button class="theme-pill" data-theme="cyan" style="--theme-color: #06b6d4;">
+              <span class="pill-dot"></span> Ocean Cyan
+            </button>
+            <button class="theme-pill" data-theme="emerald" style="--theme-color: #10b981;">
+              <span class="pill-dot"></span> Emerald Green
+            </button>
+            <button class="theme-pill" data-theme="pink" style="--theme-color: #ec4899;">
+              <span class="pill-dot"></span> Sunset Pink
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Mockup Screen -->
+      <div class="simulator-window animate-in" id="simWindow">
+        <!-- Browser Bar Header -->
+        <div class="sim-browser-bar">
+          <div class="sim-dots">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+          </div>
+          <div class="sim-url-bar">
+            <span class="lock-icon">🔒</span>
+            <span id="simUrlText">https://isletmeniz.kolaywebci.com</span>
+          </div>
+          <div class="sim-badge-live">LIVE DEMO</div>
+        </div>
+
+        <!-- Live Website Body Content -->
+        <div class="sim-site-body theme-purple" id="simSiteBody">
+          <!-- Mini Navbar -->
+          <div class="sim-nav">
+            <div class="sim-brand" id="simBrandName">Lezzet Durağı Restoran</div>
+            <div class="sim-menu">
+              <span>Ana Sayfa</span>
+              <span>Menümüz</span>
+              <span>Hakkımızda</span>
+              <span>İletişim</span>
+            </div>
+            <button class="sim-btn-contact" id="simNavAction">Rezervasyon Yap</button>
+          </div>
+
+          <!-- Mini Hero Banner -->
+          <div class="sim-hero">
+            <div class="sim-hero-badge" id="simHeroBadge">✨ Lezzetin & Kalitenin Adresi</div>
+            <h3 class="sim-hero-title" id="simHeroTitle">Bartın'ın En Nefis Lezzetleri Masanızda!</h3>
+            <p class="sim-hero-desc" id="simHeroDesc">Taze malzemeler, usta eller ve eşsiz mekan atmosferimiz ile sizleri ve sevdiklerinizi ağırlamaktan mutluluk duyuyoruz.</p>
+            <div class="sim-hero-cta">
+              <a href="#iletisim" class="sim-main-btn" id="simCtaBtn">Hemen Başvur - 5000 TL</a>
+              <span class="sim-delivery-tag">⚡ 48 Saat Teslim</span>
+            </div>
+          </div>
+
+          <!-- Mini Services / Features Grid -->
+          <div class="sim-services-grid" id="simServicesGrid">
+            <div class="sim-service-card">
+              <span class="card-icon">🍲</span>
+              <h4 id="servTitle1">Günlük Ev Yemekleri</h4>
+              <p id="servDesc1">Özenle hazırlanan sıcak çorbalar, zeytinyağlılar ve ana yemekler.</p>
+            </div>
+            <div class="sim-service-card">
+              <span class="card-icon">🔥</span>
+              <h4 id="servTitle2">Izgara & Kebap Çeşitleri</h4>
+              <p id="servDesc2">Közde pişen leziz et çeşitleri ve özel ikramlar.</p>
+            </div>
+            <div class="sim-service-card">
+              <span class="card-icon">🛵</span>
+              <h4 id="servTitle3">Hızlı Paket Servis</h4>
+              <p id="servDesc3">Bartın içi sıcak ve hijyenik paket servis imkanı.</p>
+            </div>
+          </div>
+
+          <!-- Simulated Floating WhatsApp button inside demo -->
+          <div class="sim-floating-wa">
+            <span>💬 WhatsApp İletişim</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Action Prompt -->
+      <div class="sim-footer-prompt">
+        <p>Beğendiniz mi? Bu sitenin tam versiyonu <strong>48 saat içinde sizin adınıza tescillenip yayına alınır.</strong></p>
+        <a href="#iletisim" class="btn btn-primary btn-glow" id="simOrderBtn">
+          <span>Bu Tasarımı İşletmem İçin Başlat (5000 TL)</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- FEATURED PROJECTS PORTFOLIO -->
   <section class="section featured-projects" id="portfolyo">
     <div class="container">
@@ -726,20 +845,106 @@
         <p class="cta-desc">1000 firma kontenjanı hızla doluyor. Hemen ücretsiz ön başvurunuzu iletin, yerinizi ayırtalım!</p>
         
         <div class="cta-form-wrapper">
-          <form class="cta-form" id="ctaForm">
-            <div class="form-row">
-              <input type="text" placeholder="Firma Adınız" required id="firmaAdi" />
-              <input type="text" placeholder="Adınız Soyadınız" required id="adSoyad" />
-            </div>
-            <div class="form-row">
-              <input type="tel" placeholder="Telefon Numaranız" required id="telefon" />
-              <input type="text" placeholder="Sektörünüz (Örn: Kafe, Kuaför vb.)" required id="sektor" />
-            </div>
-            <textarea placeholder="Varsa eklemek istediğiniz özel notlar..." rows="3" id="notlar"></textarea>
-            
-            <button type="submit" class="btn btn-primary btn-glow btn-full">
-              <span>🚀 Hemen Başvur - Yerimi Ayırt!</span>
+          <!-- Wizard Nav Header -->
+          <div class="wizard-nav" id="wizNav">
+            <button type="button" class="wizard-step-btn active" data-step="1">
+              <span>1. Bilgileriniz</span>
             </button>
+            <button type="button" class="wizard-step-btn" data-step="2">
+              <span>2. Ek Hizmetler</span>
+            </button>
+            <button type="button" class="wizard-step-btn" data-step="3">
+              <span>3. Özet & Sipariş</span>
+            </button>
+          </div>
+
+          <form class="cta-form" id="ctaForm">
+            <!-- STEP 1 PANEL -->
+            <div class="wizard-step-panel active" id="wizStep1">
+              <div class="form-row">
+                <input type="text" placeholder="Firma Adınız *" required id="firmaAdi" />
+                <input type="text" placeholder="Adınız Soyadınız *" required id="adSoyad" />
+              </div>
+              <div class="form-row">
+                <input type="tel" placeholder="Telefon Numaranız *" required id="telefon" />
+                <input type="text" placeholder="Sektörünüz (Örn: Kafe, Kuaför, Emlak) *" required id="sektor" />
+              </div>
+              <input type="text" placeholder="Şehriniz / İlçeniz (Örn: Bartın Merkez, Amasra)" id="sehir" style="margin-bottom: 16px;" />
+              <button type="button" class="btn btn-primary btn-glow btn-full" id="wizNextStep1">
+                <span>Adım 2: Ek Hizmet Seçimine Geç ➔</span>
+              </button>
+            </div>
+
+            <!-- STEP 2 PANEL (ADDONS) -->
+            <div class="wizard-step-panel" id="wizStep2">
+              <h4 style="color: #fff; margin-bottom: 12px; font-size: 16px; text-align: left;">Paketinize Ekleyebileceğiniz Modüller:</h4>
+              <div class="addons-grid">
+                <label class="addon-checkbox-label">
+                  <div class="addon-info">
+                    <input type="checkbox" class="addon-cb" data-name="Google Harita Kaydı" data-price="1000" />
+                    <span>📍 Google İşletme Harita Kaydı & Doğrulama</span>
+                  </div>
+                  <span class="addon-price">+1000 TL</span>
+                </label>
+
+                <label class="addon-checkbox-label">
+                  <div class="addon-info">
+                    <input type="checkbox" class="addon-cb" data-name="Kurumsal E-Posta (5 Adet)" data-price="500" />
+                    <span>✉️ 5 Adet Kurumsal E-Posta Hesabı (info@site.com)</span>
+                  </div>
+                  <span class="addon-price">+500 TL</span>
+                </label>
+
+                <label class="addon-checkbox-label">
+                  <div class="addon-info">
+                    <input type="checkbox" class="addon-cb" data-name="Logo & Kartvizit Tasarımı" data-price="1500" />
+                    <span>🎨 Özel Kurumsal Logo & Kartvizit Tasarımı</span>
+                  </div>
+                  <span class="addon-price">+1500 TL</span>
+                </label>
+
+                <label class="addon-checkbox-label">
+                  <div class="addon-info">
+                    <input type="checkbox" class="addon-cb" data-name="Sosyal Medya Şablonları" data-price="1000" />
+                    <span>📱 10 Adet Sosyal Medya Gönderi & Hikaye Şablonu</span>
+                  </div>
+                  <span class="addon-price">+1000 TL</span>
+                </label>
+              </div>
+
+              <div style="display: flex; gap: 10px;">
+                <button type="button" class="btn btn-ghost" id="wizPrevStep2">⬅ Geri</button>
+                <button type="button" class="btn btn-primary btn-glow" style="flex: 1;" id="wizNextStep2">
+                  <span>Adım 3: Canlı Özeti Gör ➔</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- STEP 3 PANEL (LIVE SUMMARY & ORDER) -->
+            <div class="wizard-step-panel" id="wizStep3">
+              <div class="live-price-card">
+                <h4 style="color: #fff; margin-bottom: 12px; font-size: 16px;">Sipariş & Fiyat Özeti</h4>
+                <ul class="price-summary-list" id="summaryList">
+                  <li><span>Ana Kurumsal Web Sitesi Paketi (48 Saat Teslim)</span> <span>5000 TL</span></li>
+                </ul>
+                <div class="price-total-row">
+                  <span>Toplam Sipariş Tutarı:</span>
+                  <span class="price-total-amount" id="totalPriceEl">5000 TL</span>
+                </div>
+              </div>
+
+              <textarea placeholder="Varsa eklemek istediğiniz özel notlar veya istekleriniz..." rows="2" id="notlar" style="margin-bottom: 16px;"></textarea>
+
+              <div class="wizard-actions">
+                <button type="button" class="btn btn-ghost" id="wizPrevStep3">⬅ Geri</button>
+                <button type="button" class="btn btn-whatsapp-order btn-glow" style="flex: 1;" id="waOrderBtn">
+                  <span>💬 WhatsApp ile Sipariş Ver</span>
+                </button>
+                <button type="submit" class="btn btn-primary btn-glow" style="flex: 1;">
+                  <span>📩 Ücretsiz Ön Başvuru Yap</span>
+                </button>
+              </div>
+            </div>
           </form>
           <p class="form-note">* Başvurunuz tamamen ücretsizdir. Kurulum ve ödeme site onayından sonra gerçekleşir.</p>
         </div>
@@ -819,6 +1024,17 @@
           </a>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- LIVE SOCIAL PROOF TOAST WIDGET -->
+  <div class="social-proof-toast" id="socialProofToast">
+    <button class="toast-close" id="toastCloseBtn">&times;</button>
+    <div class="toast-avatar" id="toastAvatar">⚡</div>
+    <div class="toast-content">
+      <div class="toast-title" id="toastTitle">Yeni Başvuru Alındı!</div>
+      <div class="toast-desc" id="toastDesc">14 dakika önce Amasra'dan bir Balık Restoranı katıldı.</div>
+      <div class="toast-time" id="toastTime">Kalan Kontenjan: 953/1000</div>
     </div>
   </div>
 
