@@ -1072,6 +1072,81 @@ const SIMULATOR_DATA = {
       { img: 'https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?auto=format&fit=crop&q=80&w=400', tag: 'Vakumlu', title: 'Yerinde Koltuk Yıkama', desc: 'Alman buharlı vakum makineleriyle koltuk ve yatak yıkama.' },
       { img: 'https://images.unsplash.com/photo-1628177142898-93e36e4e3a50?auto=format&fit=crop&q=80&w=400', tag: 'Detaylı', title: 'Ev & İnşaat Sonrası Temizlik', desc: 'Taşınma öncesi ve inşaat kalıntısı temizliğinde uzman ekip.' }
     ]
+  },
+  kres: {
+    brand: 'Neşeli Adımlar Anaokulu & Kreş',
+    badge: '👶 Güvenli, Eğlenceli ve Çift Dilli Okul Öncesi Eğitim',
+    title: 'Çocuklarınızın Geleceğine Güvenli Adımlar Atıyoruz',
+    desc: 'Geniş oyun bahçemiz, uzman psikolog & pedagog kadromuz, organik beslenme ve robotik kodlama atölyelerimizle hizmetinizdeyiz.',
+    url: 'https://neseliadimlar.kolaywebci.com',
+    navAction: 'Ön Kayıt Yaptır',
+    heroImg: 'https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&q=80&w=800',
+    overlayTag: '👶 MEB Onaylı Kreş',
+    services: [
+      { img: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=400', tag: 'Eğlenceli', title: 'Montessori & Robotik Kodlama', desc: 'Çocukların zihinsel ve motor becerilerini geliştiren atölyeler.' },
+      { img: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&q=80&w=400', tag: 'Kamera', title: 'Canlı Veli İzleme Sistemi', desc: 'Gün boyu güvenlik kameralarıyla çocuğunuzu telefonunuzdan izleyin.' },
+      { img: 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&q=80&w=400', tag: 'Organik', title: 'Diyetisyen Onaylı Beslenme', desc: 'Günlük taze ve organik malzemelerle 3 öğün sıcak yemek.' }
+    ]
+  },
+  optik: {
+    brand: 'Odak Optik & Saat Mağazası',
+    badge: '👓 Trend Güneş Gözlükleri ve Reçeteli Optik Camlar',
+    title: 'Göz Sağlığınız İçin Dünyaca Ünlü Markalar',
+    desc: 'Ray-Ban, Oakley, Vogue ve Prada gibi dünya markalarının orijinal güneş ve optik gözlük koleksiyonları en uygun fiyatlarla.',
+    url: 'https://odakoptik.kolaywebci.com',
+    navAction: 'Gözlük Çeşitleri',
+    heroImg: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&q=80&w=800',
+    overlayTag: '👓 SGK Anlaşmalı',
+    services: [
+      { img: 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&q=80&w=400', tag: 'Orijinal', title: 'Dünya Markası Güneş Gözlükleri', desc: 'UV400 korumalı polarize kadın, erkek ve çocuk güneş gözlükleri.' },
+      { img: 'https://images.unsplash.com/photo-1591076482161-42ce6da69f67?auto=format&fit=crop&q=80&w=400', tag: 'SGK', title: 'Reçeteli Optik Çerçeveler', desc: 'Doktor reçetenize uygun hafif ve esnek optik gözlük modelleri.' },
+      { img: 'https://images.unsplash.com/photo-1589782182703-2aaa69037b5b?auto=format&fit=crop&q=80&w=400', tag: 'Şeffaf', title: 'Numaralı & Renkli Kontak Lens', desc: 'Air Optix, Acuvue ve Biofinity marka günlük ve aylık lensler.' }
+    ]
+  },
+  mermer: {
+    brand: 'Kaya Mermer & Granit Sanayi',
+    badge: '🪨 Mutfak Tezgahı, Basamak ve Mezarlık Yapımı',
+    title: 'Doğal Taşın Estetiği ve Dayanıklılığı',
+    desc: 'Mutfak Çimstone/Granit tezgahları, mermer merdiven basamakları, banyo kaplamaları ve blok mermer mezarlık imalatı.',
+    url: 'https://kayamermer.kolaywebci.com',
+    navAction: 'Fiyat / Ölçü Al',
+    heroImg: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=800',
+    overlayTag: '🪨 Doğal Granit',
+    services: [
+      { img: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&q=80&w=400', tag: 'Çizilmez', title: 'Granit & Çimstone Mutfak Tezgahı', desc: 'Leke tutmaz, ısıya dayanıklı modern mutfak tezgahı imalatı.' },
+      { img: 'https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&q=80&w=400', tag: 'İç & Dış', title: 'Mermer Basamak & Denizlik', desc: 'Bina girişi, villa ve iş yerleri için hassas kesim mermer.' },
+      { img: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&q=80&w=400', tag: 'Garantili', title: 'Granit & Mermer Mezarlık Yapımı', desc: 'Tekli ve çiftli başdaşlı blok granit mezar imalatı.' }
+    ]
+  },
+  terzi: {
+    brand: 'Moda Terzi & Özel Dikim Atölyesi',
+    badge: '🧵 Takım Elbise, Abiye ve Kuru Temizleme Tadilatı',
+    title: 'Kişiye Özel Ölçü ve Kusursuz İşçilik',
+    desc: 'Erkek takım elbise dikimi, abiye/gelinlik daraltma, paça/fermuar tadilatı ve deri ceket tamiri konusunda 30 yıllık tecrübe.',
+    url: 'https://modaterzi.kolaywebci.com',
+    navAction: 'Ölçü Randevusu',
+    heroImg: 'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&q=80&w=800',
+    overlayTag: '🧵 30 Yıllık Usta',
+    services: [
+      { img: 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&q=80&w=400', tag: 'İtalyan Kumaş', title: 'Özel Dikim Takım Elbise', desc: 'Vücudunuza özel kalıpla dikilen İtalyan kumaş takım elbiseler.' },
+      { img: 'https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&q=80&w=400', tag: 'Abiye & Elbise', title: 'Gelinlik & Abiye Tadilatı', desc: 'Daraltma, boy kısaltma ve beden ayarlama tamiratları.' },
+      { img: 'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&q=80&w=400', tag: 'Hızlı', title: 'Paça, Fermuar & Deri Tamiri', desc: 'Orijinal paça kıvırma, kot ve deri ceket fermuar değişimi.' }
+    ]
+  },
+  cicekci: {
+    brand: 'Bahar Çiçekçilik & Organizasyon',
+    badge: '💐 Canlı Çiçek, Buket, Çelenk ve Düğün Süsleme',
+    title: 'En Taze Çiçekler ve Şık Buketlerle Sevdiklerinizi Gülümsetin',
+    desc: 'Sevgililer günü, doğum günü, açılış çelenkleri, araba süsleme ve gelin buketi siparişleriniz aynı gün adresinize teslim.',
+    url: 'https://baharcicek.kolaywebci.com',
+    navAction: 'Çiçek Siparişi Ver',
+    heroImg: 'https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&q=80&w=800',
+    overlayTag: '💐 Aynı Gün Teslim',
+    services: [
+      { img: 'https://images.unsplash.com/photo-1563241527-3004b7be0ffd?auto=format&fit=crop&q=80&w=400', tag: 'Güller & Orkideler', title: 'Tasarım Çiçek Buketleri', desc: 'Kırmızı güller, şık orkideler ve kutuda canlı çiçek tasarımları.' },
+      { img: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&q=80&w=400', tag: 'Açılış & Taziye', title: 'Açılış & Taziye Çelenkleri', desc: 'Bartın ve Amasra içi hızlı adrese teslim canlı çelenk siparişi.' },
+      { img: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&q=80&w=400', tag: 'Özel Gün', title: 'Gelin Arabası & Salon Süsleme', desc: 'Taze canlı çiçeklerle gelin arabası ve nişan masası süsleme.' }
+    ]
   }
 };
 
