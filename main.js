@@ -997,6 +997,81 @@ const SIMULATOR_DATA = {
       { img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=80&w=400', tag: 'Foto Gerçekçi', title: '3D Proje Çizimi & Render', desc: 'Uygulama öncesi foto gerçekçi 3D mimari modelleme.' },
       { img: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&q=80&w=400', tag: 'Garantili', title: 'Tadilat & Uygulama', desc: 'Tüm kırım, tesisat, mobilya ve alçı işlerinde uzman kadro.' }
     ]
+  },
+  fotografci: {
+    brand: 'Studio Elegance Fotoğrafçılık & Plato',
+    badge: '📸 Düğün Hikayesi, Dış Çekim & Ürün Fotoğrafçılığı',
+    title: 'En Özel Anlarınızı Ölümsüzleştiriyoruz',
+    desc: 'Amasra sahil dış çekimleri, düğün klip hikayeleri ve profesyonel plato çekimlerimizle unutulmaz anılar biriktirin.',
+    url: 'https://studioelegance.kolaywebci.com',
+    navAction: 'Çekim Randevusu Al',
+    heroImg: 'https://images.unsplash.com/photo-1537633552985-df8429e8048b?auto=format&fit=crop&q=80&w=800',
+    overlayTag: '📸 Profesyonel Çekim',
+    services: [
+      { img: 'https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&q=80&w=400', tag: 'Dış Çekim', title: 'Düğün & Nişan Fotoğrafı', desc: 'Doğal ışıkta Amasra ve Bartın dış çekim albümleri.' },
+      { img: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&q=80&w=400', tag: '4K Sinematik', title: 'Düğün Hikayesi Video Klip', desc: 'Havadan drone destekli sinematik düğün belgeseli.' },
+      { img: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=400', tag: 'E-Ticaret', title: 'Ürün & Stüdyo Çekimi', desc: 'Markanız için yüksek çözünürlüklü katalog çekimleri.' }
+    ]
+  },
+  surucukursu: {
+    brand: 'Bartın Hedef Sürücü Kursu',
+    badge: '🚘 B, A2, C, D Sınıfı Ehliyet ve Özel Direksiyon Dersi',
+    title: 'Güvenli Sürüş Eğitimiyle Ehliyetinizi İlk Sınavda Alın',
+    desc: 'Son model eğitim araçlarımız, simülatör sınıfımız ve sabırlı usta öğreticilerimizle yüksek sınav başarı oranı.',
+    url: 'https://hedefsurucu.kolaywebci.com',
+    navAction: 'Kursa Kaydol',
+    heroImg: 'https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&q=80&w=800',
+    overlayTag: '🚘 %98 Sınav Başarısı',
+    services: [
+      { img: 'https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&q=80&w=400', tag: 'B Sınıfı', title: 'Otomobil Ehliyeti Eğitimi', desc: 'Manuel ve otomatik vites araç seçeneğiyle B sınıfı ehliyet.' },
+      { img: 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&q=80&w=400', tag: 'A2 & A', title: 'Motosiklet Ehliyeti', desc: 'Güvenli sürüş ekipmanlarıyla motor ehliyeti programı.' },
+      { img: 'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=400', tag: 'Özel Ders', title: 'Akan Trafikte Direksiyon Dersi', desc: 'Kendi aracınızla veya kurs aracıyla özel sürüş eğitimi.' }
+    ]
+  },
+  spor: {
+    brand: 'IronFit Fitness & Pilates Club',
+    badge: '🏋️ Kişiye Özel Antrenör & Reformer Pilates',
+    title: 'Hayalinizdeki Vücuda Uzman Eğitmenlerle Ulaşın',
+    desc: 'Geniş kardiyo alanı, serbest ağırlıklar, grup dersleri, reformer pilates ve sauna imkanımızla formda kalın.',
+    url: 'https://ironfit.kolaywebci.com',
+    navAction: 'Ücretsiz Deneme Dersi',
+    heroImg: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=800',
+    overlayTag: '🏋️ 7/24 Açık Salon',
+    services: [
+      { img: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&q=80&w=400', tag: 'Personal Trainer', title: 'Birebir Özel Koçluk (PT)', desc: 'Beslenme programı destekli kişiye özel vücut geliştirme.' },
+      { img: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&q=80&w=400', tag: 'Bayanlara Özel', title: 'Reformer Pilates', desc: 'Omurga sağlığı, sıkılaşma ve esneklik için aletli pilates.' },
+      { img: 'https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&q=80&w=400', tag: 'Grup Dersi', title: 'Zumba & Spin Cycling', desc: 'Eğlenceli müzikler eşliğinde yüksek kalori yaktıran grup antrenmanı.' }
+    ]
+  },
+  veteriner: {
+    brand: 'PatiDost Veteriner Kliniği & Pet Shop',
+    badge: '🐾 7/24 Acil Veteriner Hekim & Pet Kuaför',
+    title: 'Sevimli Dostlarınız İçin Şefkatli ve Uzman Bakım',
+    desc: 'Aşı takibi, dijital röntgen, cerrah operasyonlar, koruyucu hekimlik ve medikal pet kuaför hizmetleri.',
+    url: 'https://patidost.kolaywebci.com',
+    navAction: 'Muayene Randevusu',
+    heroImg: 'https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?auto=format&fit=crop&q=80&w=800',
+    overlayTag: '🐾 7/24 Acil Klinik',
+    services: [
+      { img: 'https://images.unsplash.com/photo-1576201836106-db1758fd1c97?auto=format&fit=crop&q=80&w=400', tag: 'Koruyucu', title: 'Aşı & Genel Muayene', desc: 'Kedi ve köpekleriniz için periyodik aşı ve parazit takibi.' },
+      { img: 'https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&q=80&w=400', tag: 'Anestezisiz', title: 'Pet Kuaför & Banyo', desc: 'Irka özel tüy kesimi, banyo ve tırnak bakımı.' },
+      { img: 'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&q=80&w=400', tag: 'Premium', title: 'Pet Shop & Mama Satışı', desc: 'Orijinal kaliteli kuru mama, ödül bisküvisi ve aksesuarlar.' }
+    ]
+  },
+  temizlik: {
+    brand: 'Bartın Hijyen Halı Yıkama & Temizlik',
+    badge: '🧹 Tam Otomatik Halı Yıkama ve Ev/Ofis Temizliği',
+    title: 'Evinizde ve İş Yerinizde Hijyenik Ve Pırıl Pırıl Ferahlık',
+    desc: 'Bitkisel şampuanlarla antibakteriyel halı yıkama, koltuk yıkama, inşaat sonrası temizlik ve kurumsal temizlik.',
+    url: 'https://bartinhijyen.kolaywebci.com',
+    navAction: 'Ücretsiz Servis Çağır',
+    heroImg: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&q=80&w=800',
+    overlayTag: '🧹 Antibakteriyel Yıkama',
+    services: [
+      { img: 'https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&q=80&w=400', tag: 'Otomatik', title: 'Halı & Kilimbing Yıkama', desc: 'Kombineli otomatik makinelerde hav alma ve kapıya teslim.' },
+      { img: 'https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?auto=format&fit=crop&q=80&w=400', tag: 'Vakumlu', title: 'Yerinde Koltuk Yıkama', desc: 'Alman buharlı vakum makineleriyle koltuk ve yatak yıkama.' },
+      { img: 'https://images.unsplash.com/photo-1628177142898-93e36e4e3a50?auto=format&fit=crop&q=80&w=400', tag: 'Detaylı', title: 'Ev & İnşaat Sonrası Temizlik', desc: 'Taşınma öncesi ve inşaat kalıntısı temizliğinde uzman ekip.' }
+    ]
   }
 };
 
