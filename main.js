@@ -1147,6 +1147,81 @@ const SIMULATOR_DATA = {
       { img: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&q=80&w=400', tag: 'Açılış & Taziye', title: 'Açılış & Taziye Çelenkleri', desc: 'Bartın ve Amasra içi hızlı adrese teslim canlı çelenk siparişi.' },
       { img: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&q=80&w=400', tag: 'Özel Gün', title: 'Gelin Arabası & Salon Süsleme', desc: 'Taze canlı çiçeklerle gelin arabası ve nişan masası süsleme.' }
     ]
+  },
+  kuyumcu: {
+    brand: 'Zirve Pırlanta & Kuyumculuk',
+    badge: '💎 22 Ayar Bilezik, Pırlanta ve Sarrafiye Hizmetleri',
+    title: 'Göz Alıcı Şıklık ve Güvenilir Yatırımın Adresi',
+    desc: 'Tektaş pırlanta yüzükler, 22 ayar kelepçe bilezikler, cumhuriyet altını ve özel tasarım düğün takı setleri.',
+    url: 'https://zirvekuyumcu.kolaywebci.com',
+    navAction: 'Koleksiyonu İncele',
+    heroImg: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=800',
+    overlayTag: '💎 Sertifikalı Pırlanta',
+    services: [
+      { img: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&q=80&w=400', tag: 'GIA Sertifikalı', title: 'Pırlanta Tektaş & Beştaş', desc: 'Uluslararası sertifikalı özel kesim pırlanta yüzükler.' },
+      { img: 'https://images.unsplash.com/photo-1611591475140-e3887ec35737?auto=format&fit=crop&q=80&w=400', tag: '22 Ayar', title: 'Altın Bilezik & Takı Seti', desc: 'İşçiliksiz yatırım bilezikleri ve modern düğün setleri.' },
+      { img: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=400', tag: 'Günlük Kur', title: 'Sarrafiye & Yatırım Altını', desc: 'Çeyrek, yarım, ata altın ve külçe altın alım-satımı.' }
+    ]
+  },
+  pastane: {
+    brand: 'Tadı Güzel Pastane & Baklava Salonu',
+    badge: '🎂 Taze Yaş Pasta, Antep Fıstıklı Baklava ve Kurabiye',
+    title: 'Günlük Taze Üretim ve Eşsiz Tatlı Lezzetleri',
+    desc: 'Özel gün resimli pastaları, tereyağlı Antep baklavası, su böreği ve taze fırın mamulleriyle damağınızda unutulmaz tatlar.',
+    url: 'https://tadiguzel.kolaywebci.com',
+    navAction: 'Pasta Siparişi Ver',
+    heroImg: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&q=80&w=800',
+    overlayTag: '🎂 Günlük Taze Üretim',
+    services: [
+      { img: 'https://images.unsplash.com/photo-1535141192574-5d4897c13136?auto=format&fit=crop&q=80&w=400', tag: 'Özel Tasarım', title: 'Nişan & Doğum Günü Pastası', desc: 'Kişiye özel resimli ve figürlü yaş pasta tasarımları.' },
+      { img: 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&q=80&w=400', tag: 'Gaziantep Usulü', title: 'Taze Çıtır Baklava Çeşitleri', desc: 'Halis tereyağlı fıstıklı ve cevizli baklava çeşitleri.' },
+      { img: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&q=80&w=400', tag: 'Sıcak Fırın', title: 'Kuru Pasta & Su Böreği', desc: 'Günlük peynirli su böreği, poğaça ve çay tatlıları.' }
+    ]
+  },
+  sigorta: {
+    brand: 'Güvence Sigorta Acenteliği',
+    badge: '🛡️ Kasko, Zorunlu Trafik, DASK ve Tamamlayıcı Sağlık',
+    title: 'Geleceğinizi ve Malınızı Teminat Altına Alın',
+    desc: '20 farklı sigorta şirketinden tek tıkla en uygun teklifleri karşılaştırıp 5 dakikada poliçenizi hazırlıyoruz.',
+    url: 'https://guvencesigorta.kolaywebci.com',
+    navAction: 'Teklif Al',
+    heroImg: 'https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&q=80&w=800',
+    overlayTag: '🛡️ 20+ Şirketten Teklif',
+    services: [
+      { img: 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=400', tag: 'En Uygun Fiyat', title: 'Trafik Sigortası & Kasko', desc: 'Aracınız için en geniş teminatlı kasko ve indirimli trafik sigortası.' },
+      { img: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=400', tag: 'Zorunlu', title: 'DASK & Konut Sigortası', desc: 'Deprem, yangın, hırsızlık ve su baskınına karşı evinizi koruyun.' },
+      { img: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=400', tag: 'Özel Hastane', title: 'Tamamlayıcı Sağlık Sigortası', desc: 'Özel hastanelerde fark ücreti ödemeden tedavi olun.' }
+    ]
+  },
+  otoyikama: {
+    brand: 'Parlak Car Care & Seramik Kaplama',
+    badge: '🧼 Fırçasız Kuru Köpük Yıkama, Pasta Cila ve Seramik',
+    title: 'Aracınıza İlk Günkü Parlaklığını Geri Kazandırıyoruz',
+    desc: 'Detaylı iç kuaför, koltuk yıkama, pasta cila, boya koruma ve 9H sertlikte seramik kaplama uygulamaları.',
+    url: 'https://parlakcarcare.kolaywebci.com',
+    navAction: 'Randevu Al',
+    heroImg: 'https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&q=80&w=800',
+    overlayTag: '🧼 9H Seramik Kaplama',
+    services: [
+      { img: 'https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&q=80&w=400', tag: 'Kılcal Çizik Giderme', title: 'Pasta Cila & Boya Koruma', desc: 'Aracınızdaki çizikleri yok eden ayna parlaklığı uygulaması.' },
+      { img: 'https://images.unsplash.com/photo-1507136566006-cfc505b114fe?auto=format&fit=crop&q=80&w=400', tag: 'Buharlı Vakum', title: 'Detaylı İç Kuaför & Koltuk', desc: 'Tavan, taban, koltuk ve klima kanallarında dezenfeksiyon.' },
+      { img: 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&q=80&w=400', tag: 'Garantili', title: '9H Nano Seramik Kaplama', desc: 'Su itici, hidrofobik ve taş vuruklarına karşı dış koruma.' }
+    ]
+  },
+  mali_musavir: {
+    brand: 'Doğru Mali Müşavirlik & Danışmanlık',
+    badge: '📊 SMMM Vergi Danışmanlığı, Şirket Kuruluşu ve SGK',
+    title: 'İşletmenizin Mali ve Vergi Süreçlerinde Güvenilir Müşavir',
+    desc: 'Şahıs ve limited şirket kuruluşu, e-fatura/e-arşiv dönüşümü, vergi beyannameleri ve SGK teşvik danışmanlığı.',
+    url: 'https://dogrumalimusavir.kolaywebci.com',
+    navAction: 'Danışmanlık Al',
+    heroImg: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=800',
+    overlayTag: '📊 SMMM Onaylı',
+    services: [
+      { img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=400', tag: '1 Günde', title: 'Şahıs & Ltd Şirket Kuruluşu', desc: 'Vergi dairesi ve oda kaydı dahil hızlı şirket kurulumu.' },
+      { img: 'https://images.unsplash.com/photo-1554224154-26032ffc0d07?auto=format&fit=crop&q=80&w=400', tag: 'Vergi Muafiyeti', title: 'Vergi & Beyanname Danışmanlığı', desc: 'Aylık KDV, Muhtasar ve Geçici vergi beyannameleri.' },
+      { img: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=400', tag: 'Dijital', title: 'E-Fatura & SGK Teşvik Takibi', desc: 'Personel bordrolama ve devlet SGK prim teşviklerinden yararlanma.' }
+    ]
   }
 };
 
