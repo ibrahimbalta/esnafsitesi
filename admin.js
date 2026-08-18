@@ -1263,7 +1263,13 @@ async function renderKanbanBoard() {
   let counts = { new: 0, assets: 0, design: 0, live: 0 };
 
   applications.forEach((app, idx) => {
-    const status = app.status || 'new';
+    let rawStatus = app.status || 'new';
+    let status = 'new';
+    if (rawStatus === 'pending' || rawStatus === 'new') status = 'new';
+    else if (rawStatus === 'assets') status = 'assets';
+    else if (rawStatus === 'design') status = 'design';
+    else if (rawStatus === 'approved' || rawStatus === 'live') status = 'live';
+
     counts[status] = (counts[status] || 0) + 1;
 
     const card = document.createElement('div');
