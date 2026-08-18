@@ -922,6 +922,81 @@ const SIMULATOR_DATA = {
       { img: 'https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?auto=format&fit=crop&q=80&w=400', tag: 'Elektrik', title: 'Elektrik Arıza & Montaj', desc: 'Ev ve iş yeri elektrik tesisatı yenileme.' },
       { img: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&q=80&w=400', tag: 'Periyodik', title: 'Kombi & Klima Bakımı', desc: 'Yıllık periyodik bakım ve petek temizliği.' }
     ]
+  },
+  dishekimi: {
+    brand: 'DentSmile Ağız & Diş Sağlığı Polikliniği',
+    badge: '🦷 Gülüş Tasarımı ve İmplant Uzmanı',
+    title: 'Sağlıklı ve Estetik Gülüşler İçin Yanınızdayız',
+    desc: 'Alanında uzman hekim kadromuz, modern teknoloji ve hijyenik klinik ortamımızla diş tedavilerinizde 7/24 hizmet sunuyoruz.',
+    url: 'https://dentsmile.kolaywebci.com',
+    navAction: 'Randevu Al',
+    heroImg: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=800',
+    overlayTag: '🦷 Uzman Klinik',
+    services: [
+      { img: 'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&q=80&w=400', tag: 'Estetik', title: 'Zirkonyum & Gülüş Tasarımı', desc: 'Doğal ve estetik görünüm kazandıran kişiye özel zirkonyum kaplama.' },
+      { img: 'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&q=80&w=400', tag: 'Garantili', title: 'İmplant & Cerrahi Tedavi', desc: 'Eksik dişlerinizi ağrısız ve ömür boyu garantili implant yöntemiyle tamamlayın.' },
+      { img: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=400', tag: 'Hızlı', title: 'Laser Diş Beyazlatma', desc: 'Tek seansta dişlerinizin doğal beyazlığına kavuşmasını sağlayın.' }
+    ]
+  },
+  nakliyat: {
+    brand: 'Bartın Güven Evden Eve Nakliyat',
+    badge: '🚚 Ambalajlı & Sigortalı Şehirler Arası Nakliyat',
+    title: 'Eşyalarınız Güvenle ve Hasarsız Taşınsın',
+    desc: 'Asansörlü taşımacılık, marangozlu söküm-takım ve sigortalı nakliye hizmetlerimizle Bartın ve 81 ilde hizmetinizdeyiz.',
+    url: 'https://bartinnakliyat.kolaywebci.com',
+    navAction: 'Fiyat Teklifi Al',
+    heroImg: 'https://images.unsplash.com/photo-1600518464441-9154a4dea21b?auto=format&fit=crop&q=80&w=800',
+    overlayTag: '🚚 Asansörlü Taşımacılık',
+    services: [
+      { img: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=400', tag: 'Sigortalı', title: 'Asansörlü Ev Taşıma', desc: 'Yüksek katlara hasarsız ve hızlı asansörlü nakliye imkanı.' },
+      { img: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&q=80&w=400', tag: 'Marangozlu', title: 'Ofis & İş Yeri Taşıma', desc: 'Kurumsal taşımacılıkta marangozlu ambalaj ve paketleme.' },
+      { img: 'https://images.unsplash.com/photo-1580674684081-7617fbf3d745?auto=format&fit=crop&q=80&w=400', tag: '81 İl', title: 'Şehirler Arası Lojistik', desc: 'Türkiye\'nin her yerine günlük seferlerle eşya taşımacılığı.' }
+    ]
+  },
+  oto: {
+    brand: 'MotorTech Oto Servis & Rent a Car',
+    badge: '🚗 Garantili Bakım, Ekspertiz ve Araç Kiralama',
+    title: 'Aracınız İçin Profesyonel Bakım ve Güvenli Sürüş',
+    desc: 'Bilgisayarlı arıza tespiti, periyodik bakım, yedek parça ve kasko güvencesiyle binek ve ticari araç kiralama.',
+    url: 'https://motortech.kolaywebci.com',
+    navAction: 'Araç / Randevu Bul',
+    heroImg: 'https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&q=80&w=800',
+    overlayTag: '🚗 Yetkili Özel Servis',
+    services: [
+      { img: 'https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&q=80&w=400', tag: 'Bilgisayarlı', title: 'Periyodik Oto Bakım', desc: 'Yağ, filtre, fren ve mekanik bakım hizmetleri.' },
+      { img: 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=400', tag: 'Kaskolu', title: 'Rent a Car / Araç Kiralama', desc: 'Günlük ve aylık ekonomik binek araç kiralama.' },
+      { img: 'https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?auto=format&fit=crop&q=80&w=400', tag: 'TSE Belgeli', title: 'Oto Ekspertiz Hizmeti', desc: 'Tarafsız ve detaylı ekspertiz raporlama.' }
+    ]
+  },
+  otel: {
+    brand: 'Mavi Deniz Otel & Bungalov Amasra',
+    badge: '🏨 Deniz Manzaralı Konaklama ve Huzur',
+    title: 'Amasra\'nın Eşsiz Manzarasıyla Unutulmaz Bir Tatil',
+    desc: 'Denize sıfır konumumuz, şömineli bungalov evlerimiz ve açık büfe kahvaltımız ile doğanın tadını çıkarın.',
+    url: 'https://mavidenizotel.kolaywebci.com',
+    navAction: 'Oda Rezerve Et',
+    heroImg: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=800',
+    overlayTag: '🏖️ Amasra Sahil',
+    services: [
+      { img: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&q=80&w=400', tag: 'Lüks Suit', title: 'Deniz Manzaralı Odalar', desc: 'Jakuzili, balkonlu ve eşsiz Amasra manzaralı suitler.' },
+      { img: 'https://images.unsplash.com/photo-1587061949409-02df41d5e562?auto=format&fit=crop&q=80&w=400', tag: 'Şömineli', title: 'Doğada Bungalov Evler', desc: 'Orman içinde özel bahçeli ve şömineli ahşap evler.' },
+      { img: 'https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&q=80&w=400', tag: 'Organik', title: 'Serpme Yöresel Kahvaltı', desc: 'Taze Karadeniz ürünleriyle hazırlanan serpme kahvaltı.' }
+    ]
+  },
+  mimarlik: {
+    brand: 'Vizon Mimarlık & İç Tasarım',
+    badge: '📐 Modern Mimari ve Şık İç Mekan Çözümleri',
+    title: 'Yaşam Alanlarınıza Estetik ve Fonksiyonellik Katıyoruz',
+    desc: '3D görselleştirme, iç mimari proje tasarımı, anahtar teslim tadilat ve şantiye uygulamaları.',
+    url: 'https://vizonmimarlik.kolaywebci.com',
+    navAction: 'Proje İncele',
+    heroImg: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&q=80&w=800',
+    overlayTag: '📐 3D Tasarım',
+    services: [
+      { img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=400', tag: 'Anahtar Teslim', title: 'İç Mimari & Dekorasyon', desc: 'Konut, ofis ve mağazalar için lüks iç mekan tasarımı.' },
+      { img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=80&w=400', tag: 'Foto Gerçekçi', title: '3D Proje Çizimi & Render', desc: 'Uygulama öncesi foto gerçekçi 3D mimari modelleme.' },
+      { img: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&q=80&w=400', tag: 'Garantili', title: 'Tadilat & Uygulama', desc: 'Tüm kırım, tesisat, mobilya ve alçı işlerinde uzman kadro.' }
+    ]
   }
 };
 
