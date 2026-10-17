@@ -10,15 +10,15 @@ function showAlert(message, type = 'success', title = '') {
         left: 0;
         width: 100vw;
         height: 100vh;
-        background: rgba(3, 0, 20, 0.85);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
+        background: rgba(15, 23, 42, 0.5);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
         z-index: 100000;
         display: flex;
         justify-content: center;
         align-items: center;
         opacity: 0;
-        transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         pointer-events: none;
       }
       .cyber-modal-backdrop.active {
@@ -26,18 +26,18 @@ function showAlert(message, type = 'success', title = '') {
         pointer-events: auto;
       }
       .cyber-modal {
-        background: linear-gradient(145deg, rgba(20, 16, 40, 0.95), rgba(10, 8, 25, 0.98));
-        border: 1px solid rgba(139, 92, 246, 0.35);
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
         border-radius: 24px;
         width: 90%;
         max-width: 440px;
         padding: 40px 30px;
         text-align: center;
-        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7), 0 0 30px rgba(139, 92, 246, 0.25);
+        box-shadow: 0 25px 60px rgba(15, 23, 42, 0.15), 0 0 0 1px rgba(99, 102, 241, 0.1);
         transform: translateY(30px) scale(0.95);
         transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         font-family: 'Outfit', sans-serif;
-        color: #f8fafc;
+        color: #0f172a;
         position: relative;
         overflow: hidden;
       }
@@ -48,7 +48,7 @@ function showAlert(message, type = 'success', title = '') {
         left: -50%;
         width: 200%;
         height: 200%;
-        background: radial-gradient(circle, rgba(139, 92, 246, 0.05) 0%, transparent 70%);
+        background: radial-gradient(circle, rgba(99, 102, 241, 0.05) 0%, transparent 70%);
         pointer-events: none;
       }
       .cyber-modal-backdrop.active .cyber-modal {
@@ -66,22 +66,22 @@ function showAlert(message, type = 'success', title = '') {
         z-index: 1;
       }
       .cyber-modal-icon-wrapper.success {
-        background: rgba(6, 182, 212, 0.1);
-        border: 1.5px solid rgba(6, 182, 212, 0.5);
-        box-shadow: 0 0 25px rgba(6, 182, 212, 0.3);
-        color: #06b6d4;
+        background: rgba(16, 185, 129, 0.12);
+        border: 1.5px solid rgba(16, 185, 129, 0.4);
+        box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
+        color: #059669;
       }
       .cyber-modal-icon-wrapper.error {
-        background: rgba(236, 72, 153, 0.1);
-        border: 1.5px solid rgba(236, 72, 153, 0.5);
-        box-shadow: 0 0 25px rgba(236, 72, 153, 0.3);
-        color: #ec4899;
+        background: rgba(239, 68, 68, 0.1);
+        border: 1.5px solid rgba(239, 68, 68, 0.4);
+        box-shadow: 0 4px 15px rgba(239, 68, 68, 0.2);
+        color: #dc2626;
       }
       .cyber-modal-icon-wrapper.warning {
-        background: rgba(245, 158, 11, 0.1);
-        border: 1.5px solid rgba(245, 158, 11, 0.5);
-        box-shadow: 0 0 25px rgba(245, 158, 11, 0.3);
-        color: #f59e0b;
+        background: rgba(245, 158, 11, 0.12);
+        border: 1.5px solid rgba(245, 158, 11, 0.4);
+        box-shadow: 0 4px 15px rgba(245, 158, 11, 0.2);
+        color: #d97706;
       }
       .cyber-modal-icon {
         font-size: 36px;
@@ -89,7 +89,7 @@ function showAlert(message, type = 'success', title = '') {
         line-height: 1;
       }
       .cyber-modal-title {
-        color: #f8fafc;
+        color: #0f172a;
         font-size: 24px;
         font-weight: 700;
         margin-bottom: 12px;
@@ -98,7 +98,7 @@ function showAlert(message, type = 'success', title = '') {
         position: relative;
       }
       .cyber-modal-text {
-        color: #94a3b8;
+        color: #475569;
         font-size: 15px;
         line-height: 1.6;
         margin-bottom: 30px;
@@ -107,24 +107,24 @@ function showAlert(message, type = 'success', title = '') {
         padding: 0 10px;
       }
       .cyber-modal-btn {
-        background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 50%, #06b6d4 100%);
+        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
         color: #ffffff;
         border: none;
         border-radius: 14px;
         padding: 14px 35px;
         font-size: 16px;
-        font-weight: 600;
+        font-weight: 700;
         cursor: pointer;
         width: 100%;
         transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4);
+        box-shadow: 0 8px 25px rgba(99, 102, 241, 0.35);
         position: relative;
         z-index: 1;
       }
       .cyber-modal-btn:hover {
         transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(139, 92, 246, 0.6);
-        filter: brightness(1.15);
+        box-shadow: 0 12px 30px rgba(99, 102, 241, 0.45);
+        filter: brightness(1.08);
       }
       .cyber-modal-btn:active {
         transform: translateY(0);

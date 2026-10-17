@@ -32,14 +32,16 @@ body {
 /* SIDEBAR */
 .sidebar {
   width: var(--sidebar-width);
-  background: var(--dark);
-  color: var(--white);
+  background: var(--white);
+  border-right: 1px solid var(--border);
+  color: var(--dark);
   padding: 30px 20px;
   display: flex;
   flex-direction: column;
   position: fixed;
   height: 100vh;
   z-index: 100;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.03);
 }
 
 .sidebar-brand {
@@ -52,21 +54,24 @@ body {
   align-items: center;
   gap: 12px;
   text-decoration: none;
-  color: var(--white);
+  color: var(--dark);
 }
 
 .admin-logo-svg {
   flex-shrink: 0;
-  filter: drop-shadow(0 0 4px rgba(79, 70, 229, 0.4));
+  filter: drop-shadow(0 2px 6px rgba(99, 102, 241, 0.3));
 }
 
 .logo-text {
   font-size: 24px;
   font-weight: 800;
+  color: var(--dark);
 }
 
 .logo-accent {
-  color: var(--primary);
+  background: linear-gradient(135deg, #6366f1 0%, #ec4899 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .sidebar-nav {
@@ -79,26 +84,30 @@ body {
   gap: 12px;
   padding: 12px 16px;
   border-radius: 12px;
-  color: #94a3b8;
+  color: #475569;
   text-decoration: none;
-  font-weight: 500;
-  transition: all 0.3s;
+  font-weight: 600;
+  transition: all 0.25s ease;
   margin-bottom: 8px;
 }
 
-.nav-item:hover, .nav-item.active {
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--white);
+.nav-item:hover {
+  background: #f1f5f9;
+  color: var(--primary);
+  transform: translateX(4px);
 }
 
 .nav-item.logout-btn:hover {
   background: rgba(239, 68, 68, 0.1) !important;
   color: #ef4444 !important;
+  transform: translateX(4px);
 }
 
 .nav-item.active {
-  background: var(--primary);
-  color: var(--white);
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.35);
+  font-weight: 700;
 }
 
 .nav-item .badge {
@@ -112,7 +121,7 @@ body {
 
 .sidebar-footer {
   padding-top: 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid var(--border);
 }
 
 /* MAIN CONTENT */
@@ -282,43 +291,62 @@ td {
 }
 
 .btn-admin {
-  background: var(--primary);
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
   color: white;
   border: none;
-  padding: 12px 24px;
+  padding: 14px 24px;
   border-radius: 12px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
-  transition: 0.3s;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.35);
   width: 100%;
 }
 
 .btn-admin:hover {
-  background: #4338ca;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.45);
+  filter: brightness(1.08);
 }
 
 .btn-outline {
-  background: transparent;
-  border: 1px solid var(--border);
+  background: #ffffff;
+  border: 1.5px solid #cbd5e1;
+  color: #334155;
   padding: 8px 16px;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
   font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+.btn-outline:hover {
+  border-color: #6366f1;
+  color: #4f46e5;
+  background: #f8fafc;
 }
 
 .btn-action {
-  padding: 6px 12px;
+  padding: 7px 14px;
   border-radius: 8px;
   border: none;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   margin-right: 5px;
   font-size: 13px;
+  transition: all 0.2s ease;
 }
 
-.btn-approve { background: #d1fae5; color: #065f46; }
-.btn-delete { background: #fee2e2; color: #991b1b; }
-.btn-edit { background: #e0e7ff; color: #3730a3; }
+.btn-action:hover {
+  transform: translateY(-1px);
+}
+
+.btn-approve { background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }
+.btn-approve:hover { background: #16a34a; color: #ffffff; box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3); }
+.btn-delete { background: #fee2e2; color: #b91c1c; border: 1px solid #fecaca; }
+.btn-delete:hover { background: #dc2626; color: #ffffff; box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3); }
+.btn-edit { background: #e0e7ff; color: #4338ca; border: 1px solid #c7d2fe; }
+.btn-edit:hover { background: #4f46e5; color: #ffffff; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3); }
 
 /* CUSTOMER TRACKING */
 .customer-layout {
