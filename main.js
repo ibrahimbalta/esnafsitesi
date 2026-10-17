@@ -511,6 +511,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   initDemoSimulator();
   initApplicationWizard();
   initSocialProofToast();
+  initComparisonSlider();
   
   // Basic Animation on Scroll (Intersection Observer)
   const observerOptions = {
@@ -1456,6 +1457,107 @@ function initSocialProofToast() {
       toast.classList.remove('active');
     });
   }
+}
+
+// --- CORPORATE COMPARISON SLIDER CONTROLLER ---
+function initComparisonSlider() {
+  const track = document.getElementById('compSliderTrack');
+  const navPills = document.querySelectorAll('.comp-nav-pill');
+  const prevBtn = document.getElementById('compPrevBtn');
+  const nextBtn = document.getElementById('compNextBtn');
+  const viewport = document.getElementById('compSliderViewport');
+  
+  if (!track || navPills.length === 0) return;
+  
+  let currentSlide = 0;
+  const totalSlides = navPills.length;
+  let autoplayTimer = null;
+  const AUTOPLAY_DELAY = 6000;
+  
+  function goToSlide(index) {
+    currentSlide = (index + totalSlides) % totalSlides;
+    track.style.transform = `translateX(-${currentSlide * 100}%)`;
+    
+    navPills.forEach((pill, idx) => {
+      if (idx === currentSlide) {
+        pill.classList.add('active');
+        const bar = pill.querySelector('.pill-progress-bar');
+        if (bar) {
+          bar.style.animation = 'none';
+          void bar.offsetWidth; // trigger reflow
+          bar.style.animation = 'progressTimer 6s linear infinite';
+        }
+      } else {
+        pill.classList.remove('active');
+      }
+    });
+  }
+  
+  function nextSlide() {
+    goToSlide(currentSlide + 1);
+  }
+  
+  function prevSlide() {
+    goToSlide(currentSlide - 1);
+  }
+  
+  function startAutoplay() {
+    stopAutoplay();
+    autoplayTimer = setInterval(nextSlide, AUTOPLAY_DELAY);
+  }
+  
+  function stopAutoplay() {
+    if (autoplayTimer) {
+      clearInterval(autoplayTimer);
+      autoplayTimer = null;
+    }
+  }
+  
+  navPills.forEach((pill) => {
+    pill.addEventListener('click', () => {
+      const slideIdx = parseInt(pill.getAttribute('data-slide'), 10);
+      goToSlide(slideIdx);
+      startAutoplay();
+    });
+  });
+  
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      prevSlide();
+      startAutoplay();
+    });
+  }
+  
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      nextSlide();
+      startAutoplay();
+    });
+  }
+  
+  if (viewport) {
+    viewport.addEventListener('mouseenter', stopAutoplay);
+    viewport.addEventListener('mouseleave', startAutoplay);
+    
+    let touchStartX = 0;
+    let touchEndX = 0;
+    viewport.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+      stopAutoplay();
+    }, { passive: true });
+    
+    viewport.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      if (touchStartX - touchEndX > 50) {
+        nextSlide();
+      } else if (touchEndX - touchStartX > 50) {
+        prevSlide();
+      }
+      startAutoplay();
+    }, { passive: true });
+  }
+  
+  startAutoplay();
 }
 
 
