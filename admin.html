@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
-  <title>Yönetim Paneli | KolayWebci</title>
+  <title>Yönetim Paneli | KolayWebci Enterprise</title>
   <link rel="icon" type="image/png" href="/logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/admin.css" />
   <script>
     if (sessionStorage.getItem('isAdmin') !== 'true') {
@@ -21,52 +21,86 @@
     <!-- SIDEBAR -->
     <aside class="sidebar">
       <div class="sidebar-brand">
-        <a href="/" class="admin-brand-link">
-          <img src="/logo-kolaywebci.png" alt="KolayWebci Admin Logo" style="height: 36px; width: auto; object-fit: contain;" />
+        <a href="/" class="admin-brand-link" title="Anasayfaya Git">
+          <img src="/logo-kolaywebci.png" alt="KolayWebci Admin Logo" style="height: 38px; width: auto; object-fit: contain;" />
         </a>
+        <div class="brand-badge-pill">
+          <span class="live-pulse"></span> Kurumsal V2.5
+        </div>
       </div>
+
       <nav class="sidebar-nav">
+        <!-- GENEL BAKIŞ -->
+        <div class="nav-category">GENEL BAKIŞ</div>
         <a href="#" class="nav-item active" data-view="dashboard">
-          <span class="icon">📊</span> Dashboard
+          <span class="icon">📊</span>
+          <span class="nav-text">Dashboard</span>
         </a>
+        <a href="#" class="nav-item" data-view="grid">
+          <span class="icon">🏁</span>
+          <span class="nav-text">1000 Panosu</span>
+        </a>
+
+        <!-- MÜŞTERİ & İŞ TAKİBİ -->
+        <div class="nav-category">İŞ & MÜŞTERİ</div>
         <a href="#" class="nav-item" data-view="applications">
-          <span class="icon">📝</span> Başvurular
+          <span class="icon">📝</span>
+          <span class="nav-text">Başvurular</span>
           <span class="badge" id="appBadge">0</span>
         </a>
         <a href="#" class="nav-item" data-view="customers">
-          <span class="icon">👥</span> Müşteri Takibi
+          <span class="icon">👥</span>
+          <span class="nav-text">Müşteri Takibi</span>
           <span class="badge badge-warn" id="expiryBadge" style="display:none;">!</span>
         </a>
         <a href="#" class="nav-item" data-view="kanban">
-          <span class="icon">📋</span> Kanban İş Tahtası
+          <span class="icon">📋</span>
+          <span class="nav-text">Kanban İş Tahtası</span>
+        </a>
+
+        <!-- VİTRİN & İÇERİK -->
+        <div class="nav-category">VİTRİN & İÇERİK</div>
+        <a href="#" class="nav-item" data-view="portfolio">
+          <span class="icon">✨</span>
+          <span class="nav-text">Referanslar</span>
         </a>
         <a href="#" class="nav-item" data-view="reviews">
-          <span class="icon">💬</span> Yorum Yönetimi
+          <span class="icon">💬</span>
+          <span class="nav-text">Müşteri Yorumları</span>
           <span class="badge badge-review" id="reviewBadge">0</span>
         </a>
-        <a href="#" class="nav-item" data-view="portfolio">
-          <span class="icon">✨</span> Referans Yönetimi
-        </a>
-        <a href="#" class="nav-item" data-view="grid">
-          <span class="icon">🏁</span> 1000 Panosu
+        <a href="#" class="nav-item" data-view="promo">
+          <span class="icon">📢</span>
+          <span class="nav-text">Günün Tanıtımı</span>
         </a>
         <a href="#" class="nav-item" data-view="agenda">
-          <span class="icon">📅</span> Ajanda
+          <span class="icon">📅</span>
+          <span class="nav-text">Ajanda</span>
         </a>
-        <a href="#" class="nav-item" data-view="promo">
-          <span class="icon">📢</span> Günün Tanıtımı
+
+        <!-- VERİ & SİSTEM -->
+        <div class="nav-category">GÜVENLİK & VERİ</div>
+        <a href="#" class="nav-item nav-highlight" data-view="backup">
+          <span class="icon">💾</span>
+          <span class="nav-text">Yedekleme & Kurtarma</span>
+          <span class="badge badge-success">KORUMALI</span>
         </a>
         <a href="#" class="nav-item" data-view="settings">
-          <span class="icon">⚙️</span> Ayarlar
+          <span class="icon">⚙️</span>
+          <span class="nav-text">Sistem Ayarları</span>
         </a>
       </nav>
+
       <div class="sidebar-footer">
-        <a href="/" class="nav-item">
-          <span class="icon">🏠</span> Siteye Dön
+        <a href="/" target="_blank" class="nav-item">
+          <span class="icon">🌐</span>
+          <span class="nav-text">Siteyi Görüntüle</span>
         </a>
-        <a href="#" class="nav-item logout-btn" id="logoutBtn" style="color: #ef4444;">
-          <span class="icon">🚪</span> Çıkış Yap
+        <a href="#" class="nav-item logout-btn" id="logoutBtn">
+          <span class="icon">🚪</span>
+          <span class="nav-text">Çıkış Yap</span>
         </a>
+      </div>
     </aside>
 
     <!-- SIDEBAR OVERLAY FOR MOBILE -->
@@ -74,68 +108,154 @@
 
     <!-- MAIN CONTENT -->
     <main class="main-content">
+      <!-- TOP EXECUTIVE HEADER -->
       <header class="main-header">
-        <div style="display: flex; align-items: center; gap: 15px;">
+        <div class="header-left">
           <button class="mobile-toggle-btn" id="mobileToggleBtn" aria-label="Menü">
             <span></span>
             <span></span>
             <span></span>
           </button>
-          <h2 id="viewTitle" style="margin: 0;">Dashboard</h2>
+          <div>
+            <h2 id="viewTitle">Dashboard</h2>
+            <p class="header-subtitle" id="headerSubtitle">KolayWebci Yönetim ve Güvenli Veri Merkezi</p>
+          </div>
         </div>
-        <div class="user-profile">
-          <span>Yönetici 👋</span>
-          <div class="avatar">👑</div>
+
+        <div class="header-actions">
+          <!-- STORAGE HEALTH PILL -->
+          <div class="storage-health-pill" id="storageHealthPill" title="Tarayıcı verileri silinmeye karşı kalıcı olarak kilitlenmiştir.">
+            <span class="health-dot pulse"></span>
+            <span class="health-text" id="storageHealthText">Kalıcı Hafıza: Aktif</span>
+          </div>
+
+          <!-- TOP ACTION BUTTONS -->
+          <button type="button" class="btn-top-action btn-backup" id="topQuickBackupBtn" title="Tüm verilerin tek tıkla yedeğini bilgisayara indir">
+            <span class="btn-icon">💾</span>
+            <span class="btn-label">Yedek İndir</span>
+          </button>
+          <button type="button" class="btn-top-action btn-restore" id="topQuickRestoreBtn" title="Daha önce indirdiğiniz JSON yedeğini yükleyin">
+            <span class="btn-icon">📥</span>
+            <span class="btn-label">Yedek Yükle</span>
+          </button>
+          <input type="file" id="topBackupFileInput" accept=".json,application/json" style="display:none;" />
+
+          <a href="/" target="_blank" class="btn-top-action btn-site" title="Web Sitesini Yeni Sekmede Aç">
+            <span class="btn-icon">↗</span>
+            <span class="btn-label">Siteyi Gör</span>
+          </a>
+
+          <!-- USER PROFILE PILL -->
+          <div class="user-profile-pill">
+            <div class="user-avatar">👑</div>
+            <div class="user-info">
+              <span class="user-name">Yönetici</span>
+              <span class="user-role">Süper Admin</span>
+            </div>
+          </div>
         </div>
       </header>
 
-      <!-- VIEW: DASHBOARD -->
+      <!-- VIEW 1: DASHBOARD -->
       <div id="view-dashboard" class="view active">
+        <!-- STATS KPI GRID -->
         <div class="stats-grid">
-          <div class="stat-card">
-            <div class="stat-info">
+          <div class="stat-card stat-card-blue">
+            <div class="stat-content">
               <span class="stat-label">Toplam Başvuru</span>
               <span class="stat-value" id="totalApps">0</span>
+              <span class="stat-sub">Siteden gelen sipariş talepleri</span>
             </div>
-            <div class="stat-icon">📝</div>
+            <div class="stat-icon-wrapper blue">📝</div>
           </div>
-          <div class="stat-card">
-            <div class="stat-info">
+
+          <div class="stat-card stat-card-emerald">
+            <div class="stat-content">
               <span class="stat-label">Dolu Slotlar</span>
               <span class="stat-value" id="filledSlots">0</span>
+              <span class="stat-sub">1000 Panosundaki aktif esnaflar</span>
             </div>
-            <div class="stat-icon">✅</div>
+            <div class="stat-icon-wrapper emerald">✅</div>
           </div>
-          <div class="stat-card">
-            <div class="stat-info">
+
+          <div class="stat-card stat-card-amber">
+            <div class="stat-content">
               <span class="stat-label">Kalan Kontenjan</span>
               <span class="stat-value" id="emptySlots">1000</span>
+              <span class="stat-sub">5000 TL kampanya kotası</span>
             </div>
-            <div class="stat-icon">⌛</div>
+            <div class="stat-icon-wrapper amber">⌛</div>
           </div>
-          <div class="stat-card">
-            <div class="stat-info">
-              <span class="stat-label">Potansiyel Kazanç</span>
+
+          <div class="stat-card stat-card-violet">
+            <div class="stat-content">
+              <span class="stat-label">Tahmini Ciro</span>
               <span class="stat-value" id="potentialRev">0 TL</span>
+              <span class="stat-sub">Dolu esnaf portföy değeri</span>
             </div>
-            <div class="stat-icon">💰</div>
+            <div class="stat-icon-wrapper violet">💰</div>
           </div>
         </div>
 
+        <!-- QUICK ACCESS TILES -->
+        <div class="quick-tiles-grid">
+          <div class="quick-tile" onclick="document.querySelector('[data-view=applications]').click()">
+            <div class="tile-icon">📥</div>
+            <div class="tile-details">
+              <h4>Başvuruları İncele</h4>
+              <p>Gelen yeni teklif taleplerine WhatsApp'tan hemen yanıt verin</p>
+            </div>
+            <span class="tile-arrow">➔</span>
+          </div>
+
+          <div class="quick-tile" onclick="document.querySelector('[data-view=customers]').click()">
+            <div class="tile-icon">👥</div>
+            <div class="tile-details">
+              <h4>Müşteri & Domain Takibi</h4>
+              <p>Hosting ve alan adı bitiş tarihlerini ve ödemeleri kontrol edin</p>
+            </div>
+            <span class="tile-arrow">➔</span>
+          </div>
+
+          <div class="quick-tile" onclick="document.querySelector('[data-view=kanban]').click()">
+            <div class="tile-icon">📋</div>
+            <div class="tile-details">
+              <h4>Kanban İş Tahtası</h4>
+              <p>Tasarım ve yayına alma aşamasındaki işleri sürükleyin</p>
+            </div>
+            <span class="tile-arrow">➔</span>
+          </div>
+
+          <div class="quick-tile highlight-tile" onclick="document.querySelector('[data-view=backup]').click()">
+            <div class="tile-icon">🛡️</div>
+            <div class="tile-details">
+              <h4>Yedekleme & Veri Güvenliği</h4>
+              <p>Verilerin kaybolmasını engellemek için tek tıkla JSON yedeği indirin</p>
+            </div>
+            <span class="tile-arrow">➔</span>
+          </div>
+        </div>
+
+        <!-- DASHBOARD SPLIT GRID -->
         <div class="dashboard-grid">
           <div class="panel">
             <div class="panel-header">
-              <h3>Son Başvurular</h3>
-              <a href="#" onclick="document.querySelector('[data-view=applications]').click()">Tümünü Gör</a>
+              <div>
+                <h3>Son Gelen Başvurular</h3>
+                <p class="panel-sub">Sitedeki sipariş ve form dolduran müşteriler</p>
+              </div>
+              <button class="btn-outline" onclick="document.querySelector('[data-view=applications]').click()">Tümünü Gör ➔</button>
             </div>
             <div class="table-wrapper">
               <table>
                 <thead>
                   <tr>
-                    <th>Firma</th>
+                    <th>Firma Adı</th>
+                    <th>Yetkili & Tel</th>
                     <th>Sektör</th>
                     <th>Tarih</th>
                     <th>Durum</th>
+                    <th>Hızlı İletişim</th>
                   </tr>
                 </thead>
                 <tbody id="recentAppsBody">
@@ -147,16 +267,19 @@
 
           <div class="panel">
             <div class="panel-header">
-              <h3>Hızlı Slot İşlemi</h3>
+              <div>
+                <h3>Hızlı Slot & Esnaf Ata</h3>
+                <p class="panel-sub">1000 panosuna anında yeni esnaf ekleyin</p>
+              </div>
             </div>
             <form id="quickSlotForm" class="admin-form">
               <div class="form-group">
-                <label>Slot No (#0001 - #1000)</label>
+                <label>Slot Numarası (#1 - #1000)</label>
                 <input type="number" id="slotNo" min="1" max="1000" placeholder="Örn: 48" required />
               </div>
               <div class="form-group">
                 <label>Firma Adı</label>
-                <input type="text" id="slotFirmName" placeholder="Örn: Yeni Esnaf" required />
+                <input type="text" id="slotFirmName" placeholder="Örn: Öz Karadeniz Pide" required />
               </div>
               <div class="form-group">
                 <label>Site URL (Opsiyonel)</label>
@@ -165,21 +288,42 @@
               <div class="form-group">
                 <label>Firma Logosu (Opsiyonel)</label>
                 <input type="file" id="slotLogo" accept="image/*" class="admin-file-input" />
-                <small style="color: #94a3b8; font-size: 11px; margin-top: 4px; display: block;">Önerilen: Kare logo, max 1MB</small>
+                <small class="form-help">Önerilen: Kare logo, sistem otomatik sıkıştırır</small>
               </div>
-              <button type="submit" class="btn-admin">Slotu Güncelle</button>
+              <button type="submit" class="btn-admin">Slotu Panoya Kaydet</button>
             </form>
           </div>
         </div>
       </div>
 
-      <!-- VIEW: APPLICATIONS -->
+      <!-- VIEW 2: APPLICATIONS -->
       <div id="view-applications" class="view">
         <div class="panel">
           <div class="panel-header">
-            <h3>Tüm Başvurular</h3>
-            <button class="btn-outline" id="clearApps">Tümünü Temizle</button>
+            <div>
+              <h3>Tüm Müşteri Başvuruları</h3>
+              <p class="panel-sub">Web sitenizden form veya paket seçerek gelen tüm siparişler</p>
+            </div>
+            <div class="panel-actions">
+              <button class="btn-outline" id="exportAppsCsv">📊 Excel / CSV İndir</button>
+              <button class="btn-danger-outline" id="clearApps">Tümünü Temizle</button>
+            </div>
           </div>
+
+          <!-- SEARCH & FILTER BAR -->
+          <div class="table-filter-bar">
+            <div class="search-input-wrapper">
+              <span class="search-icon">🔍</span>
+              <input type="text" id="appSearchInput" placeholder="Firma adı, müşteri ismi veya telefon ile filtrele..." />
+            </div>
+            <div class="filter-pills" id="appStatusFilters">
+              <button class="filter-pill active" data-filter="all">Tümü (<span id="filterCountAll">0</span>)</button>
+              <button class="filter-pill" data-filter="new">Yeni (<span id="filterCountNew">0</span>)</button>
+              <button class="filter-pill" data-filter="contacted">İletişimde</button>
+              <button class="filter-pill" data-filter="completed">Anlaşıldı</button>
+            </div>
+          </div>
+
           <div class="table-wrapper">
             <table>
               <thead>
@@ -188,9 +332,10 @@
                   <th>Firma Adı</th>
                   <th>Yetkili</th>
                   <th>Telefon</th>
-                  <th>Sektör</th>
+                  <th>Sektör / Şehir</th>
+                  <th>Seçilen Ek Hizmetler</th>
                   <th>Durum</th>
-                  <th>İşlem</th>
+                  <th>İşlemler</th>
                 </tr>
               </thead>
               <tbody id="allAppsBody">
@@ -201,81 +346,88 @@
         </div>
       </div>
 
-      <!-- VIEW: KANBAN BOARD -->
+      <!-- VIEW 3: KANBAN BOARD -->
       <div id="view-kanban" class="view">
         <div class="panel">
           <div class="panel-header">
             <div>
               <h3>📋 İş Süreci & Kanban Takip Tahtası</h3>
-              <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Başvuruların ve aktif web tasarım süreçlerinin aşamalarını takip edin.</p>
+              <p class="panel-sub">Web tasarım süreçlerini adım adım takip edin, işleri aşamalar arasında kolayca taşıyın.</p>
             </div>
-            <button class="btn-outline" id="refreshKanbanBtn">🔄 Yenile</button>
+            <div class="panel-actions">
+              <button class="btn-outline" id="refreshKanbanBtn">🔄 Yenile</button>
+            </div>
           </div>
 
           <div class="kanban-board" id="kanbanBoard">
-            <!-- Kanban Column 1: Yeni Başvurular -->
+            <!-- Col 1 -->
             <div class="kanban-col" data-status="new">
               <div class="kanban-col-header col-new">
                 <span>📥 Yeni Başvurular</span>
                 <span class="kanban-count" id="count-new">0</span>
               </div>
-              <div class="kanban-cards" id="col-new">
-                <!-- JS generated -->
-              </div>
+              <div class="kanban-cards" id="col-new"></div>
             </div>
 
-            <!-- Kanban Column 2: Görseller Bekleniyor -->
+            <!-- Col 2 -->
             <div class="kanban-col" data-status="assets">
               <div class="kanban-col-header col-assets">
                 <span>📁 Görseller Bekleniyor</span>
                 <span class="kanban-count" id="count-assets">0</span>
               </div>
-              <div class="kanban-cards" id="col-assets">
-                <!-- JS generated -->
-              </div>
+              <div class="kanban-cards" id="col-assets"></div>
             </div>
 
-            <!-- Kanban Column 3: Tasarım Aşamasında -->
+            <!-- Col 3 -->
             <div class="kanban-col" data-status="design">
               <div class="kanban-col-header col-design">
                 <span>🎨 Tasarım Aşamasında</span>
                 <span class="kanban-count" id="count-design">0</span>
               </div>
-              <div class="kanban-cards" id="col-design">
-                <!-- JS generated -->
-              </div>
+              <div class="kanban-cards" id="col-design"></div>
             </div>
 
-            <!-- Kanban Column 4: Canlıda / Tamamlandı -->
+            <!-- Col 4 -->
             <div class="kanban-col" data-status="live">
               <div class="kanban-col-header col-live">
                 <span>🚀 Canlıda / Tamamlandı</span>
                 <span class="kanban-count" id="count-live">0</span>
               </div>
-              <div class="kanban-cards" id="col-live">
-                <!-- JS generated -->
-              </div>
+              <div class="kanban-cards" id="col-live"></div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- VIEW: CUSTOMERS -->
+      <!-- VIEW 4: CUSTOMERS -->
       <div id="view-customers" class="view">
         <div class="customer-layout">
           <div class="panel customer-list-panel">
             <div class="panel-header">
-              <h3>Müşteri Listesi</h3>
-              <button class="btn-outline" id="addCustomerBtn">+ Yeni Müşteri</button>
+              <div>
+                <h3>Müşteri Portföyü & Süre Takibi</h3>
+                <p class="panel-sub">Domain, hosting ve yıllık yenileme sürelerini takip edin</p>
+              </div>
+              <button class="btn-admin-sm" id="addCustomerBtn">+ Yeni Müşteri Ekle</button>
             </div>
+
+            <!-- SEARCH BAR -->
+            <div class="table-filter-bar">
+              <div class="search-input-wrapper">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="custSearchInput" placeholder="Müşteri veya domain ara..." />
+              </div>
+            </div>
+
             <div class="table-wrapper">
               <table>
                 <thead>
                   <tr>
-                    <th>Firma</th>
-                    <th>Domain Durumu</th>
+                    <th>Firma Adı</th>
+                    <th>Domain & Bitiş</th>
+                    <th>Hosting Bitiş</th>
                     <th>Ödeme</th>
-                    <th>İşlem</th>
+                    <th>İşlemler</th>
                   </tr>
                 </thead>
                 <tbody id="customerTableBody">
@@ -288,18 +440,18 @@
           <div class="panel customer-detail-panel" id="customerDetailPanel" style="display:none;">
             <div class="panel-header">
               <h3 id="detailTitle">Müşteri Detayları</h3>
-              <button class="btn-outline" onclick="document.getElementById('customerDetailPanel').style.display='none'">Kapat</button>
+              <button class="btn-outline-sm" onclick="document.getElementById('customerDetailPanel').style.display='none'">✕ Kapat</button>
             </div>
             <form id="customerDetailForm" class="admin-form">
               <input type="hidden" id="custId" />
               <div class="form-row">
                 <div class="form-group">
                   <label>Firma Adı</label>
-                  <input type="text" id="custName" required />
+                  <input type="text" id="custName" placeholder="Örn: Ege Züccaciye" required />
                 </div>
                 <div class="form-group">
                   <label>Domain Adresi</label>
-                  <input type="text" id="custDomain" placeholder="example.com" />
+                  <input type="text" id="custDomain" placeholder="egezuccaciye.com" />
                 </div>
               </div>
               <div class="form-row">
@@ -315,7 +467,7 @@
               <div class="form-row">
                 <div class="form-group">
                   <label>Hosting Sağlayıcı</label>
-                  <input type="text" id="custHosting" placeholder="Natro, Turhost vb." />
+                  <input type="text" id="custHosting" placeholder="Natro, Turhost, Vercel..." />
                 </div>
                 <div class="form-group">
                   <label>Hosting Bitiş</label>
@@ -323,34 +475,34 @@
                 </div>
               </div>
               <div class="form-group">
-                <label>Teknik Notlar & Hosting Bilgileri</label>
-                <textarea id="custNotes" rows="4" placeholder="FTP, Panel bilgileri, özel notlar..."></textarea>
+                <label>Teknik Notlar & Müşteri Şifreleri</label>
+                <textarea id="custNotes" rows="3" placeholder="FTP, DNS, Panel bilgileri, özel notlar..."></textarea>
               </div>
               <div class="form-row">
                 <div class="form-group">
                   <label>Ödeme Durumu</label>
                   <select id="custPaymentStatus" class="admin-select">
-                    <option value="paid">Ödendi</option>
-                    <option value="pending">Bekliyor</option>
-                    <option value="unpaid">Ödenmedi</option>
+                    <option value="paid">✅ Ödendi</option>
+                    <option value="pending">⏳ Bekliyor</option>
+                    <option value="unpaid">❌ Ödenmedi</option>
                   </select>
                 </div>
                 <div class="form-group">
                   <label>Destek Paketi</label>
                   <select id="custSupportStatus" class="admin-select">
-                    <option value="active">Aktif</option>
-                    <option value="expired">Süresi Doldu</option>
-                    <option value="none">Yok</option>
+                    <option value="active">🟢 Aktif</option>
+                    <option value="expired">🔴 Süresi Doldu</option>
+                    <option value="none">⚪ Yok</option>
                   </select>
                 </div>
               </div>
-              <button type="submit" class="btn-admin">Bilgileri Kaydet</button>
+              <button type="submit" class="btn-admin">Müşteri Bilgilerini Kaydet</button>
             </form>
           </div>
         </div>
       </div>
 
-      <!-- VIEW: REVIEWS -->
+      <!-- VIEW 5: REVIEWS -->
       <div id="view-reviews" class="view">
         <div class="review-stats-bar">
           <div class="review-stat-item">
@@ -395,11 +547,74 @@
         </div>
       </div>
 
-      <!-- VIEW: GRID -->
+      <!-- VIEW 6: PORTFOLIO / REFERANSLAR -->
+      <div id="view-portfolio" class="view">
+        <div class="customer-layout">
+          <div class="panel customer-list-panel">
+            <div class="panel-header">
+              <div>
+                <h3>Anasayfa Referans Vitrini</h3>
+                <p class="panel-sub">Görenlerin hayran kalacağı tamamlanan müşteri projeleri</p>
+              </div>
+              <button class="btn-admin-sm" id="addPortfolioBtn">+ Yeni Referans Ekle</button>
+            </div>
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Görsel</th>
+                    <th>Firma Adı</th>
+                    <th>Sektör / Açıklama</th>
+                    <th>Site Linki</th>
+                    <th>İşlem</th>
+                  </tr>
+                </thead>
+                <tbody id="portfolioTableBody">
+                  <!-- JS generated -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="panel customer-detail-panel" id="portfolioDetailPanel" style="display:none;">
+            <div class="panel-header">
+              <h3 id="portfolioDetailTitle">Yeni Referans Ekle</h3>
+              <button class="btn-outline-sm" onclick="document.getElementById('portfolioDetailPanel').style.display='none'">✕ Kapat</button>
+            </div>
+            <form id="portfolioDetailForm" class="admin-form">
+              <input type="hidden" id="portId" />
+              <div class="form-group">
+                <label>Firma Adı</label>
+                <input type="text" id="portName" placeholder="Örn: Akdeniz Mimarlık" required />
+              </div>
+              <div class="form-group">
+                <label>Sektör / Açıklama</label>
+                <input type="text" id="portSubtitle" placeholder="Örn: İç Mimarlık & Tasarım Ofisi" required />
+              </div>
+              <div class="form-group">
+                <label>Görsel Yükle veya Link Girin</label>
+                <input type="file" id="portImageFile" accept="image/*" class="admin-file-input" style="margin-bottom: 8px;" />
+                <input type="text" id="portImage" placeholder="veya görsel linki girin (https://...)" />
+                <small class="form-help">Fotoğraf otomatik optimize edilir, hafızayı şişirmez.</small>
+              </div>
+              <div class="form-group">
+                <label>Canlı Site URL</label>
+                <input type="text" id="portUrl" placeholder="https://akdenizmimarlik.com" required />
+              </div>
+              <button type="submit" class="btn-admin">Referansı Vitrine Ekle</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW 7: 1000 PANOSU (GRID) -->
       <div id="view-grid" class="view">
         <div class="panel">
           <div class="panel-header">
-            <h3>1000 Firma Panosu (Sıralı Görünüm)</h3>
+            <div>
+              <h3>1000 Esnaf Panosu (Canlı Matris)</h3>
+              <p class="panel-sub">Anasayfadaki 1000 slotluk interaktif esnaf vitrini</p>
+            </div>
             <div class="grid-stats">
               <span class="badge badge-approved" id="gridFilledCount">0 Dolu</span>
             </div>
@@ -410,16 +625,19 @@
         </div>
       </div>
 
-      <!-- VIEW: AGENDA -->
+      <!-- VIEW 8: AJANDA -->
       <div id="view-agenda" class="view">
         <div class="agenda-layout">
           <div class="panel">
             <div class="panel-header">
-              <h3>Yapılacak İşler & Planlama</h3>
+              <div>
+                <h3>Günlük Ajanda & Yapılacaklar</h3>
+                <p class="panel-sub">Teslim edilecek siteler ve müşteri hatırlatmaları</p>
+              </div>
               <form id="agendaForm" class="agenda-quick-add">
-                <input type="text" id="agendaInput" placeholder="Yeni görev ekle..." required />
+                <input type="text" id="agendaInput" placeholder="Yeni görev / iş notu ekle..." required />
                 <input type="date" id="agendaDate" required />
-                <button type="submit" class="btn-admin">Ekle</button>
+                <button type="submit" class="btn-admin-sm">Ekle</button>
               </form>
             </div>
             <div class="agenda-list" id="agendaList">
@@ -429,19 +647,22 @@
         </div>
       </div>
 
-      <!-- VIEW: PROMO -->
+      <!-- VIEW 9: GÜNÜN TANITIMI -->
       <div id="view-promo" class="view">
         <div class="panel">
           <div class="panel-header">
-            <h3>Günün Tanıtım Reklamı (Açılır Pencere)</h3>
+            <div>
+              <h3>Günün Tanıtım Reklamı (Açılır Pencere)</h3>
+              <p class="panel-sub">Anasayfaya giren ziyaretçileri karşılayan özel esnaf vitrini</p>
+            </div>
           </div>
           <form id="promoForm" class="admin-form">
             <div class="form-group" style="display: flex; align-items: center; gap: 10px; margin-bottom: 24px;">
-              <input type="checkbox" id="promoActive" style="width: auto; height: 20px; width: 20px; cursor: pointer;" />
+              <input type="checkbox" id="promoActive" style="width: 20px; height: 20px; cursor: pointer;" />
               <label for="promoActive" style="margin-bottom: 0; cursor: pointer; font-weight: 700;">Anasayfada tanıtım penceresini aktif et</label>
             </div>
             
-            <div class="customer-layout" style="margin-bottom: 20px;">
+            <div class="form-row">
               <div class="form-group">
                 <label for="promoFirmName">Firma Adı</label>
                 <input type="text" id="promoFirmName" placeholder="Örn: Lezzet Durağı Restoran" required />
@@ -454,14 +675,13 @@
 
             <div class="form-group">
               <label for="promoText">Tanıtım Yazısı / Slogan</label>
-              <textarea id="promoText" rows="4" class="admin-select" style="width: 100%; border: 1px solid var(--border); border-radius: 12px; padding: 12px; font-family: inherit; height: auto;" placeholder="Örn: Harika lezzetleri ve yepyeni web tasarımı ile bugün yayına girdi! Hemen inceleyin." required></textarea>
+              <textarea id="promoText" rows="3" class="admin-select" style="width: 100%; border: 1.5px solid var(--border); border-radius: 12px; padding: 12px; font-family: inherit; height: auto;" placeholder="Örn: Harika lezzetleri ve yepyeni web tasarımı ile bugün yayına girdi! Hemen inceleyin." required></textarea>
             </div>
 
             <div class="form-group">
               <label>Tanıtım Görseli / Logo</label>
               <input type="file" id="promoImageFile" accept="image/*" class="admin-file-input" style="margin-bottom: 8px;" />
               <input type="text" id="promoImage" placeholder="veya görsel linki girin (https://...)" />
-              <small style="color: #94a3b8; font-size: 11px; margin-top: 4px; display: block;">Boş bırakılırsa varsayılan görsel kullanılacaktır.</small>
             </div>
 
             <div class="panel" style="background: #f8fafc; border: 1px dashed var(--border); margin: 24px 0; padding: 20px; box-shadow: none;">
@@ -487,17 +707,176 @@
         </div>
       </div>
 
-      <!-- VIEW: SETTINGS -->
+      <!-- VIEW 10: BACKUP & DATA RECOVERY CENTER (NEW!) -->
+      <div id="view-backup" class="view">
+        <!-- STORAGE HEALTH BANNER -->
+        <div class="backup-hero-card">
+          <div class="backup-hero-icon">🛡️</div>
+          <div class="backup-hero-info">
+            <h2>Kalıcı Veri & Yedekleme Merkezi</h2>
+            <p>Verilerinizin asla kaybolmaması için <strong>IndexedDB (Süresiz Tarayıcı Hafızası)</strong>, <strong>Otomatik Günlük Snapshot</strong> ve <strong>Bulut Senkronizasyonu</strong> birlikte çalışmaktadır.</p>
+          </div>
+        </div>
+
+        <!-- 4 HEALTH CARDS -->
+        <div class="backup-status-grid">
+          <div class="status-metric-card">
+            <div class="metric-icon green">💾</div>
+            <div class="metric-info">
+              <span class="metric-label">Tarayıcı Kalıcı Belleği</span>
+              <span class="metric-value" id="statusIdb">Aktif (IndexedDB)</span>
+              <span class="metric-desc">Silinmeye karşı kilitlendi</span>
+            </div>
+          </div>
+
+          <div class="status-metric-card">
+            <div class="metric-icon blue">📸</div>
+            <div class="metric-info">
+              <span class="metric-label">Otomatik Snapshot</span>
+              <span class="metric-value" id="statusSnapshot">Devrede</span>
+              <span class="metric-desc" id="statusSnapshotDate">Günlük otomatik yedek</span>
+            </div>
+          </div>
+
+          <div class="status-metric-card">
+            <div class="metric-icon purple">☁️</div>
+            <div class="metric-info">
+              <span class="metric-label">Bulut Veritabanı</span>
+              <span class="metric-value" id="statusCloud">Senkronize</span>
+              <span class="metric-desc" id="statusCloudDesc">Supabase / Serverless API</span>
+            </div>
+          </div>
+
+          <div class="status-metric-card">
+            <div class="metric-icon amber">📦</div>
+            <div class="metric-info">
+              <span class="metric-label">Toplam Veri Kaydı</span>
+              <span class="metric-value" id="statusTotalItems">Hesaplanıyor...</span>
+              <span class="metric-desc">Müşteri, başvuru ve vitrin</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- BACKUP ACTION PANELS -->
+        <div class="backup-action-grid">
+          <!-- PANEL 1: MANUAL BACKUP DOWNLOAD -->
+          <div class="panel backup-card">
+            <div class="panel-header">
+              <div>
+                <h3>💾 Tek Tıkla Tam Yedek İndir</h3>
+                <p class="panel-sub">Tüm verilerinizi tek bir JSON dosyası olarak bilgisayarınıza indirin</p>
+              </div>
+            </div>
+            <p class="backup-desc">
+              Başvurular, müşteri kayıtları, domain/hosting tarihleri, portföy, 1000 panosu ve ayarlar tek bir dosyada güvenle paketlenir. Bu dosyayı istediğiniz zaman başka bir bilgisayara veya telefona aktarabilirsiniz.
+            </p>
+            <button type="button" class="btn-admin btn-backup-large" id="downloadBackupBtn">
+              <span class="icon">💾</span> Tüm Verileri Bilgisayarıma İndir (.json)
+            </button>
+          </div>
+
+          <!-- PANEL 2: RESTORE BACKUP -->
+          <div class="panel backup-card">
+            <div class="panel-header">
+              <div>
+                <h3>📥 Yedeği Geri Yükle (Kurtarma)</h3>
+                <p class="panel-sub">Daha önce indirdiğiniz JSON dosyasını seçerek her şeyi geri getirin</p>
+              </div>
+            </div>
+            <p class="backup-desc">
+              Bilgisayarınız temizlendiğinde, tarayıcı sıfırlandığında veya yeni bir cihaza geçtiğinizde yedeğinizi yükleyin. Hiçbir veri kaybı yaşamazsınız.
+            </p>
+            <div class="backup-dropzone" id="backupDropzone" onclick="document.getElementById('backupFileInput').click()">
+              <span class="dropzone-icon">📁</span>
+              <span class="dropzone-text">JSON Yedek Dosyasını Seçin veya Sürükleyin</span>
+              <span class="dropzone-sub">Örn: kolaywebci-tam-yedek-2026-10-17.json</span>
+              <input type="file" id="backupFileInput" accept=".json,application/json" style="display:none;" />
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL 3: AUTOMATIC RECOVERY SNAPSHOTS -->
+        <div class="panel" style="margin-top: 24px;">
+          <div class="panel-header">
+            <div>
+              <h3>🔄 Otomatik Sistem Kurtarma Noktaları</h3>
+              <p class="panel-sub">Sistem her veri değişikliğinde tarayıcınızın derin belleğinde otomatik anlık görüntü kaydeder</p>
+            </div>
+            <button class="btn-outline" id="refreshSnapshotsBtn">Listeyi Yenile</button>
+          </div>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Kayıt Tarihi</th>
+                  <th>Kayıt Kimliği</th>
+                  <th>İçerik Detayı</th>
+                  <th>İşlem</th>
+                </tr>
+              </thead>
+              <tbody id="snapshotTableBody">
+                <!-- JS generated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- PANEL 4: DIRECT SUPABASE CLOUD SYNC -->
+        <div class="panel" style="margin-top: 24px; border: 1.5px solid rgba(99, 102, 241, 0.25);">
+          <div class="panel-header">
+            <div>
+              <h3 style="color: var(--primary);">☁️ Supabase Bulut Veritabanı Entegrasyonu</h3>
+              <p class="panel-sub">İster Vercel panelinden, isterseniz doğrudan buradan Supabase bilgilerinizi girerek verilerinizi kalıcı buluta eşitleyin</p>
+            </div>
+          </div>
+          <form id="supabaseConfigForm" class="admin-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Supabase Project URL</label>
+                <input type="url" id="sbUrl" placeholder="https://xyzcompany.supabase.co" />
+                <small class="form-help">Supabase Dashboard -> Project Settings -> API</small>
+              </div>
+              <div class="form-group">
+                <label>Supabase Anon / Service API Key</label>
+                <input type="password" id="sbKey" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." />
+                <small class="form-help">Anon public key veya service_role key</small>
+              </div>
+            </div>
+            <div class="form-actions-row">
+              <button type="submit" class="btn-admin" id="saveSbBtn">Bulut Bağlantısını Kaydet & Eşitle</button>
+              <button type="button" class="btn-outline" id="testSbBtn">Bağlantıyı Test Et</button>
+            </div>
+            <div id="sbTestResult" style="display:none; margin-top: 15px; padding: 12px; border-radius: 8px; font-size: 13px;"></div>
+          </form>
+
+          <div class="supabase-sql-help" style="margin-top: 20px; padding: 16px; background: #f8fafc; border-radius: 12px; border: 1px dashed var(--border);">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <strong style="font-size: 13px; color: #334155;">Supabase SQL Tablo Kurulum Kodu (SQL Editor'e yapıştırıp Run'a basın):</strong>
+              <button type="button" class="btn-outline-sm" id="copySqlBtn">Kodu Kopyala</button>
+            </div>
+            <pre id="supabaseSqlCode" style="background:#0f172a; color:#38bdf8; padding:12px; border-radius:8px; font-size:12px; overflow-x:auto;">CREATE TABLE IF NOT EXISTS store (
+  key TEXT PRIMARY KEY,
+  value JSONB,
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW 11: SETTINGS -->
       <div id="view-settings" class="view">
         <div class="panel">
           <div class="panel-header">
-            <h3>Sistem Ayarları</h3>
+            <div>
+              <h3>Site İletişim & Genel Ayarlar</h3>
+              <p class="panel-sub">Anasayfada yer alan telefon, WhatsApp ve e-posta bilgileri</p>
+            </div>
           </div>
           <div class="settings-container">
             <form id="settingsForm" class="admin-form">
               <div class="form-group">
                 <label>İletişim E-posta</label>
-                <input type="email" id="setEmail" placeholder="info@..." />
+                <input type="email" id="setEmail" placeholder="info@kolaywebci.com" />
               </div>
               <div class="form-group">
                 <label>İletişim Telefon</label>
@@ -512,92 +891,37 @@
           </div>
         </div>
 
-        <!-- DATA MIGRATION PANEL -->
-        <div class="panel" style="margin-top: 30px; border: 1px solid rgba(79, 70, 229, 0.3); background: #f8fafc; box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.05);">
+        <!-- DATA MIGRATION PANEL (NETLIFY TO SUPABASE) -->
+        <div class="panel" style="margin-top: 30px; border: 1px solid rgba(79, 70, 229, 0.3); background: #f8fafc;">
           <div class="panel-header" style="border-bottom: 1px solid rgba(79, 70, 229, 0.1); padding-bottom: 15px; margin-bottom: 20px;">
             <h3 style="color: var(--primary); display: flex; align-items: center; gap: 8px; margin: 0;">
-              🚀 Netlify'dan Supabase'e Veri Taşıma Aracı
+              🚀 Eski Siteden (Netlify) Veri Taşıma Aracı
             </h3>
           </div>
           <p style="color: var(--gray); font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
-            Eski web sitenizdeki (Netlify üzerinde çalışan) verileri bu aracı kullanarak tek tıkla yeni <strong>Supabase (PostgreSQL)</strong> veritabanınıza güvenle taşıyabilirsiniz. Hiçbir müşteri ve firma veriniz kaybolmaz!
+            Eski sitenizdeki (Netlify üzerinde çalışan) verileri bu aracı kullanarak tek tıkla yeni sisteme aktarabilirsiniz.
           </p>
           <div class="admin-form">
             <div class="form-group">
-              <label style="color: var(--dark);">Eski Netlify Site Adresi (URL)</label>
-              <input type="url" id="migrationUrl" placeholder="Örn: https://esnafsitesi.netlify.app" required style="border-color: rgba(79, 70, 229, 0.4);" />
-              <small style="color: var(--gray); font-size: 11px; margin-top: 4px; display: block;">Adresin sonuna "/" koymanıza gerek yoktur.</small>
+              <label style="color: var(--dark);">Eski Site Adresi (URL)</label>
+              <input type="url" id="migrationUrl" placeholder="Örn: https://esnafsitesi.netlify.app" style="border-color: rgba(79, 70, 229, 0.4);" />
             </div>
             
-            <div id="migrationStatus" style="display: none; padding: 16px; border-radius: 12px; font-size: 14px; margin-bottom: 20px; line-height: 1.5; border-left: 4px solid #4f46e5; background: #e0e7ff; color: #3730a3;">
+            <div id="migrationStatus" style="display: none; padding: 16px; border-radius: 12px; font-size: 14px; margin-bottom: 20px; line-height: 1.5;">
               Aktarım durum mesajı...
             </div>
             
-            <button type="button" id="startMigrationBtn" class="btn-admin" style="background: linear-gradient(135deg, var(--primary) 0%, #4338ca 100%); display: flex; align-items: center; justify-content: center; gap: 8px;">
+            <button type="button" id="startMigrationBtn" class="btn-admin" style="background: linear-gradient(135deg, var(--primary) 0%, #4338ca 100%);">
               ⚡ Verileri Şimdi Aktar
             </button>
           </div>
         </div>
       </div>
-
-      <!-- VIEW: PORTFOLIO -->
-      <div id="view-portfolio" class="view">
-        <div class="customer-layout">
-          <div class="panel">
-            <div class="panel-header">
-              <h3>Referans Yönetimi (Canlı Örneklerimiz)</h3>
-              <button class="btn-outline" id="addPortfolioBtn">+ Yeni Referans Ekle</button>
-            </div>
-            <div class="table-wrapper">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Görsel</th>
-                    <th>Firma Adı</th>
-                    <th>Sektör / Açıklama</th>
-                    <th>Site Linki</th>
-                    <th>İşlem</th>
-                  </tr>
-                </thead>
-                <tbody id="portfolioTableBody">
-                  <!-- JS generated -->
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <div class="panel" id="portfolioDetailPanel" style="display:none;">
-            <div class="panel-header">
-              <h3 id="portfolioDetailTitle">Yeni Referans Ekle</h3>
-              <button class="btn-outline" onclick="document.getElementById('portfolioDetailPanel').style.display='none'">Kapat</button>
-            </div>
-            <form id="portfolioDetailForm" class="admin-form">
-              <input type="hidden" id="portId" />
-              <div class="form-group">
-                <label>Firma Adı</label>
-                <input type="text" id="portName" required />
-              </div>
-              <div class="form-group">
-                <label>Sektör / Açıklama</label>
-                <input type="text" id="portSubtitle" required />
-              </div>
-              <div class="form-group">
-                <label>Görsel Seçin veya URL Girin</label>
-                <input type="file" id="portImageFile" accept="image/*" class="admin-file-input" style="margin-bottom: 8px;" />
-                <input type="text" id="portImage" placeholder="veya görsel linki girin (https://...)" />
-              </div>
-              <div class="form-group">
-                <label>Site URL (Siteyi İncele butonu için)</label>
-                <input type="text" id="portUrl" placeholder="https://..." required />
-              </div>
-              <button type="submit" class="btn-admin">Referansı Kaydet</button>
-            </form>
-          </div>
-        </div>
-      </div>
-
     </main>
   </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div class="admin-toast-container" id="adminToastContainer"></div>
 
   <script src="/admin.js" type="module"></script>
 </body>

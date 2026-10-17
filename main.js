@@ -1,3 +1,8 @@
+import { fetchFromStore, saveToStore, requestStoragePersistence } from './storageVault.js';
+
+// Auto-request storage persistence in browser
+requestStoragePersistence().catch(() => {});
+
 // --- PREMIUM CYBER-AI MODAL ALERT SYSTEM ---
 function showAlert(message, type = 'success', title = '') {
   if (!document.getElementById('cyber-modal-styles')) {
@@ -223,70 +228,8 @@ const filterBtns = document.querySelectorAll('.filter-btn');
 const TOTAL_SLOTS = 1000;
 const INITIAL_FILLED = 47;
 
-// --- API & Cloud Storage Helpers ---
-const API_URL = '/api/api';
+// (API & Storage handled via storageVault.js)
 
-async function fetchFromStore(key, defaultValue) {
-  // Check sessionStorage cache first (valid for 60 seconds to prevent burst traffic billing)
-  const cacheKey = `cache_${key}`;
-  const cacheTimeKey = `cache_time_${key}`;
-  const cachedData = sessionStorage.getItem(cacheKey);
-  const cachedTime = sessionStorage.getItem(cacheTimeKey);
-  
-  if (cachedData && cachedTime && (Date.now() - parseInt(cachedTime) < 60 * 1000)) {
-    return JSON.parse(cachedData);
-  }
-
-  try {
-    const res = await fetch(`${API_URL}?key=${key}`);
-    if (res.ok) {
-      const data = await res.json();
-      const result = data !== null ? data : defaultValue;
-      
-      // Save to cache
-      sessionStorage.setItem(cacheKey, JSON.stringify(result));
-      sessionStorage.setItem(cacheTimeKey, Date.now().toString());
-      
-      return result;
-    }
-  } catch (err) {
-    console.warn(`Failed to fetch ${key} from Netlify Blobs, falling back to localStorage:`, err);
-  }
-  
-  // Fallback to localStorage
-  const localData = localStorage.getItem(key);
-  return localData ? JSON.parse(localData) : defaultValue;
-}
-
-async function saveToStore(key, value) {
-  // Clear cache immediately on write
-  sessionStorage.removeItem(`cache_${key}`);
-  sessionStorage.removeItem(`cache_time_${key}`);
-
-  // Save to localStorage immediately as a local copy/backup
-  try {
-    localStorage.setItem(key, JSON.stringify(value));
-  } catch (err) {
-    console.warn(`Failed to save ${key} to localStorage (quota exceeded?):`, err);
-  }
-  
-  try {
-    const res = await fetch(API_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ key, value })
-    });
-    if (res.ok) {
-      console.log(`Saved ${key} to Netlify Blobs successfully.`);
-      return true;
-    }
-  } catch (err) {
-    console.error(`Failed to save ${key} to Netlify Blobs:`, err);
-  }
-  return false;
-}
 
 // Initialize Grid
 async function initGrid(filter = 'all') {

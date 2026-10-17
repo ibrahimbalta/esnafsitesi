@@ -1,10 +1,21 @@
 import { createClient } from '@supabase/supabase-js';
 
-// Initialize Supabase client using Vercel environment variables
-const supabase = createClient(
-  process.env.SUPABASE_URL,
-  process.env.SUPABASE_KEY
-);
+// Safe Supabase client resolver with fallback to request headers or env variables
+function getSupabaseClient(req) {
+  const url = process.env.SUPABASE_URL || req.headers['x-supabase-url'];
+  const key = process.env.SUPABASE_KEY || req.headers['x-supabase-key'];
+
+  if (!url || !key) {
+    return null;
+  }
+
+  try {
+    return createClient(url, key);
+  } catch (err) {
+    console.error('Supabase client creation error:', err);
+    return null;
+  }
+}
 
 export default async function handler(req, res) {
   // CORS Headers
@@ -13,11 +24,19 @@ export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
   res.setHeader(
     'Access-Control-Allow-Headers',
-    'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, X-Admin-Password'
+    'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, X-Admin-Password, X-Supabase-Url, X-Supabase-Key'
   );
 
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
+  }
+
+  const supabase = getSupabaseClient(req);
+  if (!supabase) {
+    return res.status(503).json({
+      error: 'SUPABASE_NOT_CONFIGURED',
+      message: 'Supabase URL veya API Key yapılandırılmamış. Lütfen Admin Ayarlarından veya Vercel panelinden Supabase bilgilerinizi ekleyin.'
+    });
   }
 
   const { method } = req;
@@ -45,7 +64,7 @@ export default async function handler(req, res) {
         return res.status(500).json({ error: error.message });
       }
 
-      return res.status(200).json(data.value);
+      return res.status(200).json(data ? data.value : null);
     } catch (err) {
       console.error(`Error reading key "${key}" from Supabase:`, err);
       return res.status(500).json({ error: err.message });
