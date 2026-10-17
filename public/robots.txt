@@ -1,7 +1,11 @@
 User-agent: *
 Allow: /
 Allow: /ekibimiz.html
+Allow: /ek-hizmetler.html
+Allow: /logo.png
+Allow: /logo-kolaywebci.png
 Disallow: /admin.html
 Disallow: /login.html
+Disallow: /api/
 
 Sitemap: https://kolaywebci.com/sitemap.xml

@@ -1,15 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://kolaywebci.com/</loc>
-    <lastmod>2026-05-22</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-10-17</lastmod>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://kolaywebci.com/logo-kolaywebci.png</image:loc>
+      <image:title>KolayWebci Bartın Web Tasarım &amp; Esnaf Sitesi</image:title>
+      <image:caption>Bartın ve ilçelerinde esnaf ve KOBİler için anahtar teslim kurumsal web siteleri</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://kolaywebci.com/ek-hizmetler.html</loc>
+    <lastmod>2026-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://kolaywebci.com/ekibimiz.html</loc>
-    <lastmod>2026-05-22</lastmod>
+    <lastmod>2026-10-17</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.80</priority>
   </url>
 </urlset>
